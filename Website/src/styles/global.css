@@ -841,6 +841,83 @@ main {
   margin-bottom: 6px;
 }
 
+/* Portfolio CTA Card */
+.portfolio-card--cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
+  border: 2px dashed rgba(99, 102, 241, 0.3);
+  transition: all 0.3s ease;
+}
+
+.portfolio-card--cta:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+  border-color: rgba(99, 102, 241, 0.5);
+  transform: translateY(-4px);
+}
+
+.portfolio-card--cta .cta-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px;
+  text-align: center;
+}
+
+.portfolio-card--cta .cta-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.portfolio-card--cta:hover .cta-icon {
+  transform: translateX(4px);
+}
+
+.portfolio-card--cta .cta-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.portfolio-card--cta .cta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.portfolio-card--cta .cta-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+}
+
+.portfolio-card--cta .cta-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.section[data-theme="dark"] .portfolio-card--cta {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+  border-color: rgba(99, 102, 241, 0.25);
+}
+
+.section[data-theme="dark"] .portfolio-card--cta:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
 /* ═══════════════════════════════════════════════════════════
    SERVICE-ICONS – Leistungs-Badges auf Cards
    ═══════════════════════════════════════════════════════════ */

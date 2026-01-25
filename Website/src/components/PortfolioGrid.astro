@@ -12,11 +12,14 @@ const items: {
   likes: number;
   services: ServiceType[];
   image?: string;
+  subtitle?: string;
+  artist?: string;
 }[] = [
-  // Videografie (3)
-  { title: "Produktfilm Short", type: "video", category: "Videografie", views: 128400, likes: 6420, services: ["video", "post", "konzept"] },
-  { title: "Event Recap", type: "video", category: "Videografie", views: 95200, likes: 5180, services: ["video", "post"] },
-  { title: "Brand Story", type: "video", category: "Videografie", views: 112300, likes: 6890, services: ["video", "post", "produktion"] },
+  // Videografie (4)
+  { title: "mooniac", subtitle: "Behind the scene brand content", artist: "@mooniac", type: "video", category: "Videografie", views: 95200, likes: 5180, services: ["video", "post"], image: "/uploads/videos/MOONIAC_Shooting_3_v01_low.webp" },
+  { title: "MissesVlog", subtitle: "YouTube Content", artist: "@MissesVlog", type: "video", category: "Videografie", views: 128400, likes: 6420, services: ["video", "post", "konzept"], image: "/uploads/videos/Kelly_Shooting_2_v01_low.webp" },
+  { title: "Henkes Corner", subtitle: "Video Podcast", artist: "@henkescorner", type: "video", category: "Videografie", views: 112300, likes: 6890, services: ["video", "post", "produktion"] },
+  { title: "Kaffee mit Zitrone", subtitle: "Video Podcast", artist: "@kaffeemitzitrone_podcast", type: "video", category: "Videografie", views: 87500, likes: 4230, services: ["video", "post"] },
   // Short Content (3)
   { title: "Branding & Motion Clip", type: "video", category: "Short Content", views: 84200, likes: 5210, services: ["video", "post"] },
   { title: "Showreel Teaser", type: "video", category: "Short Content", views: 156900, likes: 9020, services: ["video", "post", "produktion"] },
@@ -68,8 +71,9 @@ const formatCount = (value: number) => {
         </div>
       </div>
       <div class="label">
-        <div class="eyebrow">{item.category}</div>
+        <div class="eyebrow">{item.subtitle || item.category}</div>
         <div class="label__title">{item.title}</div>
+        {item.artist && <div class="label__artist">{item.artist}</div>}
         <div class="service-icons">
           {item.services.map((service) => (
             <ServiceIcon service={service} size="sm" />
@@ -78,4 +82,20 @@ const formatCount = (value: number) => {
       </div>
     </article>
   ))}
+  
+  {category === "Videografie" && (
+    <a href="#highlights" class="portfolio-card portfolio-card--cta reveal" data-reveal>
+      <div class="cta-content">
+        <div class="cta-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </div>
+        <div class="cta-text">
+          <span class="cta-label">Mehr erfahren</span>
+          <span class="cta-title">Projekte im Detail</span>
+        </div>
+      </div>
+    </a>
+  )}
 </div>
