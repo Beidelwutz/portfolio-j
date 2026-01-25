@@ -19,6 +19,85 @@ if (!prefersReducedMotion) {
   revealElements.forEach((el) => el.classList.add("is-visible"));
 }
 
+function formatCount(value) {
+  if (value >= 1e6) return `${(value / 1e6).toFixed(1)}M`.replace(".0", "");
+  if (value >= 1e3) return `${(value / 1e3).toFixed(1)}k`.replace(".0", "");
+  return `${value}`;
+}
+
+function countUpInCard(card) {
+  if (prefersReducedMotion) return;
+  const viewsEl = card.querySelector(".stats-badge--views .stats-badge__count[data-value]");
+  const likesEl = card.querySelector(".stats-badge--likes .stats-badge__count[data-value]");
+  if (!viewsEl && !likesEl) return;
+
+  const viewTarget = viewsEl ? parseInt(viewsEl.getAttribute("data-value"), 10) : 0;
+  const likeTarget = likesEl ? parseInt(likesEl.getAttribute("data-value"), 10) : 0;
+  if (!Number.isFinite(viewTarget) && !Number.isFinite(likeTarget)) return;
+
+  card._countUpRunId = (card._countUpRunId || 0) + 1;
+  const runId = card._countUpRunId;
+  if (viewsEl) viewsEl.textContent = "0";
+  if (likesEl) likesEl.textContent = "0";
+
+  const duration = 1100;
+  const start = performance.now();
+  let lastViewsDisplay = "";
+  let lastLikesDisplay = "";
+
+  const tick = (now) => {
+    if (runId !== card._countUpRunId) return;
+    const t = Math.min((now - start) / duration, 1);
+    const eased = 1 - (1 - t) * (1 - t) * (1 - t);
+
+    if (viewsEl && Number.isFinite(viewTarget)) {
+      const current = Math.round(viewTarget * eased);
+      const display = formatCount(current);
+      if (display !== lastViewsDisplay) {
+        lastViewsDisplay = display;
+        viewsEl.textContent = display;
+      }
+      if (t >= 1) viewsEl.textContent = formatCount(viewTarget);
+    }
+    if (likesEl && Number.isFinite(likeTarget)) {
+      const current = Math.round(likeTarget * eased);
+      const display = formatCount(current);
+      if (display !== lastLikesDisplay) {
+        lastLikesDisplay = display;
+        likesEl.textContent = display;
+      }
+      if (t >= 1) likesEl.textContent = formatCount(likeTarget);
+    }
+
+    if (t < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+const enableScrollBadges = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+const statsCards = document.querySelectorAll(".portfolio-card");
+if (enableScrollBadges && statsCards.length) {
+  const statsObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-active");
+          countUpInCard(entry.target);
+        } else {
+          entry.target.classList.remove("is-active");
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+
+  statsCards.forEach((card) => statsObserver.observe(card));
+}
+
+statsCards.forEach((card) => {
+  card.addEventListener("mouseenter", () => countUpInCard(card));
+});
+
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", (event) => {
     const targetId = anchor.getAttribute("href");

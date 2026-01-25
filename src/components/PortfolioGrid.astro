@@ -2,16 +2,28 @@
 type Category = "Video" | "Clip" | "Foto";
 const { category }: { category: Category } = Astro.props;
 
-const items: { title: string; type: "video" | "image"; category: Category }[] = [
-  { title: "Produktfilm Short", type: "video", category: "Video" },
-  { title: "Branding & Motion Clip", type: "video", category: "Clip" },
-  { title: "Showreel Teaser", type: "video", category: "Clip" },
-  { title: "UI Konzept – Mobile", type: "image", category: "Foto" },
-  { title: "Kampagne – Visuals", type: "image", category: "Foto" },
-  { title: "Landingpage – Clean", type: "image", category: "Foto" },
+const items: {
+  title: string;
+  type: "video" | "image";
+  category: Category;
+  views: number;
+  likes: number;
+}[] = [
+  { title: "Produktfilm Short", type: "video", category: "Video", views: 128400, likes: 6420 },
+  { title: "Branding & Motion Clip", type: "video", category: "Clip", views: 84200, likes: 5210 },
+  { title: "Showreel Teaser", type: "video", category: "Clip", views: 156900, likes: 9020 },
+  { title: "UI Konzept – Mobile", type: "image", category: "Foto", views: 56400, likes: 3010 },
+  { title: "Kampagne – Visuals", type: "image", category: "Foto", views: 73300, likes: 4150 },
+  { title: "Landingpage – Clean", type: "image", category: "Foto", views: 48900, likes: 2670 },
 ];
 
 const filtered = items.filter((item) => item.category === category);
+
+const formatCount = (value: number) => {
+  if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`.replace(".0", "");
+  if (value >= 1_000) return `${(value / 1_000).toFixed(1)}k`.replace(".0", "");
+  return `${value}`;
+};
 ---
 <div class="portfolio-grid">
   {filtered.map((item) => (
@@ -21,8 +33,27 @@ const filtered = items.filter((item) => item.category === category);
       data-lightbox
       data-title={item.title}
       data-type={item.type}
+      tabindex="0"
+      aria-label={`${item.title}. ${formatCount(item.views)} Aufrufe, ${formatCount(item.likes)} Likes.`}
     >
-      <div class="media" aria-hidden="true"></div>
+      <div class="media" aria-hidden="true">
+        <div class="stats-bar" aria-hidden="true">
+          <span class="stats-badge stats-badge--views">
+            <span class="stats-badge__icon stats-badge__icon--eye" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </span>
+            <span class="stats-badge__count" data-value={item.views}>{formatCount(item.views)}</span>
+          </span>
+          <span class="stats-bar__divider" aria-hidden="true"></span>
+          <span class="stats-badge stats-badge--likes">
+            <span class="stats-badge__icon stats-badge__icon--heart" aria-hidden="true">
+              <svg class="heart-outline" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <svg class="heart-filled" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </span>
+            <span class="stats-badge__count" data-value={item.likes}>{formatCount(item.likes)}</span>
+          </span>
+        </div>
+      </div>
       <div class="label">
         <div class="eyebrow">{item.category}</div>
         <div>{item.title}</div>
