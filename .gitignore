@@ -1,0 +1,35 @@
+# Abhängigkeiten
+node_modules/
+
+# Build- und Cache-Ordner
+dist/
+build/
+.cache/
+*.local
+
+# Umgebungsvariablen und Secrets
+.env
+.env.local
+.env.*.local
+
+# IDE und Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Betriebssystem
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs und temporäre Dateien
+*.log
+npm-debug.log*
+tmp/
+temp/
+
+# Optional: große oder sensible Assets (bei Bedarf anpassen)
+# assets/raw/
+# *.psd
