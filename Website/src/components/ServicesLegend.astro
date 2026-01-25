@@ -12,6 +12,21 @@ const services: {
   { id: "konzept", label: "Konzept", description: "Kreative Leitung und Storytelling" },
   { id: "produktion", label: "Produktion", description: "Projektleitung und Organisation" },
 ];
+
+const tools: {
+  abbr: string;
+  name: string;
+  color: string;
+}[] = [
+  { abbr: "Ps", name: "Photoshop", color: "#31A8FF" },
+  { abbr: "Lr", name: "Lightroom", color: "#31A8FF" },
+  { abbr: "Pr", name: "Premiere Pro", color: "#9999FF" },
+  { abbr: "Ae", name: "After Effects", color: "#9999FF" },
+  { abbr: "Da", name: "DaVinci Resolve", color: "#FF6B4A" },
+  { abbr: "Cn", name: "Canva", color: "#00C4CC" },
+  { abbr: "Cc", name: "CapCut", color: "#000000" },
+  { abbr: "iZ", name: "iZotope", color: "#6366F1" },
+];
 ---
 
 <div class="services-legend">
@@ -26,7 +41,7 @@ const services: {
     {services.map((service) => (
       <div class="legend-item">
         <div class="legend-icon">
-          <ServiceIcon service={service.id} size="lg" showTooltip={false} />
+          <ServiceIcon service={service.id} size="lg" showTooltip={false} linkToLegend={false} />
         </div>
         <div class="legend-content">
           <h3 class="legend-label">{service.label}</h3>
@@ -34,5 +49,17 @@ const services: {
         </div>
       </div>
     ))}
+  </div>
+
+  <div class="tools-section reveal" data-reveal>
+    <h3 class="tools-title">Programme & Tools</h3>
+    <div class="tools-grid">
+      {tools.map((tool) => (
+        <div class="tool-badge" style={`--tool-color: ${tool.color}`}>
+          <span class="tool-abbr">{tool.abbr}</span>
+          <span class="tool-name">{tool.name}</span>
+        </div>
+      ))}
+    </div>
   </div>
 </div>

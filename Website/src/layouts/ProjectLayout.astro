@@ -1,0 +1,226 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  heroImage?: string;
+  heroVideo?: string;
+  date?: string;
+  client?: string;
+  location?: string;
+  duration?: string;
+  services?: string[];
+  category?: string;
+}
+
+const {
+  title,
+  subtitle,
+  heroImage,
+  heroVideo,
+  date,
+  client,
+  location,
+  duration,
+  services = [],
+  category = "Projekt",
+} = Astro.props;
+---
+
+<BaseLayout title={`${title} · Portfolio`} description={subtitle ?? title}>
+  <main id="main" class="magazine">
+    <!-- Floating Back Button -->
+    <a href="/" class="magazine-back" aria-label="Zurück zur Startseite">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+    </a>
+
+    <!-- Hero Section - Fullscreen Immersive -->
+    <section class="magazine-hero" data-parallax-hero>
+      <div class="magazine-hero__media">
+        {heroVideo ? (
+          <video autoplay muted loop playsinline>
+            <source src={heroVideo} type="video/mp4" />
+          </video>
+        ) : heroImage ? (
+          <img src={heroImage} alt={title} data-parallax-img />
+        ) : (
+          <div class="magazine-hero__gradient"></div>
+        )}
+      </div>
+      <div class="magazine-hero__overlay"></div>
+      <div class="magazine-hero__content">
+        <span class="magazine-hero__category">{category}</span>
+        <h1 class="magazine-hero__title">{title}</h1>
+        {subtitle && <p class="magazine-hero__subtitle">{subtitle}</p>}
+        <div class="magazine-hero__scroll">
+          <span>Weiterlesen</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Meta Bar -->
+    <section class="magazine-meta">
+      <div class="magazine-meta__inner">
+        {client && (
+          <div class="magazine-meta__item">
+            <span class="magazine-meta__label">Kunde</span>
+            <span class="magazine-meta__value">{client}</span>
+          </div>
+        )}
+        {location && (
+          <div class="magazine-meta__item">
+            <span class="magazine-meta__label">Ort</span>
+            <span class="magazine-meta__value">{location}</span>
+          </div>
+        )}
+        {date && (
+          <div class="magazine-meta__item">
+            <span class="magazine-meta__label">Jahr</span>
+            <span class="magazine-meta__value">{date}</span>
+          </div>
+        )}
+        {duration && (
+          <div class="magazine-meta__item">
+            <span class="magazine-meta__label">Dauer</span>
+            <span class="magazine-meta__value">{duration}</span>
+          </div>
+        )}
+        {services.length > 0 && (
+          <div class="magazine-meta__item magazine-meta__item--tags">
+            <span class="magazine-meta__label">Leistungen</span>
+            <div class="magazine-meta__tags">
+              {services.map((s) => (
+                <span class="magazine-meta__tag">{s}</span>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- Content -->
+    <article class="magazine-content">
+      <slot />
+    </article>
+
+    <!-- Footer Navigation -->
+    <footer class="magazine-footer">
+      <a href="/" class="magazine-footer__link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span>Zurück zur Übersicht</span>
+      </a>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="magazine-lightbox" data-lightbox hidden>
+      <button class="magazine-lightbox__close" data-lightbox-close aria-label="Schließen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+      <div class="magazine-lightbox__content">
+        <img src="" alt="" data-lightbox-img />
+      </div>
+      <button class="magazine-lightbox__nav magazine-lightbox__nav--prev" data-lightbox-prev aria-label="Vorheriges Bild">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      <button class="magazine-lightbox__nav magazine-lightbox__nav--next" data-lightbox-next aria-label="Nächstes Bild">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+      <div class="magazine-lightbox__counter" data-lightbox-counter></div>
+    </div>
+  </main>
+
+  <script>
+    // Parallax Effect for Hero
+    const heroMedia = document.querySelector('[data-parallax-img]');
+    if (heroMedia && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * 0.4;
+        heroMedia.style.transform = `translate3d(0, ${rate}px, 0) scale(1.1)`;
+      }, { passive: true });
+    }
+
+    // Scroll Reveal Animations
+    const revealElements = document.querySelectorAll('.mag-reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+    revealElements.forEach((el) => revealObserver.observe(el));
+
+    // Image Lightbox
+    const lightbox = document.querySelector('[data-lightbox]');
+    const lightboxImg = document.querySelector('[data-lightbox-img]');
+    const lightboxClose = document.querySelector('[data-lightbox-close]');
+    const lightboxPrev = document.querySelector('[data-lightbox-prev]');
+    const lightboxNext = document.querySelector('[data-lightbox-next]');
+    const lightboxCounter = document.querySelector('[data-lightbox-counter]');
+    const galleryImages = document.querySelectorAll('[data-gallery-img]');
+    let currentIndex = 0;
+
+    const openLightbox = (index) => {
+      if (!lightbox || !lightboxImg || !galleryImages.length) return;
+      currentIndex = index;
+      const img = galleryImages[index];
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightboxCounter.textContent = `${index + 1} / ${galleryImages.length}`;
+      lightbox.removeAttribute('hidden');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeLightbox = () => {
+      if (!lightbox) return;
+      lightbox.setAttribute('hidden', '');
+      document.body.style.overflow = '';
+    };
+
+    const navigateLightbox = (direction) => {
+      const newIndex = (currentIndex + direction + galleryImages.length) % galleryImages.length;
+      openLightbox(newIndex);
+    };
+
+    galleryImages.forEach((img, index) => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => openLightbox(index));
+    });
+
+    lightboxClose?.addEventListener('click', closeLightbox);
+    lightboxPrev?.addEventListener('click', () => navigateLightbox(-1));
+    lightboxNext?.addEventListener('click', () => navigateLightbox(1));
+    lightbox?.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (lightbox?.hasAttribute('hidden')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigateLightbox(-1);
+      if (e.key === 'ArrowRight') navigateLightbox(1);
+    });
+
+    // Stagger Animation for Gallery Items
+    const staggerItems = document.querySelectorAll('.mag-stagger');
+    staggerItems.forEach((item, index) => {
+      item.style.transitionDelay = `${index * 0.1}s`;
+    });
+  </script>
+</BaseLayout>

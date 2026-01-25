@@ -5,9 +5,10 @@ interface Props {
   service: ServiceType;
   size?: "sm" | "md" | "lg";
   showTooltip?: boolean;
+  linkToLegend?: boolean;
 }
 
-const { service, size = "sm", showTooltip = true } = Astro.props;
+const { service, size = "sm", showTooltip = true, linkToLegend = true } = Astro.props;
 
 const serviceInfo: Record<ServiceType, { label: string; description: string }> = {
   foto: { label: "Fotografie", description: "Professionelle Bildaufnahmen" },
@@ -24,13 +25,15 @@ const sizeClasses: Record<string, string> = {
 };
 
 const info = serviceInfo[service];
+const Tag = linkToLegend ? "a" : "span";
 ---
 
-<span
+<Tag
+  href={linkToLegend ? "#leistungen" : undefined}
   class={`service-icon ${sizeClasses[size]}`}
   data-service={service}
   data-tooltip={showTooltip ? info.label : undefined}
-  aria-label={info.label}
+  aria-label={linkToLegend ? `${info.label} – zur Legende` : info.label}
   title={info.label}
 >
   {service === "foto" && (
@@ -71,4 +74,4 @@ const info = serviceInfo[service];
       <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
     </svg>
   )}
-</span>
+</Tag>

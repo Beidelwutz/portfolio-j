@@ -11,13 +11,13 @@ const items: {
   views: number;
   likes: number;
   services: ServiceType[];
+  image?: string;
 }[] = [
   { title: "Produktfilm Short", type: "video", category: "Video", views: 128400, likes: 6420, services: ["video", "post", "konzept"] },
   { title: "Branding & Motion Clip", type: "video", category: "Clip", views: 84200, likes: 5210, services: ["video", "post"] },
   { title: "Showreel Teaser", type: "video", category: "Clip", views: 156900, likes: 9020, services: ["video", "post", "produktion"] },
-  { title: "UI Konzept – Mobile", type: "image", category: "Foto", views: 56400, likes: 3010, services: ["foto", "konzept"] },
-  { title: "Kampagne – Visuals", type: "image", category: "Foto", views: 73300, likes: 4150, services: ["foto", "post", "konzept"] },
-  { title: "Landingpage – Clean", type: "image", category: "Foto", views: 48900, likes: 2670, services: ["foto", "konzept"] },
+  { title: "Nessi Portrait", type: "image", category: "Foto", views: 56400, likes: 3010, services: ["foto", "post"], image: "/uploads/fotos/Nessi_1_V01_low.webp" },
+  { title: "Sido Live", type: "image", category: "Foto", views: 73300, likes: 4150, services: ["foto", "post", "konzept"], image: "/uploads/fotos/Sido_1_V01.jpg" },
 ];
 
 const filtered = items.filter((item) => item.category === category);
@@ -40,6 +40,9 @@ const formatCount = (value: number) => {
       aria-label={`${item.title}. ${formatCount(item.views)} Aufrufe, ${formatCount(item.likes)} Likes.`}
     >
       <div class="media" aria-hidden="true">
+        {item.image && (
+          <img src={item.image} alt={item.title} loading="lazy" />
+        )}
         <div class="stats-bar" aria-hidden="true">
           <span class="stats-badge stats-badge--views">
             <span class="stats-badge__icon stats-badge__icon--eye" aria-hidden="true">

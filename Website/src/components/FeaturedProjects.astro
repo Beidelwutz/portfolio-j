@@ -1,0 +1,104 @@
+---
+import ServiceIcon, { type ServiceType } from "./ServiceIcon.astro";
+
+interface Project {
+  slug: string;
+  title: string;
+  subtitle: string;
+  thumbnail: string;
+  views: number;
+  likes: number;
+  services: ServiceType[];
+}
+
+const projects: Project[] = [
+  {
+    slug: "projekt-alpha",
+    title: "Diana's Vision",
+    subtitle: "Porträt-Shooting",
+    thumbnail: "/uploads/projekte/Di_10_V01_low.webp",
+    views: 89200,
+    likes: 4820,
+    services: ["foto", "post", "konzept"],
+  },
+  {
+    slug: "projekt-beta",
+    title: "Kelly's Cover",
+    subtitle: "Fashion Editorial",
+    thumbnail: "/uploads/projekte/Kelly_Covershoot_2_V01_low.webp",
+    views: 124500,
+    likes: 7340,
+    services: ["foto", "post", "produktion"],
+  },
+  {
+    slug: "projekt-gamma",
+    title: "MOONIAC Sessions",
+    subtitle: "Bandfotos",
+    thumbnail: "/uploads/projekte/MOONIAC_Shooting_V01_low.webp",
+    views: 67800,
+    likes: 3910,
+    services: ["foto", "video", "post"],
+  },
+];
+
+const formatCount = (value: number) => {
+  if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`.replace(".0", "");
+  if (value >= 1_000) return `${(value / 1_000).toFixed(1)}k`.replace(".0", "");
+  return `${value}`;
+};
+---
+
+<div class="featured-projects">
+  <div class="featured-projects__header">
+    <span class="eyebrow">Highlights</span>
+    <h2 class="headline reveal" data-reveal>Ausgewählte Projekte</h2>
+    <p class="subtitle reveal" data-reveal>
+      Was ich so mache – zwischen Short Content, Fotografie und Videografie.
+    </p>
+  </div>
+
+  <div class="portfolio-grid reveal" data-reveal>
+    {projects.map((project) => (
+      <a
+        href={`/projekte/${project.slug}`}
+        class="portfolio-card portfolio-card--link reveal"
+        data-reveal
+        aria-label={`${project.title}. ${formatCount(project.views)} Aufrufe, ${formatCount(project.likes)} Likes.`}
+      >
+        <div class="media" aria-hidden="true">
+          <img src={project.thumbnail} alt={project.title} loading="lazy" />
+          <div class="stats-bar" aria-hidden="true">
+            <span class="stats-badge stats-badge--views">
+              <span class="stats-badge__icon stats-badge__icon--eye" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </span>
+              <span class="stats-badge__count" data-value={project.views}>{formatCount(project.views)}</span>
+            </span>
+            <span class="stats-bar__divider" aria-hidden="true"></span>
+            <span class="stats-badge stats-badge--likes">
+              <span class="stats-badge__icon stats-badge__icon--heart" aria-hidden="true">
+                <svg class="heart-outline" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <svg class="heart-filled" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </span>
+              <span class="stats-badge__count" data-value={project.likes}>{formatCount(project.likes)}</span>
+            </span>
+          </div>
+        </div>
+        <div class="label">
+          <div class="eyebrow">{project.subtitle}</div>
+          <div class="label__title">{project.title}</div>
+          <div class="service-icons">
+            {project.services.map((service) => (
+              <ServiceIcon service={service} size="sm" linkToLegend={false} />
+            ))}
+          </div>
+        </div>
+        <div class="portfolio-card__arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </div>
+      </a>
+    ))}
+  </div>
+</div>

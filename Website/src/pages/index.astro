@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/Section.astro";
 import Hero from "../components/Hero.astro";
+import FeaturedProjects from "../components/FeaturedProjects.astro";
 import PortfolioGrid from "../components/PortfolioGrid.astro";
 import ServicesLegend from "../components/ServicesLegend.astro";
 import ContactForm from "../components/ContactForm.astro";
@@ -10,6 +11,10 @@ import ContactForm from "../components/ContactForm.astro";
   <main id="main">
     <Section id="start" theme="light" variant="hero">
       <Hero />
+    </Section>
+
+    <Section id="highlights" theme="light">
+      <FeaturedProjects />
     </Section>
 
     <Section id="videos" theme="light">
@@ -60,7 +65,28 @@ import ContactForm from "../components/ContactForm.astro";
         </div>
         <ContactForm />
       </div>
+      <a href="#highlights" class="back-to-portfolio">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+        <span>zum Portfolio</span>
+      </a>
     </Section>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="site-footer__brand">
+          <span class="site-footer__logo">Jenny<span>.</span></span>
+          <p class="site-footer__tagline">Vom ersten Gedanken bis zum letzten Schnitt.</p>
+        </div>
+        <div class="site-footer__links">
+          <a href="/faq">FAQ</a>
+          <a href="/impressum">Impressum</a>
+          <a href="https://instagram.com/jpgjenny" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+        <p class="site-footer__copy">© 2025 Jenny. Alle Rechte vorbehalten.</p>
+      </div>
+    </footer>
   </main>
 
   <div class="lightbox" data-lightbox-overlay hidden>

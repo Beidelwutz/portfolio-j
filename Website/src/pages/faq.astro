@@ -1,0 +1,152 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const faqs = [
+  {
+    category: "Zusammenarbeit",
+    questions: [
+      {
+        q: "Wie läuft eine Zusammenarbeit ab?",
+        a: "Alles beginnt mit einem unverbindlichen Gespräch, in dem wir deine Vorstellungen besprechen. Danach erstelle ich ein individuelles Konzept und Angebot. Nach deiner Zusage planen wir gemeinsam den Dreh oder das Shooting, ich kümmere mich um die Produktion, und am Ende bekommst du das fertig bearbeitete Material."
+      },
+      {
+        q: "Wie lange dauert ein Projekt?",
+        a: "Das hängt vom Umfang ab. Ein einfaches Fotoshooting kann in wenigen Tagen fertig sein, während größere Videoprojekte mehrere Wochen dauern können. Im Vorgespräch gebe ich dir eine realistische Einschätzung."
+      },
+      {
+        q: "Arbeitest du auch außerhalb von Köln?",
+        a: "Ja, absolut! Ich bin flexibel und reise gerne für Projekte. Reisekosten werden je nach Entfernung individuell besprochen."
+      }
+    ]
+  },
+  {
+    category: "Kosten & Buchung",
+    questions: [
+      {
+        q: "Was kostet ein Shooting oder eine Videoproduktion?",
+        a: "Die Kosten variieren je nach Projektumfang, Dauer und Aufwand in der Postproduktion. Ich erstelle für jedes Projekt ein individuelles Angebot, damit du genau weißt, was auf dich zukommt. Schreib mir einfach – eine erste Einschätzung ist immer kostenlos."
+      },
+      {
+        q: "Muss ich eine Anzahlung leisten?",
+        a: "Ja, bei größeren Projekten ist eine Anzahlung von 30-50% üblich. Das sichert beide Seiten ab und ermöglicht mir, Ressourcen zu reservieren."
+      },
+      {
+        q: "Wie kann ich bezahlen?",
+        a: "Du erhältst eine ordentliche Rechnung und kannst per Überweisung oder PayPal bezahlen."
+      }
+    ]
+  },
+  {
+    category: "Fotos & Videos",
+    questions: [
+      {
+        q: "In welchem Format bekomme ich die Fotos/Videos?",
+        a: "Fotos liefere ich in der Regel als hochauflösende JPEGs, auf Wunsch auch als RAW-Dateien. Videos werden je nach Verwendungszweck in verschiedenen Formaten exportiert (z.B. MP4 für Web, ProRes für Weiterverarbeitung)."
+      },
+      {
+        q: "Wie viele Bilder bekomme ich?",
+        a: "Das hängt vom Shooting ab und wird vorher vereinbart. Bei einem typischen Porträt-Shooting sind es etwa 20-40 fertig bearbeitete Bilder."
+      },
+      {
+        q: "Kann ich die Bilder für Social Media verwenden?",
+        a: "Ja! Ich liefere auf Wunsch auch Versionen, die für Instagram, TikTok & Co. optimiert sind."
+      },
+      {
+        q: "Bekomme ich auch unbearbeitete Rohdaten?",
+        a: "Auf Anfrage ist das möglich, wird aber gesondert berechnet. Normalerweise liefere ich nur fertig bearbeitetes Material, da die Bearbeitung ein wesentlicher Teil meiner Arbeit ist."
+      }
+    ]
+  },
+  {
+    category: "Am Set",
+    questions: [
+      {
+        q: "Muss ich eigene Kleidung/Requisiten mitbringen?",
+        a: "Das besprechen wir vorher gemeinsam. In der Regel kümmere ich mich um das Styling-Konzept und gebe dir klare Empfehlungen. Bei größeren Produktionen kann ich auch Stylisten hinzuziehen."
+      },
+      {
+        q: "Kann ich jemanden zum Shooting mitbringen?",
+        a: "Ja, eine Begleitung ist kein Problem – viele fühlen sich damit wohler. Bei größeren Produktionen mit begrenztem Platz sprechen wir das vorher ab."
+      },
+      {
+        q: "Was passiert bei schlechtem Wetter?",
+        a: "Bei Outdoor-Shootings haben wir immer einen Plan B. Entweder verschieben wir auf einen anderen Tag oder wir nutzen das Wetter kreativ – manchmal entstehen bei Regen die interessantesten Bilder!"
+      }
+    ]
+  },
+  {
+    category: "Nutzungsrechte",
+    questions: [
+      {
+        q: "Darf ich die Bilder/Videos kommerziell nutzen?",
+        a: "Die Nutzungsrechte werden im Angebot klar definiert. Für private Nutzung ist das immer inklusive. Für kommerzielle Nutzung (Werbung, Print, etc.) gibt es erweiterte Lizenzen."
+      },
+      {
+        q: "Darfst du meine Bilder für dein Portfolio verwenden?",
+        a: "Ich frage immer vorher um Erlaubnis. Wenn du damit einverstanden bist, nutze ich ausgewählte Bilder für meine Website und Social Media – natürlich nur, wenn du gut aussiehst!"
+      }
+    ]
+  }
+];
+---
+
+<BaseLayout title="FAQ · Portfolio" description="Häufig gestellte Fragen zu Fotografie und Videoproduktion">
+  <main id="main" class="legal-page faq-page">
+    <a href="/" class="legal-back" aria-label="Zurück zur Startseite">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+    </a>
+
+    <section class="legal-hero">
+      <span class="legal-hero__eyebrow">Support</span>
+      <h1 class="legal-hero__title">Häufige Fragen</h1>
+      <p class="legal-hero__subtitle">
+        Hier findest du Antworten auf die wichtigsten Fragen rund um die Zusammenarbeit mit mir.
+      </p>
+    </section>
+
+    <article class="faq-content">
+      {faqs.map((section) => (
+        <section class="faq-category">
+          <h2 class="faq-category__title">{section.category}</h2>
+          <div class="faq-list">
+            {section.questions.map((item) => (
+              <details class="faq-item">
+                <summary class="faq-item__question">
+                  <span>{item.q}</span>
+                  <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12h14"/>
+                  </svg>
+                </summary>
+                <div class="faq-item__answer">
+                  <p>{item.a}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </section>
+      ))}
+    </article>
+
+    <section class="faq-cta">
+      <h2>Noch Fragen?</h2>
+      <p>Wenn du hier keine Antwort gefunden hast, schreib mir einfach!</p>
+      <a href="/#kontakt" class="faq-cta__button">
+        Kontakt aufnehmen
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </section>
+
+    <footer class="legal-footer">
+      <a href="/" class="legal-footer__link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span>Zurück zur Startseite</span>
+      </a>
+    </footer>
+  </main>
+</BaseLayout>

@@ -76,6 +76,33 @@ function countUpInCard(card) {
 
 const enableScrollBadges = window.matchMedia("(hover: none), (pointer: coarse)").matches;
 const statsCards = document.querySelectorAll(".portfolio-card");
+const featuredCards = document.querySelectorAll(".featured-projects .portfolio-card");
+
+// Featured projects: count up every time they scroll into view
+if (featuredCards.length) {
+  const featuredObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Reset to 0 first, then count up after a short delay
+          const viewsEl = entry.target.querySelector(".stats-badge--views .stats-badge__count[data-value]");
+          const likesEl = entry.target.querySelector(".stats-badge--likes .stats-badge__count[data-value]");
+          if (viewsEl) viewsEl.textContent = "0";
+          if (likesEl) likesEl.textContent = "0";
+          
+          // Small delay so user sees it start from 0
+          setTimeout(() => {
+            countUpInCard(entry.target);
+          }, 150);
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+  featuredCards.forEach((card) => featuredObserver.observe(card));
+}
+
+// Regular portfolio cards: scroll badges on mobile only
 if (enableScrollBadges && statsCards.length) {
   const statsObserver = new IntersectionObserver(
     (entries) => {
@@ -94,8 +121,11 @@ if (enableScrollBadges && statsCards.length) {
   statsCards.forEach((card) => statsObserver.observe(card));
 }
 
+// Regular cards: count up on hover
 statsCards.forEach((card) => {
-  card.addEventListener("mouseenter", () => countUpInCard(card));
+  if (!card.closest(".featured-projects")) {
+    card.addEventListener("mouseenter", () => countUpInCard(card));
+  }
 });
 
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -105,6 +135,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     const target = document.querySelector(targetId);
     if (!target) return;
     event.preventDefault();
+    event.stopPropagation();
     target.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 });

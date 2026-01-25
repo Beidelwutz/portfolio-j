@@ -11,7 +11,7 @@ const { name = "Jenny", headline, subtitle } = Astro.props;
         height="400"
         fetchpriority="high"
       />
-      <span class="hero__badge">das bin ich</span>
+      <a href="https://instagram.com/jpgjenny" target="_blank" rel="noopener noreferrer" class="hero__badge">@jpgjenny</a>
     </div>
   </div>
 
@@ -20,14 +20,18 @@ const { name = "Jenny", headline, subtitle } = Astro.props;
       <span class="hero__greeting">Hi, ich bin {name}</span>
     </div>
     <h1 class="hero__headline reveal" data-reveal>
-      {headline ?? "Von der Idee zum fertigen Ergebnis"}
+      {headline ?? (
+        <>
+          Vom ersten Gedanken<br />bis zum letzten Schnitt.
+        </>
+      )}
     </h1>
     <p class="hero__sub reveal" data-reveal>
-      {subtitle ?? "Ich gestalte klare, moderne Web-Erlebnisse, die wirken und sich richtig gut anfühlen."}
+      {subtitle ?? "Ich begleite Projekte von der Planung über Foto und Video bis hin zur Postproduktion."}
     </p>
     <div class="hero__actions reveal" data-reveal>
       <a class="hero__cta" href="#kontakt">
-        Lass uns reden
+        Lass uns gemeinsam starten
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
