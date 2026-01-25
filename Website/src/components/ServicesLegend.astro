@@ -1,0 +1,38 @@
+---
+import ServiceIcon, { type ServiceType } from "./ServiceIcon.astro";
+
+const services: {
+  id: ServiceType;
+  label: string;
+  description: string;
+}[] = [
+  { id: "foto", label: "Fotografie", description: "Professionelle Bildaufnahmen und visuelle Konzepte" },
+  { id: "video", label: "Videografie", description: "Videodreh und Bewegtbild-Produktion" },
+  { id: "post", label: "Postproduktion", description: "Schnitt, Colorgrading und Bearbeitung" },
+  { id: "konzept", label: "Konzept", description: "Kreative Leitung und Storytelling" },
+  { id: "produktion", label: "Produktion", description: "Projektleitung und Organisation" },
+];
+---
+
+<div class="services-legend">
+  <div class="services-legend__header">
+    <span class="eyebrow">Leistungen</span>
+    <h2 class="headline reveal" data-reveal>Was wir machen</h2>
+    <p class="subtitle reveal" data-reveal>
+      Diese Icons zeigen dir, wofür wir bei jedem Projekt verantwortlich waren.
+    </p>
+  </div>
+  <div class="services-legend__grid reveal" data-reveal>
+    {services.map((service) => (
+      <div class="legend-item">
+        <div class="legend-icon">
+          <ServiceIcon service={service.id} size="lg" showTooltip={false} />
+        </div>
+        <div class="legend-content">
+          <h3 class="legend-label">{service.label}</h3>
+          <p class="legend-desc">{service.description}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

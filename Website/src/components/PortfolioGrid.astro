@@ -1,4 +1,6 @@
 ---
+import ServiceIcon, { type ServiceType } from "./ServiceIcon.astro";
+
 type Category = "Video" | "Clip" | "Foto";
 const { category }: { category: Category } = Astro.props;
 
@@ -8,13 +10,14 @@ const items: {
   category: Category;
   views: number;
   likes: number;
+  services: ServiceType[];
 }[] = [
-  { title: "Produktfilm Short", type: "video", category: "Video", views: 128400, likes: 6420 },
-  { title: "Branding & Motion Clip", type: "video", category: "Clip", views: 84200, likes: 5210 },
-  { title: "Showreel Teaser", type: "video", category: "Clip", views: 156900, likes: 9020 },
-  { title: "UI Konzept – Mobile", type: "image", category: "Foto", views: 56400, likes: 3010 },
-  { title: "Kampagne – Visuals", type: "image", category: "Foto", views: 73300, likes: 4150 },
-  { title: "Landingpage – Clean", type: "image", category: "Foto", views: 48900, likes: 2670 },
+  { title: "Produktfilm Short", type: "video", category: "Video", views: 128400, likes: 6420, services: ["video", "post", "konzept"] },
+  { title: "Branding & Motion Clip", type: "video", category: "Clip", views: 84200, likes: 5210, services: ["video", "post"] },
+  { title: "Showreel Teaser", type: "video", category: "Clip", views: 156900, likes: 9020, services: ["video", "post", "produktion"] },
+  { title: "UI Konzept – Mobile", type: "image", category: "Foto", views: 56400, likes: 3010, services: ["foto", "konzept"] },
+  { title: "Kampagne – Visuals", type: "image", category: "Foto", views: 73300, likes: 4150, services: ["foto", "post", "konzept"] },
+  { title: "Landingpage – Clean", type: "image", category: "Foto", views: 48900, likes: 2670, services: ["foto", "konzept"] },
 ];
 
 const filtered = items.filter((item) => item.category === category);
@@ -56,7 +59,12 @@ const formatCount = (value: number) => {
       </div>
       <div class="label">
         <div class="eyebrow">{item.category}</div>
-        <div>{item.title}</div>
+        <div class="label__title">{item.title}</div>
+        <div class="service-icons">
+          {item.services.map((service) => (
+            <ServiceIcon service={service} size="sm" />
+          ))}
+        </div>
       </div>
     </article>
   ))}

@@ -1,0 +1,104 @@
+# ============================================
+# Schutz vor dem versehentlichen Veröffentlichen sensibler Inhalte
+# (Private Website – nichts Vertrauliches ins Repo pushen)
+# ============================================
+
+# --- Zugangsdaten, Secrets, API-Keys ---
+.env
+.env.*
+.env.local
+.env.development
+.env.production
+.env.staging
+*.env
+!.env.example
+!.env.sample
+*.pem
+*.key
+*credentials*
+*secrets*
+*-secret*
+*secret*
+config/secrets.*
+**/secrets/
+**/credentials/
+
+# --- Lokale/private Konfiguration ---
+*.local
+*.config.local
+config.local.*
+.config.local.*
+private.config.*
+netlify.toml.local
+vercel.local*
+
+# --- Private Ordner und Daten ---
+private/
+**/private/
+**/privat/
+_private/
+**/_private/
+content/private/
+data/private/
+**/offline/
+**/intern/
+uploads/
+**/uploads/
+form-submissions/
+**/form-submissions/
+contact-data/
+**/contact-data/
+
+# --- Persönliche / vertrauliche Dateien ---
+*geheim*
+*intern*
+*vertraulich*
+*-backup-private*
+*addresses*
+*contacts*.json
+*contacts*.csv
+*.vcf
+
+# --- Abhängigkeiten ---
+node_modules/
+
+# --- Build, Cache, Output ---
+dist/
+build/
+out/
+.astro/
+.cache/
+*.local
+
+# --- IDE und Editor ---
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# --- Betriebssystem ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Logs und temporäre Dateien ---
+*.log
+npm-debug.log*
+tmp/
+temp/
+
+# --- Datenbanken, Exporte, Backups (oft mit personenbezogenen Daten) ---
+*.sql
+*.sqlite
+*.db
+*.sqlite3
+**/backups/
+**/exports/
+*.dump
+
+# --- Optionale sensible Assets (bei Bedarf auskommentieren) ---
+# assets/raw/
+# assets/private/
+# *.psd
+# *.ai

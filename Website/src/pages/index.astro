@@ -3,11 +3,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/Section.astro";
 import Hero from "../components/Hero.astro";
 import PortfolioGrid from "../components/PortfolioGrid.astro";
+import ServicesLegend from "../components/ServicesLegend.astro";
 import ContactForm from "../components/ContactForm.astro";
 ---
 <BaseLayout title="Portfolio · Beidelwutz" description="Von der Idee zum fertigen Ergebnis.">
   <main id="main">
-    <Section id="start" theme="light">
+    <Section id="start" theme="light" variant="hero">
       <Hero />
     </Section>
 
@@ -42,6 +43,10 @@ import ContactForm from "../components/ContactForm.astro";
         </p>
         <PortfolioGrid category="Foto" />
       </div>
+    </Section>
+
+    <Section id="leistungen" theme="light">
+      <ServicesLegend />
     </Section>
 
     <Section id="kontakt" theme="dark">
