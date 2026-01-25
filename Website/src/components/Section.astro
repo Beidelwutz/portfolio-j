@@ -2,7 +2,7 @@
 const { theme = "light", id, className = "", variant } = Astro.props;
 const variantClass = variant === "hero" ? " section--hero" : "";
 ---
-<section id={id} class={`section${variantClass} ${className}`.trim()} data-theme={theme}>
+<section id={id} class={`section${variantClass} ${className}`.trim()} data-theme={theme} data-section={id}>
   <div class="container">
     <div class="section-surface">
       <slot />

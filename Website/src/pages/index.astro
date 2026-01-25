@@ -9,6 +9,40 @@ import ContactForm from "../components/ContactForm.astro";
 ---
 <BaseLayout title="Portfolio · Beidelwutz" description="Von der Idee zum fertigen Ergebnis.">
   <main id="main">
+    <!-- Progress / Kapitel-Navigation (wie bei Projektseiten) -->
+    <nav class="home-progress" aria-label="Seitenfortschritt">
+      <div class="home-progress__inner">
+        <a href="#start" class="home-progress__item is-active" data-section="start">
+          <span class="home-progress__dot"></span>
+          <span class="home-progress__label">Start</span>
+        </a>
+        <a href="#highlights" class="home-progress__item" data-section="highlights">
+          <span class="home-progress__dot"></span>
+          <span class="home-progress__label">Projekte</span>
+        </a>
+        <a href="#videos" class="home-progress__item" data-section="videos">
+          <span class="home-progress__dot"></span>
+          <span class="home-progress__label">Videos</span>
+        </a>
+        <a href="#clips" class="home-progress__item" data-section="clips">
+          <span class="home-progress__dot"></span>
+          <span class="home-progress__label">Clips</span>
+        </a>
+        <a href="#fotos" class="home-progress__item" data-section="fotos">
+          <span class="home-progress__dot"></span>
+          <span class="home-progress__label">Fotos</span>
+        </a>
+        <a href="#leistungen" class="home-progress__item" data-section="leistungen">
+          <span class="home-progress__dot"></span>
+          <span class="home-progress__label">Leistungen</span>
+        </a>
+        <a href="#kontakt" class="home-progress__item" data-section="kontakt">
+          <span class="home-progress__dot"></span>
+          <span class="home-progress__label">Kontakt</span>
+        </a>
+      </div>
+    </nav>
+
     <Section id="start" theme="light" variant="hero">
       <Hero />
     </Section>

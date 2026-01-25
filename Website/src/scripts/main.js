@@ -140,6 +140,32 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
+// Home Progress – aktiver Abschnitt beim Scrollen (Startseite)
+const homeProgress = document.querySelector(".home-progress");
+if (homeProgress) {
+  const homeSections = document.querySelectorAll("#main > section[id]");
+  const homeProgressItems = homeProgress.querySelectorAll(".home-progress__item");
+
+  if (homeSections.length > 0 && homeProgressItems.length > 0) {
+    const homeProgressObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.id;
+            homeProgressItems.forEach((item) => {
+              const isMatch = item.dataset.section === sectionId;
+              item.classList.toggle("is-active", isMatch);
+            });
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "-10% 0px -70% 0px" }
+    );
+
+    homeSections.forEach((section) => homeProgressObserver.observe(section));
+  }
+}
+
 const lightboxOverlay = document.querySelector("[data-lightbox-overlay]");
 const lightboxMedia = document.querySelector("[data-lightbox-media]");
 const lightboxTitle = document.querySelector("[data-lightbox-title]");

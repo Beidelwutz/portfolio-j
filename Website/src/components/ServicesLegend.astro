@@ -37,16 +37,14 @@ const tools: {
       Diese Icons zeigen dir, wofür wir bei jedem Projekt verantwortlich waren.
     </p>
   </div>
-  <div class="services-legend__grid reveal" data-reveal>
+  
+  <div class="services-badges reveal" data-reveal>
     {services.map((service) => (
-      <div class="legend-item">
-        <div class="legend-icon">
-          <ServiceIcon service={service.id} size="lg" showTooltip={false} linkToLegend={false} />
-        </div>
-        <div class="legend-content">
-          <h3 class="legend-label">{service.label}</h3>
-          <p class="legend-desc">{service.description}</p>
-        </div>
+      <div class="service-badge">
+        <span class="service-badge__icon">
+          <ServiceIcon service={service.id} size="sm" showTooltip={false} linkToLegend={false} />
+        </span>
+        <span class="service-badge__label">{service.label}</span>
       </div>
     ))}
   </div>

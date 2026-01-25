@@ -831,7 +831,14 @@ main {
 }
 
 .portfolio-card .label__title {
-  margin-bottom: 4px;
+  margin-bottom: 2px;
+}
+
+.portfolio-card .label__artist {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-muted);
+  margin-bottom: 6px;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -962,70 +969,52 @@ a.service-icon {
   margin: 0 auto;
 }
 
-.services-legend__grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 24px;
+.services-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
 }
 
-.legend-item {
-  display: flex;
-  flex-direction: column;
+.service-badge {
+  display: inline-flex;
   align-items: center;
-  text-align: center;
-  gap: 14px;
-  padding: 24px 16px;
-  border-radius: 16px;
-  background: rgba(124, 92, 255, 0.04);
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: rgba(124, 92, 255, 0.06);
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.legend-item:hover {
-  background: rgba(124, 92, 255, 0.08);
+.service-badge:hover {
+  background: rgba(124, 92, 255, 0.12);
   transform: translateY(-2px);
 }
 
-.legend-icon {
+.service-badge__icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  background: rgba(124, 92, 255, 0.12);
 }
 
-.legend-icon .service-icon {
-  background: transparent;
-  width: 100%;
-  height: 100%;
-  padding: 12px;
+.service-badge__icon .service-icon {
+  background: rgba(124, 92, 255, 0.15);
+  width: 32px;
+  height: 32px;
+  padding: 6px;
+  border-radius: 8px;
 }
 
-.legend-icon .service-icon:hover {
-  background: transparent;
+.service-badge__icon .service-icon:hover {
+  background: rgba(124, 92, 255, 0.15);
   transform: none;
 }
 
-.legend-content {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.legend-label {
+.service-badge__label {
   font-family: "Raleway", sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--color-text);
-}
-
-.legend-desc {
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--color-muted);
-  margin: 0;
 }
 
 /* Tools/Programme Section */
@@ -2454,6 +2443,75 @@ a.service-icon {
   font-weight: 500;
 }
 
+/* Home Progress – Kapitel-Navigation (wie bei Projektseiten) */
+.home-progress {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .home-progress {
+    display: none;
+  }
+}
+
+.home-progress__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.home-progress__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--color-muted);
+  transition: color 0.3s ease;
+}
+
+.home-progress__item:hover {
+  color: var(--color-text);
+}
+
+.home-progress__item.is-active {
+  color: var(--color-accent);
+}
+
+.home-progress__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.3;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.home-progress__item.is-active .home-progress__dot {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.home-progress__label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.home-progress__item:hover .home-progress__label,
+.home-progress__item.is-active .home-progress__label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 /* Site Footer */
 .site-footer {
   background: #0f1115;
@@ -3269,9 +3327,6 @@ a.service-icon {
     bottom: -56px;
   }
 
-  .services-legend__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
 @media (max-width: 720px) {
@@ -3360,31 +3415,23 @@ a.service-icon {
     padding-bottom: 72px;
   }
 
-  .services-legend__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+  .services-badges {
+    gap: 8px;
   }
 
-  .legend-item {
-    padding: 20px 12px;
+  .service-badge {
+    padding: 10px 14px;
+    gap: 8px;
   }
 
-  .legend-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
+  .service-badge__icon .service-icon {
+    width: 28px;
+    height: 28px;
+    padding: 5px;
   }
 
-  .legend-icon .service-icon {
-    padding: 10px;
-  }
-
-  .legend-label {
-    font-size: 14px;
-  }
-
-  .legend-desc {
-    font-size: 12px;
+  .service-badge__label {
+    font-size: 13px;
   }
 
   .tools-section {
