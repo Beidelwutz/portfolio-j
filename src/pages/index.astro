@@ -1,0 +1,68 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+import Hero from "../components/Hero.astro";
+import PortfolioGrid from "../components/PortfolioGrid.astro";
+import ContactForm from "../components/ContactForm.astro";
+---
+<BaseLayout title="Portfolio · Beidelwutz" description="Von der Idee zum fertigen Ergebnis.">
+  <main id="main">
+    <Section id="start" theme="light">
+      <Hero />
+    </Section>
+
+    <Section id="videos" theme="light">
+      <div class="stack">
+        <span class="eyebrow">Portfolio</span>
+        <h2 class="headline reveal" data-reveal>Videos</h2>
+        <p class="subtitle reveal" data-reveal>
+          Längere Formate und Produktfilme.
+        </p>
+        <PortfolioGrid category="Video" />
+      </div>
+    </Section>
+
+    <Section id="clips" theme="light">
+      <div class="stack">
+        <span class="eyebrow">Portfolio</span>
+        <h2 class="headline reveal" data-reveal>Clips</h2>
+        <p class="subtitle reveal" data-reveal>
+          Kurze Bewegtbilder und Teasers.
+        </p>
+        <PortfolioGrid category="Clip" />
+      </div>
+    </Section>
+
+    <Section id="fotos" theme="light">
+      <div class="stack">
+        <span class="eyebrow">Portfolio</span>
+        <h2 class="headline reveal" data-reveal>Fotos</h2>
+        <p class="subtitle reveal" data-reveal>
+          Ausgewählte Arbeiten, die Ideen in klare, greifbare Ergebnisse verwandeln.
+        </p>
+        <PortfolioGrid category="Foto" />
+      </div>
+    </Section>
+
+    <Section id="kontakt" theme="dark">
+      <div class="grid-2">
+        <div class="stack">
+          <span class="eyebrow">Kontakt</span>
+          <h2 class="headline reveal" data-reveal>Lass uns gemeinsam machen</h2>
+          <p class="subtitle reveal" data-reveal>
+            Beschreib kurz dein Projekt – ich antworte schnell und klar.
+          </p>
+        </div>
+        <ContactForm />
+      </div>
+    </Section>
+  </main>
+
+  <div class="lightbox" data-lightbox-overlay hidden>
+    <div class="lightbox-content">
+      <button class="lightbox-close" data-lightbox-close aria-label="Schließen">×</button>
+      <div class="lightbox-media" data-lightbox-media></div>
+      <div class="lightbox-title" data-lightbox-title></div>
+    </div>
+  </div>
+</BaseLayout>

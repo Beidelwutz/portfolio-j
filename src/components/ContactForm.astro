@@ -1,0 +1,10 @@
+---
+const { email = "hello@beidelwutz.de" } = Astro.props;
+---
+<div class="contact-card reveal" data-reveal data-contact data-email={email}>
+  <input type="text" name="name" placeholder="Dein Name" required />
+  <input type="email" name="email" placeholder="Deine E-Mail" required />
+  <textarea name="message" rows="4" placeholder="Worum geht's?" required></textarea>
+  <button type="button">Nachricht senden</button>
+  <small class="footer-note">Antwort in 24–48h · Schreib mir gern direkt.</small>
+</div>

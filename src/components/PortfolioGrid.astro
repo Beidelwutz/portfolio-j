@@ -1,0 +1,32 @@
+---
+type Category = "Video" | "Clip" | "Foto";
+const { category }: { category: Category } = Astro.props;
+
+const items: { title: string; type: "video" | "image"; category: Category }[] = [
+  { title: "Produktfilm Short", type: "video", category: "Video" },
+  { title: "Branding & Motion Clip", type: "video", category: "Clip" },
+  { title: "Showreel Teaser", type: "video", category: "Clip" },
+  { title: "UI Konzept – Mobile", type: "image", category: "Foto" },
+  { title: "Kampagne – Visuals", type: "image", category: "Foto" },
+  { title: "Landingpage – Clean", type: "image", category: "Foto" },
+];
+
+const filtered = items.filter((item) => item.category === category);
+---
+<div class="portfolio-grid">
+  {filtered.map((item) => (
+    <article
+      class="portfolio-card reveal"
+      data-reveal
+      data-lightbox
+      data-title={item.title}
+      data-type={item.type}
+    >
+      <div class="media" aria-hidden="true"></div>
+      <div class="label">
+        <div class="eyebrow">{item.category}</div>
+        <div>{item.title}</div>
+      </div>
+    </article>
+  ))}
+</div>

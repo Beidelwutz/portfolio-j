@@ -1,0 +1,28 @@
+---
+const { title = "Portfolio", description = "Von der Idee zum fertigen Ergebnis." } = Astro.props;
+import SiteHeader from "../components/SiteHeader.astro";
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Raleway:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Zum Inhalt springen</a>
+    <SiteHeader />
+    <slot />
+    <script type="module" src="/src/scripts/main.js"></script>
+  </body>
+</html>
