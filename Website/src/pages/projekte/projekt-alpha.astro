@@ -1,209 +1,200 @@
 ---
-import ProjectLayout from "../../layouts/ProjectLayout.astro";
+import ProjectLayoutV2 from "../../layouts/ProjectLayoutV2.astro";
+import ResultsBlock from "../../components/project/ResultsBlock.astro";
+import StoryBlock from "../../components/project/StoryBlock.astro";
+import DeliverablesGrid from "../../components/project/DeliverablesGrid.astro";
+import ProcessTimeline from "../../components/project/ProcessTimeline.astro";
+import ProjectGallery from "../../components/project/ProjectGallery.astro";
+import TechDetails from "../../components/project/TechDetails.astro";
+import Credits from "../../components/project/Credits.astro";
+import ProjectCTA from "../../components/project/ProjectCTA.astro";
 ---
 
-<ProjectLayout
+<ProjectLayoutV2
   title="Diana's Vision"
-  subtitle="Ein intimes Porträt-Shooting, das Persönlichkeit und Stil in einzigartigen Bildern einfängt"
-  heroImage="/uploads/Di_1_V01_low.webp"
-  client="Diana"
+  tagline="Ein Porträt-Shooting, das Stärke und Verletzlichkeit einfängt – zwischen natürlichem Licht und bewussten Momenten."
+  heroMedia="/uploads/projekte/Di_10_V01_low.webp"
+  heroMediaType="image"
+  role={["Fotografie", "Lichtsetup", "Postproduktion", "Creative Direction"]}
+  client="Diana M."
+  year="2024"
   location="Köln"
-  date="2025"
-  duration="1 Tag"
-  category="Fotografie"
-  services={["Fotografie", "Konzept", "Postproduktion"]}
+  format="Porträt-Serie"
 >
-  <!-- Intro -->
-  <div class="mag-intro mag-reveal">
-    <p class="mag-intro__lead">
-      Manchmal entstehen die stärksten Bilder, wenn man einfach loslässt. 
-      Dieses Shooting war genau das – ein Tag voller Spontanität, Vertrauen 
-      und dem richtigen Licht zur richtigen Zeit.
-    </p>
-  </div>
 
-  <!-- Text Block with Drop Cap -->
-  <div class="mag-text mag-reveal">
-    <p class="drop-cap">
-      Diana kam mit einer klaren Vorstellung: Sie wollte Bilder, die sie so zeigen, 
-      wie sie wirklich ist. Keine übertriebenen Posen, keine künstliche Perfektion – 
-      einfach authentische Momente, eingefangen in natürlichem Licht. Als Fotografin 
-      ist es mein Ziel, genau diese Essenz einzufangen.
-    </p>
-    <p>
-      Wir starteten früh am Morgen, als die Sonne noch weich und golden war. 
-      Die Location – ein altes Industriegebäude mit riesigen Fenstern – bot 
-      die perfekte Kulisse für das, was wir uns vorgestellt hatten: roh, 
-      ehrlich, und voller Charakter.
-    </p>
-  </div>
+  <ResultsBlock
+    mediaType="gallery"
+    galleryImages={[
+      { src: "/uploads/projekte/Di_1_V01_low.webp", alt: "Diana Portrait 1" },
+      { src: "/uploads/projekte/Di_2_V01_low.webp", alt: "Diana Portrait 2" },
+      { src: "/uploads/projekte/Di_3_V01_low.webp", alt: "Diana Portrait 3" },
+    ]}
+    outcomes={[
+      { label: "12 finale Bilder", icon: "📸" },
+      { label: "2h Shooting-Zeit", icon: "⏱️" },
+      { label: "Natural Light Setup", icon: "☀️" },
+      { label: "Same-Day Preview", icon: "⚡" },
+      { label: "Print-Ready Files", icon: "🖨️" },
+    ]}
+  />
 
-  <!-- Full Width Image -->
-  <div class="mag-fullwidth mag-reveal">
-    <img src="/uploads/Di_2_V01_low.webp" alt="Behind the Scenes" data-gallery-img />
-    <span class="mag-fullwidth__caption">Das perfekte Licht – goldene Stunde im Industrieloft</span>
-  </div>
+  <StoryBlock
+    paragraphs={[
+      "Diana kam mit einer klaren Vision: authentische Bilder, die ihre Persönlichkeit zeigen – keine gestellten Posen, sondern echte Momente. Die Herausforderung war, diese Balance zwischen Natürlichkeit und professioneller Qualität zu finden.",
+      "Wir haben uns für eine Location mit großen Fenstern entschieden, um das natürliche Tageslicht optimal nutzen zu können. Der Look sollte clean und zeitlos sein, mit subtilen Schatten, die Tiefe erzeugen.",
+      "Das Ergebnis: Eine Serie, die Diana so zeigt, wie sie sich selbst sieht – stark, aber nahbar. Jedes Bild erzählt einen Teil ihrer Geschichte.",
+    ]}
+    quote={{
+      text: "Jenny hat es geschafft, mich vor der Kamera komplett zu entspannen. Die Bilder sind genau so geworden, wie ich sie mir vorgestellt habe – nur besser.",
+      author: "Diana M.",
+      role: "Kundin"
+    }}
+    learning="Manchmal sind die besten Aufnahmen die, die zwischen den 'offiziellen' Takes entstehen."
+  />
 
-  <!-- Text Block -->
-  <div class="mag-text mag-reveal">
-    <h2>Die Vorbereitung</h2>
-    <p>
-      Bevor wir anfingen zu fotografieren, nahmen wir uns Zeit. Zeit zum Reden, 
-      zum Kennenlernen, zum Verstehen. Was bewegt Diana? Was will sie ausdrücken? 
-      Welche Seite von sich möchte sie zeigen – und welche vielleicht gerade nicht?
-    </p>
-    <p>
-      Diese Gespräche sind für mich der wichtigste Teil jedes Shootings. Denn 
-      nur wenn ich verstehe, wer vor meiner Kamera steht, kann ich Bilder 
-      machen, die wirklich erzählen.
-    </p>
-  </div>
+  <DeliverablesGrid
+    deliverables={[
+      {
+        category: "Formate",
+        items: [
+          "Hochformat 4:5 (Instagram)",
+          "Querformat 3:2 (Web/Print)",
+          "Quadrat 1:1 (Social Media)",
+          "Original RAW auf Anfrage"
+        ]
+      },
+      {
+        category: "Plattformen",
+        items: [
+          "Instagram Feed & Stories",
+          "LinkedIn Profilbild",
+          "Website / Portfolio",
+          "Print bis A3"
+        ]
+      },
+      {
+        category: "Assets",
+        items: [
+          "12 bearbeitete Finals",
+          "3 verschiedene Looks",
+          "Hautretusche (natürlich)",
+          "Color Grading"
+        ]
+      }
+    ]}
+  />
 
-  <!-- Split: Image + Text -->
-  <div class="mag-split mag-reveal">
-    <div class="mag-split__image">
-      <img src="/uploads/Di_3_V01_low.webp" alt="Portrait Diana" data-gallery-img />
-    </div>
-    <div class="mag-split__text">
-      <h2>Das Konzept</h2>
-      <p>
-        Wir arbeiteten mit minimalen Requisiten und maximalem Fokus auf 
-        Ausdruck und Körpersprache. Jedes Bild sollte eine Geschichte erzählen, 
-        ein Gefühl transportieren.
-      </p>
-      <p>
-        Diana hatte eine natürliche Präsenz vor der Kamera, die mich 
-        immer wieder überraschte. Sie bewegte sich frei, experimentierte 
-        mit verschiedenen Posen und ließ sich von der Musik inspirieren, 
-        die leise im Hintergrund lief.
-      </p>
-    </div>
-  </div>
+  <ProcessTimeline
+    steps={[
+      {
+        title: "Vorgespräch & Moodboard",
+        duration: "1 Tag",
+        description: "Wir haben Referenzbilder gesammelt und den Look definiert. Diana wusste genau, was sie nicht wollte: überbearbeitete, künstliche Bilder. Das hat die Richtung klar vorgegeben.",
+        tools: ["Pinterest", "Notion"]
+      },
+      {
+        title: "Location Scouting",
+        duration: "2 Stunden",
+        description: "Die Location war entscheidend für das natürliche Licht. Wir haben einen Raum mit bodentiefen Fenstern gewählt, der weiches, diffuses Licht bietet – perfekt für Porträts.",
+        image: "/uploads/projekte/Di_5_V01_low.webp"
+      },
+      {
+        title: "Shooting",
+        duration: "2 Stunden",
+        description: "Entspannte Atmosphäre mit Musik und lockeren Gesprächen. Wir haben verschiedene Setups ausprobiert – stehend, sitzend, am Fenster. Die besten Shots entstanden, als Diana nicht mehr an die Kamera dachte.",
+        tools: ["Sony A7IV", "85mm f/1.4", "Reflektor"]
+      },
+      {
+        title: "Selektion & Bearbeitung",
+        duration: "3 Tage",
+        description: "Aus über 200 Aufnahmen haben wir gemeinsam 25 Favoriten ausgewählt. Die finale Bearbeitung fokussierte sich auf subtile Anpassungen – Hauttöne, Kontrast, minimale Retusche.",
+        tools: ["Lightroom", "Photoshop"]
+      },
+      {
+        title: "Delivery",
+        duration: "1 Tag",
+        description: "Finale Bilder in allen Formaten, optimiert für verschiedene Verwendungszwecke. Dazu eine kurze Anleitung zur optimalen Nutzung auf Social Media.",
+        tools: ["WeTransfer", "Google Drive"]
+      }
+    ]}
+  />
 
-  <!-- Pull Quote -->
-  <div class="mag-quote mag-reveal">
-    <p class="mag-quote__text">
-      Die besten Bilder entstehen nicht, wenn man versucht perfekt zu sein – 
-      sondern wenn man aufhört, darüber nachzudenken.
-    </p>
-    <span class="mag-quote__author">Diana, nach dem Shooting</span>
-  </div>
+  <ProjectGallery
+    highlights={[
+      { src: "/uploads/projekte/Di_1_V01_low.webp", alt: "Diana Portrait", featured: true },
+      { src: "/uploads/projekte/Di_2_V01_low.webp", alt: "Diana Close-Up" },
+      { src: "/uploads/projekte/Di_3_V01_low.webp", alt: "Diana am Fenster" },
+      { src: "/uploads/projekte/Di_4_V01_low.webp", alt: "Diana Portrait Licht" },
+      { src: "/uploads/projekte/Di_5_V01_low.webp", alt: "Diana natürlich" },
+      { src: "/uploads/projekte/Di_6_V01_low.webp", alt: "Diana Schwarz-Weiß" },
+      { src: "/uploads/projekte/Di_7_V01_low.webp", alt: "Diana Detail" },
+      { src: "/uploads/projekte/Di_8_V01_low.webp", alt: "Diana Mood" },
+    ]}
+    bts={[
+      { src: "/uploads/projekte/Di_9_V01_low.webp", alt: "Behind the Scenes 1" },
+      { src: "/uploads/projekte/Di_10_V01_low.webp", alt: "Behind the Scenes 2" },
+    ]}
+  />
 
-  <!-- Gallery -->
-  <div class="mag-gallery mag-reveal">
-    <h3 class="mag-gallery__title">Impressionen</h3>
-    <div class="mag-gallery__grid">
-      <div class="mag-gallery__item mag-gallery__item--tall mag-stagger">
-        <img src="/uploads/Di_4_V01_low.webp" alt="Portrait 1" data-gallery-img />
-      </div>
-      <div class="mag-gallery__item mag-stagger">
-        <img src="/uploads/Di_5_V01_low.webp" alt="Portrait 2" data-gallery-img />
-      </div>
-      <div class="mag-gallery__item mag-stagger">
-        <img src="/uploads/Di_6_V01_low.webp" alt="Portrait 3" data-gallery-img />
-      </div>
-      <div class="mag-gallery__item mag-stagger">
-        <img src="/uploads/Di_7_V01_low.webp" alt="Portrait 4" data-gallery-img />
-      </div>
-      <div class="mag-gallery__item mag-gallery__item--wide mag-stagger">
-        <img src="/uploads/Di_8_V01_low.webp" alt="Portrait 5" data-gallery-img />
-      </div>
-    </div>
-  </div>
+  <TechDetails
+    categories={[
+      {
+        title: "Kamera & Objektive",
+        items: [
+          "Sony A7 IV (Body)",
+          "Sony 85mm f/1.4 GM",
+          "Sony 35mm f/1.4 GM",
+          "Backup: Sony A7C"
+        ]
+      },
+      {
+        title: "Licht & Zubehör",
+        items: [
+          "Natürliches Fensterlicht",
+          "California Sunbounce Reflektor",
+          "V-Flat für Abschattung",
+          "Manfrotto Stativ"
+        ]
+      },
+      {
+        title: "Post-Production",
+        items: [
+          "Adobe Lightroom Classic",
+          "Adobe Photoshop",
+          "Eigene Preset-Basis",
+          "Frequency Separation (minimal)"
+        ]
+      }
+    ]}
+  />
 
-  <!-- Text Block -->
-  <div class="mag-text mag-reveal">
-    <h2>Die Postproduktion</h2>
-    <p>
-      In der Bearbeitung ging es mir darum, die Atmosphäre des Tages zu 
-      bewahren. Warme Töne, weiche Kontraste, und vor allem: Dianas 
-      natürliche Ausstrahlung nicht zu überdecken.
-    </p>
-    <h3>Der Look</h3>
-    <p>
-      Ich entwickelte einen speziellen Colorgrade, der die goldenen 
-      Lichtstimmung des Morgens einfängt. Hauttöne blieben natürlich, 
-      während die Schatten eine leichte Wärme bekamen. Das Ergebnis: 
-      Bilder, die zeitlos wirken und trotzdem einen eigenständigen 
-      Look haben.
-    </p>
-  </div>
+  <Credits
+    client={{
+      name: "Diana M.",
+    }}
+    credits={[
+      { role: "Fotografie", name: "Jenny" },
+      { role: "Creative Direction", name: "Jenny" },
+      { role: "Postproduktion", name: "Jenny" },
+      { role: "Hair & Makeup", name: "Diana (selbst)" },
+    ]}
+  />
 
-  <!-- Duo Images -->
-  <div class="mag-duo mag-reveal">
-    <div class="mag-duo__item">
-      <img src="/uploads/Di_9_V01_low.webp" alt="Detail 1" data-gallery-img />
-    </div>
-    <div class="mag-duo__item">
-      <img src="/uploads/projekte/Di_10_V01_low.webp" alt="Detail 2" data-gallery-img />
-    </div>
-  </div>
+  <ProjectCTA
+    relatedProjects={[
+      {
+        title: "Kelly's Cover",
+        subtitle: "Fashion Editorial",
+        thumbnail: "/uploads/projekte/Kelly_Covershoot_2_V01_low.webp",
+        slug: "projekt-beta"
+      },
+      {
+        title: "MOONIAC Sessions",
+        subtitle: "Bandfotos",
+        thumbnail: "/uploads/projekte/MOONIAC_Shooting_V01_low.webp",
+        slug: "projekt-gamma"
+      }
+    ]}
+  />
 
-  <!-- Process -->
-  <div class="mag-process mag-reveal">
-    <h3 class="mag-process__title">Der Prozess</h3>
-    <div class="mag-process__items">
-      <div class="mag-process__item">
-        <span class="mag-process__number">01</span>
-        <div class="mag-process__content">
-          <h3>Vorgespräch</h3>
-          <p>Kennenlernen, Moodboard erstellen, Konzept entwickeln und die Vision für das Shooting festlegen.</p>
-        </div>
-      </div>
-      <div class="mag-process__item">
-        <span class="mag-process__number">02</span>
-        <div class="mag-process__content">
-          <h3>Shooting</h3>
-          <p>Ein entspannter Tag mit viel Raum für Kreativität und spontane Ideen.</p>
-        </div>
-      </div>
-      <div class="mag-process__item">
-        <span class="mag-process__number">03</span>
-        <div class="mag-process__content">
-          <h3>Auswahl</h3>
-          <p>Gemeinsame Sichtung der Bilder und Auswahl der stärksten Aufnahmen.</p>
-        </div>
-      </div>
-      <div class="mag-process__item">
-        <span class="mag-process__number">04</span>
-        <div class="mag-process__content">
-          <h3>Bearbeitung</h3>
-          <p>Professionelle Retusche und Colorgrading für einen einheitlichen, zeitlosen Look.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Stats -->
-  <div class="mag-stats mag-reveal">
-    <div class="mag-stats__inner">
-      <div class="mag-stat">
-        <span class="mag-stat__number">1</span>
-        <span class="mag-stat__label">Tag</span>
-      </div>
-      <div class="mag-stat">
-        <span class="mag-stat__number">847</span>
-        <span class="mag-stat__label">Aufnahmen</span>
-      </div>
-      <div class="mag-stat">
-        <span class="mag-stat__number">42</span>
-        <span class="mag-stat__label">Finale Bilder</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Final Text -->
-  <div class="mag-text mag-reveal">
-    <h2>Das Ergebnis</h2>
-    <p>
-      Am Ende des Tages hatten wir nicht nur eine Sammlung schöner Bilder – 
-      wir hatten Erinnerungen eingefangen. Momente, die Diana zeigen, wie 
-      sie ist: stark, sanft, und absolut authentisch.
-    </p>
-    <p>
-      Dieses Projekt ist ein perfektes Beispiel dafür, was passiert, wenn 
-      Vertrauen und Kreativität zusammenkommen. Danke, Diana, für diesen 
-      unvergesslichen Tag.
-    </p>
-  </div>
-</ProjectLayout>
+</ProjectLayoutV2>

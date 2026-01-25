@@ -1,0 +1,55 @@
+---
+interface Outcome {
+  label: string;
+  icon?: string;
+}
+
+interface Props {
+  mediaType?: "video" | "gallery";
+  mediaSrc?: string;
+  mediaPoster?: string;
+  galleryImages?: { src: string; alt: string }[];
+  outcomes: Outcome[];
+}
+
+const { mediaType = "video", mediaSrc, mediaPoster, galleryImages = [], outcomes } = Astro.props;
+---
+
+<section id="results" class="results-block" data-section>
+  <div class="results-block__inner">
+    <div class="results-block__media reveal">
+      {mediaType === "video" && mediaSrc && (
+        <div class="results-block__video">
+          <video
+            src={mediaSrc}
+            poster={mediaPoster}
+            controls
+            preload="metadata"
+            playsinline
+          />
+        </div>
+      )}
+      {mediaType === "gallery" && galleryImages.length > 0 && (
+        <div class="results-block__gallery" data-gallery="results">
+          {galleryImages.slice(0, 3).map((img, idx) => (
+            <div class="results-block__gallery-item" data-gallery-item>
+              <img src={img.src} alt={img.alt} loading="lazy" data-full={img.src} />
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+    
+    <div class="results-block__outcomes reveal">
+      <span class="results-block__label">Key Outcomes</span>
+      <div class="results-block__chips">
+        {outcomes.map((outcome) => (
+          <span class="outcome-chip">
+            {outcome.icon && <span class="outcome-chip__icon">{outcome.icon}</span>}
+            {outcome.label}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

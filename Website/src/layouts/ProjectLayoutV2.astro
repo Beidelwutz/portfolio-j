@@ -1,0 +1,326 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  // Hero
+  title: string;
+  tagline: string;
+  heroMedia: string;
+  heroMediaType?: "image" | "video";
+  heroPoster?: string;
+  
+  // Meta
+  role: string[];
+  client?: string;
+  year: string;
+  location?: string;
+  format: string;
+  
+  // Optional CTAs
+  watchUrl?: string;
+  btsUrl?: string;
+}
+
+const {
+  title,
+  tagline,
+  heroMedia,
+  heroMediaType = "image",
+  heroPoster,
+  role,
+  client,
+  year,
+  location,
+  format,
+  watchUrl,
+  btsUrl,
+} = Astro.props;
+---
+
+<BaseLayout title={`${title} · Portfolio`} description={tagline}>
+  <style>
+    .site-header { display: none; }
+  </style>
+  <main id="project" class="project-page">
+    
+    <!-- Progress Indicator -->
+    <nav class="project-progress" aria-label="Seitenfortschritt">
+      <div class="project-progress__inner">
+        <a href="#hero" class="project-progress__item is-active" data-section="hero">
+          <span class="project-progress__dot"></span>
+          <span class="project-progress__label">Start</span>
+        </a>
+        <a href="#results" class="project-progress__item" data-section="results">
+          <span class="project-progress__dot"></span>
+          <span class="project-progress__label">Ergebnis</span>
+        </a>
+        <a href="#story" class="project-progress__item" data-section="story">
+          <span class="project-progress__dot"></span>
+          <span class="project-progress__label">Story</span>
+        </a>
+        <a href="#process" class="project-progress__item" data-section="process">
+          <span class="project-progress__dot"></span>
+          <span class="project-progress__label">Prozess</span>
+        </a>
+        <a href="#gallery" class="project-progress__item" data-section="gallery">
+          <span class="project-progress__dot"></span>
+          <span class="project-progress__label">Galerie</span>
+        </a>
+        <a href="#credits" class="project-progress__item" data-section="credits">
+          <span class="project-progress__dot"></span>
+          <span class="project-progress__label">Credits</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Back Button -->
+    <a href="/" class="project-back" aria-label="Zurück zur Startseite">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+    </a>
+
+    <!-- 1) Hero "Signature" -->
+    <section id="hero" class="project-hero" data-section>
+      <div class="project-hero__media">
+        {heroMediaType === "video" ? (
+          <video
+            src={heroMedia}
+            poster={heroPoster}
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          />
+        ) : (
+          <img src={heroMedia} alt={title} data-parallax-hero />
+        )}
+        <div class="project-hero__overlay"></div>
+      </div>
+      
+      <div class="project-hero__content">
+        <div class="project-hero__meta">
+          {client && <span class="project-hero__client">{client}</span>}
+          <span class="project-hero__format">{format}</span>
+          <span class="project-hero__year">{year}</span>
+          {location && <span class="project-hero__location">{location}</span>}
+        </div>
+        
+        <h1 class="project-hero__title">{title}</h1>
+        <p class="project-hero__tagline">{tagline}</p>
+        
+        <div class="project-hero__roles">
+          {role.map((r) => (
+            <span class="project-hero__role">{r}</span>
+          ))}
+        </div>
+        
+        <div class="project-hero__actions">
+          {watchUrl && (
+            <a href={watchUrl} class="project-hero__cta project-hero__cta--primary">
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Watch Film
+            </a>
+          )}
+          {btsUrl && (
+            <a href={btsUrl} class="project-hero__cta project-hero__cta--secondary">
+              Behind the Scenes
+            </a>
+          )}
+          <a href="#credits" class="project-hero__cta project-hero__cta--ghost">
+            Credits
+          </a>
+        </div>
+      </div>
+      
+      <a href="#results" class="project-hero__scroll" aria-label="Weiter scrollen">
+        <span>Entdecken</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </a>
+    </section>
+
+    <!-- Slot for all content sections -->
+    <slot />
+
+    <!-- Lightbox -->
+    <div class="project-lightbox" data-lightbox hidden>
+      <button class="project-lightbox__close" data-lightbox-close aria-label="Schließen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+      <button class="project-lightbox__nav project-lightbox__nav--prev" data-lightbox-prev aria-label="Vorheriges Bild">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      <button class="project-lightbox__nav project-lightbox__nav--next" data-lightbox-next aria-label="Nächstes Bild">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+      <div class="project-lightbox__content" data-lightbox-content></div>
+      <div class="project-lightbox__counter" data-lightbox-counter></div>
+    </div>
+
+  </main>
+
+  <script>
+    // Progress Indicator
+    const sections = document.querySelectorAll('[data-section]');
+    const progressItems = document.querySelectorAll('.project-progress__item');
+    
+    const progressObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.id;
+          progressItems.forEach((item) => {
+            item.classList.toggle('is-active', item.dataset.section === sectionId);
+          });
+        }
+      });
+    }, { threshold: 0.3, rootMargin: '-20% 0px -60% 0px' });
+    
+    sections.forEach((section) => progressObserver.observe(section));
+
+    // Smooth scroll for progress links
+    progressItems.forEach((item) => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(item.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Parallax Hero
+    const parallaxImg = document.querySelector('[data-parallax-hero]');
+    if (parallaxImg) {
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const heroHeight = document.querySelector('.project-hero')?.offsetHeight || 800;
+        if (scrollY < heroHeight) {
+          parallaxImg.style.transform = `translateY(${scrollY * 0.3}px) scale(1.1)`;
+        }
+      }, { passive: true });
+    }
+
+    // Lightbox
+    const lightbox = document.querySelector('[data-lightbox]');
+    const lightboxContent = document.querySelector('[data-lightbox-content]');
+    const lightboxCounter = document.querySelector('[data-lightbox-counter]');
+    const lightboxClose = document.querySelector('[data-lightbox-close]');
+    const lightboxPrev = document.querySelector('[data-lightbox-prev]');
+    const lightboxNext = document.querySelector('[data-lightbox-next]');
+    
+    let galleryImages = [];
+    let currentIndex = 0;
+
+    function openLightbox(images, index) {
+      galleryImages = images;
+      currentIndex = index;
+      showImage(currentIndex);
+      lightbox?.removeAttribute('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox?.setAttribute('hidden', '');
+      document.body.style.overflow = '';
+    }
+
+    function showImage(index) {
+      if (!lightboxContent || !galleryImages.length) return;
+      const img = galleryImages[index];
+      lightboxContent.innerHTML = `<img src="${img.src}" alt="${img.alt || ''}" />`;
+      if (lightboxCounter) {
+        lightboxCounter.textContent = `${index + 1} / ${galleryImages.length}`;
+      }
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      showImage(currentIndex);
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      showImage(currentIndex);
+    }
+
+    // Gallery click handlers
+    document.querySelectorAll('[data-gallery-item]').forEach((item, idx) => {
+      item.addEventListener('click', () => {
+        const gallery = item.closest('[data-gallery]');
+        const images = Array.from(gallery?.querySelectorAll('[data-gallery-item] img') || []);
+        const imgData = images.map((img) => ({ src: img.dataset.full || img.src, alt: img.alt }));
+        openLightbox(imgData, idx);
+      });
+    });
+
+    lightboxClose?.addEventListener('click', closeLightbox);
+    lightboxPrev?.addEventListener('click', prevImage);
+    lightboxNext?.addEventListener('click', nextImage);
+    lightbox?.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (lightbox?.hasAttribute('hidden')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    });
+
+    // Timeline Accordion
+    document.querySelectorAll('.process-step').forEach((step) => {
+      const header = step.querySelector('.process-step__header');
+      header?.addEventListener('click', () => {
+        const isOpen = step.classList.contains('is-open');
+        document.querySelectorAll('.process-step').forEach((s) => s.classList.remove('is-open'));
+        if (!isOpen) step.classList.add('is-open');
+      });
+    });
+
+    // Gallery Toggle (BTS)
+    const galleryToggles = document.querySelectorAll('[data-gallery-toggle]');
+    galleryToggles.forEach((toggle) => {
+      toggle.addEventListener('click', () => {
+        const target = toggle.dataset.galleryToggle;
+        const gallery = document.querySelector(`[data-gallery="${target}"]`);
+        
+        galleryToggles.forEach((t) => t.classList.remove('is-active'));
+        toggle.classList.add('is-active');
+        
+        document.querySelectorAll('[data-gallery]').forEach((g) => {
+          g.classList.toggle('is-visible', g.dataset.gallery === target);
+        });
+      });
+    });
+
+    // Tech Accordion
+    document.querySelectorAll('.tech-accordion__header').forEach((header) => {
+      header.addEventListener('click', () => {
+        const item = header.closest('.tech-accordion__item');
+        item?.classList.toggle('is-open');
+      });
+    });
+
+    // Scroll Reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealElements.forEach((el) => revealObserver.observe(el));
+  </script>
+</BaseLayout>

@@ -1,0 +1,59 @@
+---
+interface RelatedProject {
+  title: string;
+  subtitle: string;
+  thumbnail: string;
+  slug: string;
+}
+
+interface Props {
+  relatedProjects?: RelatedProject[];
+}
+
+const { relatedProjects = [] } = Astro.props;
+---
+
+<section class="project-cta">
+  <div class="project-cta__inner">
+    <div class="project-cta__contact reveal">
+      <h2 class="project-cta__title">Ähnliches Projekt umsetzen?</h2>
+      <p class="project-cta__text">
+        Ich freue mich auf deine Anfrage – egal ob kleines Shooting oder große Produktion.
+      </p>
+      <a href="/#kontakt" class="project-cta__button">
+        Kontakt aufnehmen
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+    
+    {relatedProjects.length > 0 && (
+      <div class="project-cta__related reveal">
+        <span class="project-cta__related-label">Mehr Projekte wie dieses</span>
+        <div class="project-cta__related-grid">
+          {relatedProjects.map((project) => (
+            <a href={`/projekte/${project.slug}`} class="related-card">
+              <div class="related-card__image">
+                <img src={project.thumbnail} alt={project.title} loading="lazy" />
+              </div>
+              <div class="related-card__content">
+                <h3 class="related-card__title">{project.title}</h3>
+                <p class="related-card__subtitle">{project.subtitle}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+<footer class="project-footer">
+  <a href="/" class="project-footer__link">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    Zurück zur Startseite
+  </a>
+</footer>

@@ -1,0 +1,80 @@
+---
+interface GalleryImage {
+  src: string;
+  alt: string;
+  featured?: boolean;
+}
+
+interface Props {
+  highlights: GalleryImage[];
+  bts?: GalleryImage[];
+  showBtsToggle?: boolean;
+}
+
+const { highlights, bts = [], showBtsToggle = true } = Astro.props;
+---
+
+<section id="gallery" class="gallery-section" data-section>
+  <div class="gallery-section__inner">
+    <div class="gallery-section__header reveal">
+      <div class="gallery-section__title-wrap">
+        <span class="gallery-section__label">Galerie</span>
+        <h2 class="gallery-section__title">Ausgewählte Aufnahmen</h2>
+      </div>
+      
+      {showBtsToggle && bts.length > 0 && (
+        <div class="gallery-section__toggles">
+          <button class="gallery-toggle is-active" data-gallery-toggle="highlights">
+            Highlights
+          </button>
+          <button class="gallery-toggle" data-gallery-toggle="bts">
+            Behind the Scenes
+          </button>
+        </div>
+      )}
+    </div>
+    
+    <div class="gallery-grid is-visible reveal" data-gallery="highlights">
+      {highlights.map((img, idx) => (
+        <div 
+          class={`gallery-item ${img.featured ? 'gallery-item--featured' : ''}`}
+          data-gallery-item
+        >
+          <img 
+            src={img.src} 
+            alt={img.alt} 
+            loading="lazy"
+            data-full={img.src}
+          />
+          <div class="gallery-item__overlay">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              <path d="M11 8v6M8 11h6"/>
+            </svg>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    {bts.length > 0 && (
+      <div class="gallery-grid gallery-grid--bts reveal" data-gallery="bts">
+        {bts.map((img) => (
+          <div class="gallery-item" data-gallery-item>
+            <img 
+              src={img.src} 
+              alt={img.alt} 
+              loading="lazy"
+              data-full={img.src}
+            />
+            <div class="gallery-item__overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                <path d="M11 8v6M8 11h6"/>
+              </svg>
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</section>

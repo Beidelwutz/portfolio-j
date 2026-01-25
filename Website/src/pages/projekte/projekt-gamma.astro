@@ -1,189 +1,199 @@
 ---
-import ProjectLayout from "../../layouts/ProjectLayout.astro";
+import ProjectLayoutV2 from "../../layouts/ProjectLayoutV2.astro";
+import ResultsBlock from "../../components/project/ResultsBlock.astro";
+import StoryBlock from "../../components/project/StoryBlock.astro";
+import DeliverablesGrid from "../../components/project/DeliverablesGrid.astro";
+import ProcessTimeline from "../../components/project/ProcessTimeline.astro";
+import ProjectGallery from "../../components/project/ProjectGallery.astro";
+import TechDetails from "../../components/project/TechDetails.astro";
+import Credits from "../../components/project/Credits.astro";
+import ProjectCTA from "../../components/project/ProjectCTA.astro";
 ---
 
-<ProjectLayout
+<ProjectLayoutV2
   title="MOONIAC Sessions"
-  subtitle="Bandfotos für eine Alternative-Rock-Band – roh, energetisch, ungeschliffen"
-  heroImage="/uploads/projekte/MOONIAC_Shooting_V01_low.webp"
+  tagline="Bandfotos mit Energie – vom Proberaum auf die Bühne, eingefangen in einem intensiven Shooting-Tag."
+  heroMedia="/uploads/projekte/MOONIAC_Shooting_V01_low.webp"
+  heroMediaType="image"
+  role={["Fotografie", "Videografie", "Postproduktion", "Konzept"]}
   client="MOONIAC"
-  location="Outdoor & Studio"
-  date="2025"
-  duration="3 Tage"
-  category="Musik"
-  services={["Fotografie", "Videografie", "Postproduktion", "Konzept"]}
+  year="2024"
+  location="Köln"
+  format="Band-Promo"
 >
-  <!-- Intro -->
-  <div class="mag-intro mag-reveal">
-    <p class="mag-intro__lead">
-      MOONIAC macht keine Musik für den Mainstream. Ihre Songs sind laut, 
-      ehrlich und manchmal unbequem. Genau diese Energie wollten wir in 
-      den Bildern einfangen – ohne Filter, ohne Kompromisse.
-    </p>
-  </div>
 
-  <!-- Text -->
-  <div class="mag-text mag-reveal">
-    <p class="drop-cap">
-      Als die Band auf mich zukam, war klar: Das hier wird kein gewöhnliches 
-      Bandfoto-Shooting. MOONIAC wollte Bilder, die ihre Musik visuell übersetzen. 
-      Bilder, die man hören kann. Die Challenge war es, diese rohe Energie 
-      einzufangen, ohne sie zu domestizieren.
-    </p>
-  </div>
+  <ResultsBlock
+    mediaType="gallery"
+    galleryImages={[
+      { src: "/uploads/projekte/MOONIAC_Shooting_V01_low.webp", alt: "MOONIAC Band" },
+    ]}
+    outcomes={[
+      { label: "30+ Promo-Bilder", icon: "🎸" },
+      { label: "3 Location-Setups", icon: "📍" },
+      { label: "Einzel- & Gruppenshots", icon: "👥" },
+      { label: "1 Teaser-Video", icon: "🎬" },
+      { label: "Social Media Kit", icon: "📱" },
+    ]}
+  />
 
-  <!-- Full Width -->
-  <div class="mag-fullwidth mag-reveal">
-    <img src="/uploads/Nessi_1_V01_low.webp" alt="MOONIAC Live" data-gallery-img />
-    <span class="mag-fullwidth__caption">Die Band in ihrem Element – ungeplant, ungestellt</span>
-  </div>
+  <StoryBlock
+    paragraphs={[
+      "MOONIAC standen vor ihrer ersten Deutschland-Tour und brauchten frisches Promomaterial. Die alten Bilder zeigten nicht mehr, wer sie heute sind. Der neue Look sollte rauer, direkter, energetischer sein.",
+      "Wir haben drei Locations an einem Tag bespielt: Proberaum, Industriegelände, Dachterrasse bei Sonnenuntergang. Jede Location hat einen anderen Aspekt der Band gezeigt – von intim bis episch.",
+      "Das Besondere: Die Band hat während des Shootings tatsächlich gespielt. Echte Energie, echte Momente. Keine gestellten Rock-Posen, sondern authentische Performance."
+    ]}
+    quote={{
+      text: "Endlich Bilder, die zeigen, wie wir auf der Bühne rüberkommen. Jenny hat den Vibe sofort verstanden.",
+      author: "Max",
+      role: "Frontman, MOONIAC"
+    }}
+    learning="Bei Bandfotos gilt: Musik laufen lassen. Die Körpersprache ändert sich sofort."
+  />
 
-  <!-- Split -->
-  <div class="mag-split mag-reveal">
-    <div class="mag-split__image">
-      <img src="/uploads/Di_7_V01_low.webp" alt="Behind the Scenes" data-gallery-img />
-    </div>
-    <div class="mag-split__text">
-      <h2>Das Konzept</h2>
-      <p>
-        Wir entschieden uns bewusst gegen ein steriles Studio-Setting. 
-        Stattdessen: verlassene Industriebrachen, Hinterhöfe, Orte mit 
-        Geschichte und Charakter. Orte, die genauso rau sind wie der 
-        Sound der Band.
-      </p>
-      <p>
-        Das Licht kam größtenteils von praktischen Quellen – Straßenlaternen, 
-        Neonröhren, das letzte Tageslicht. Diese Unvollkommenheit wurde 
-        zum Stilmittel.
-      </p>
-    </div>
-  </div>
+  <DeliverablesGrid
+    deliverables={[
+      {
+        category: "Formate",
+        items: [
+          "Querformat (Press Kit)",
+          "Hochformat (Poster/Flyer)",
+          "Quadrat (Social Media)",
+          "16:9 (Website Header)"
+        ]
+      },
+      {
+        category: "Plattformen",
+        items: [
+          "Spotify Artist Page",
+          "Instagram & TikTok",
+          "Booking-Anfragen",
+          "Merch & Poster"
+        ]
+      },
+      {
+        category: "Assets",
+        items: [
+          "30 bearbeitete Finals",
+          "5 B/W Alternativ-Edits",
+          "15s Teaser-Video",
+          "Press Kit (PDF)"
+        ]
+      }
+    ]}
+  />
 
-  <!-- Quote -->
-  <div class="mag-quote mag-reveal">
-    <p class="mag-quote__text">
-      Wir wollten aussehen wie wir klingen – nicht wie eine polierte 
-      Version von uns selbst. Jenny hat das sofort kapiert.
-    </p>
-    <span class="mag-quote__author">Max, MOONIAC Frontmann</span>
-  </div>
+  <ProcessTimeline
+    steps={[
+      {
+        title: "Konzept-Meeting",
+        duration: "2 Stunden",
+        description: "Pizza, Bier und Referenzbilder. Wir haben über ihre Musik gesprochen, ihre Einflüsse, ihre Vision. Das hat den Look definiert: analog angehaucht, kontrastreich, dreckig.",
+        tools: ["Spotify", "Pinterest"]
+      },
+      {
+        title: "Location-Planung",
+        duration: "1 Tag",
+        description: "Drei Locations in einer logischen Route. Timing war kritisch wegen des Golden Hour Slots auf dem Dach. Backup-Plan für Regen (wurde nicht gebraucht).",
+        tools: ["Google Maps", "Sun Surveyor"]
+      },
+      {
+        title: "Shooting Day",
+        duration: "8 Stunden",
+        description: "Start im Proberaum mit natürlichem Licht durch die Fenster. Dann Industriegelände mit Blitz-Setup. Finale auf dem Dach bei Sonnenuntergang. Zwischendurch: Band hat Songs durchgespielt.",
+        tools: ["Sony A7IV", "Profoto A2", "Godox AD200"]
+      },
+      {
+        title: "Bearbeitung",
+        duration: "4 Tage",
+        description: "Custom Look entwickelt: leicht entsättigt, Korn hinzugefügt, lifted blacks. Jedes Bandmitglied hat eigene Selects bekommen, plus Gruppenbilder für verschiedene Zwecke.",
+        tools: ["Lightroom", "VSCO Film"]
+      },
+      {
+        title: "Video-Edit",
+        duration: "2 Tage",
+        description: "Aus den Behind-the-Scenes Clips und kurzen Session-Videos ein 15-Sekunden-Teaser für Social Media geschnitten. Perfekt für Ankündigungen.",
+        tools: ["Premiere Pro", "After Effects"]
+      }
+    ]}
+  />
 
-  <!-- Duo -->
-  <div class="mag-duo mag-reveal">
-    <div class="mag-duo__item">
-      <img src="/uploads/Di_8_V01_low.webp" alt="Band Shot 1" data-gallery-img />
-    </div>
-    <div class="mag-duo__item">
-      <img src="/uploads/Di_9_V01_low.webp" alt="Band Shot 2" data-gallery-img />
-    </div>
-  </div>
+  <ProjectGallery
+    highlights={[
+      { src: "/uploads/projekte/MOONIAC_Shooting_V01_low.webp", alt: "MOONIAC Gruppe", featured: true },
+    ]}
+    bts={[]}
+    showBtsToggle={false}
+  />
 
-  <!-- Text -->
-  <div class="mag-text mag-reveal">
-    <h2>Der Dreh</h2>
-    <p>
-      Drei Tage, drei komplett verschiedene Locations. Wir folgten dem 
-      Tageslicht und der Stimmung der Band. Manchmal geplant, oft spontan. 
-      Die besten Shots entstanden in den Momenten, in denen niemand dachte, 
-      dass wir fotografieren.
-    </p>
-    <h3>Die Herausforderung</h3>
-    <p>
-      Vier Bandmitglieder, vier starke Persönlichkeiten. Jeder sollte 
-      zur Geltung kommen, ohne dass die Gruppenidentität verloren geht. 
-      Die Lösung: Wir fotografierten sowohl Einzelportraits als auch 
-      Gruppendynamiken – immer in Bewegung, immer authentisch.
-    </p>
-  </div>
+  <TechDetails
+    categories={[
+      {
+        title: "Kamera & Objektive",
+        items: [
+          "Sony A7 IV (Foto)",
+          "Sony FX3 (Video)",
+          "Sony 35mm f/1.4 GM",
+          "Sony 85mm f/1.4 GM",
+          "Tamron 17-28mm f/2.8"
+        ]
+      },
+      {
+        title: "Licht",
+        items: [
+          "Profoto A2 (x2)",
+          "Godox AD200 Pro",
+          "MagMod Modifier",
+          "Praktisches Licht vor Ort"
+        ]
+      },
+      {
+        title: "Post-Production",
+        items: [
+          "Adobe Lightroom Classic",
+          "VSCO Film Presets (angepasst)",
+          "Adobe Premiere Pro",
+          "After Effects (Teaser)"
+        ]
+      },
+      {
+        title: "Audio (Video)",
+        items: [
+          "Rode Wireless GO II",
+          "Rode VideoMic Pro+",
+          "Band-eigener Sound (Mix)"
+        ]
+      }
+    ]}
+  />
 
-  <!-- Gallery -->
-  <div class="mag-gallery mag-reveal">
-    <h3 class="mag-gallery__title">Sessions</h3>
-    <div class="mag-gallery__grid">
-      <div class="mag-gallery__item mag-stagger">
-        <img src="/uploads/projekte/Di_10_V01_low.webp" alt="Session 1" data-gallery-img />
-      </div>
-      <div class="mag-gallery__item mag-gallery__item--tall mag-stagger">
-        <img src="/uploads/projekte/MOONIAC_Shooting_V01_low.webp" alt="Session 2" data-gallery-img />
-      </div>
-      <div class="mag-gallery__item mag-stagger">
-        <img src="/uploads/Di_1_V01_low.webp" alt="Session 3" data-gallery-img />
-      </div>
-      <div class="mag-gallery__item mag-gallery__item--wide mag-stagger">
-        <img src="/uploads/Di_2_V01_low.webp" alt="Session 4" data-gallery-img />
-      </div>
-    </div>
-  </div>
+  <Credits
+    client={{
+      name: "MOONIAC",
+      link: "#"
+    }}
+    credits={[
+      { role: "Fotografie & Video", name: "Jenny" },
+      { role: "Konzept", name: "Jenny + MOONIAC" },
+      { role: "Postproduktion", name: "Jenny" },
+      { role: "Band", name: "Max, Lisa, Tom, Sarah" },
+    ]}
+  />
 
-  <!-- Process -->
-  <div class="mag-process mag-reveal">
-    <h3 class="mag-process__title">Unser Workflow</h3>
-    <div class="mag-process__items">
-      <div class="mag-process__item">
-        <span class="mag-process__number">01</span>
-        <div class="mag-process__content">
-          <h3>Musik hören</h3>
-          <p>Bevor ich eine Kamera anfasse, tauche ich komplett in die Musik ein. Verstehen, was die Band ausdrücken will.</p>
-        </div>
-      </div>
-      <div class="mag-process__item">
-        <span class="mag-process__number">02</span>
-        <div class="mag-process__content">
-          <h3>Location-Scouting</h3>
-          <p>Orte finden, die zur Ästhetik passen. Oft abseits der üblichen Pfade.</p>
-        </div>
-      </div>
-      <div class="mag-process__item">
-        <span class="mag-process__number">03</span>
-        <div class="mag-process__content">
-          <h3>Shooting</h3>
-          <p>Flexibel bleiben, Momente einfangen, der Energie der Band folgen.</p>
-        </div>
-      </div>
-      <div class="mag-process__item">
-        <span class="mag-process__number">04</span>
-        <div class="mag-process__content">
-          <h3>Postproduktion</h3>
-          <p>Bearbeitung, die den rohen Charakter erhält. Keine Überglättung.</p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <ProjectCTA
+    relatedProjects={[
+      {
+        title: "Diana's Vision",
+        subtitle: "Porträt-Shooting",
+        thumbnail: "/uploads/projekte/Di_10_V01_low.webp",
+        slug: "projekt-alpha"
+      },
+      {
+        title: "Kelly's Cover",
+        subtitle: "Fashion Editorial",
+        thumbnail: "/uploads/projekte/Kelly_Covershoot_2_V01_low.webp",
+        slug: "projekt-beta"
+      }
+    ]}
+  />
 
-  <!-- Stats -->
-  <div class="mag-stats mag-reveal">
-    <div class="mag-stats__inner">
-      <div class="mag-stat">
-        <span class="mag-stat__number">3</span>
-        <span class="mag-stat__label">Drehtage</span>
-      </div>
-      <div class="mag-stat">
-        <span class="mag-stat__number">6</span>
-        <span class="mag-stat__label">Locations</span>
-      </div>
-      <div class="mag-stat">
-        <span class="mag-stat__number">2.4k</span>
-        <span class="mag-stat__label">Aufnahmen</span>
-      </div>
-      <div class="mag-stat">
-        <span class="mag-stat__number">58</span>
-        <span class="mag-stat__label">Finale Bilder</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Final Text -->
-  <div class="mag-text mag-reveal">
-    <h2>Das Ergebnis</h2>
-    <p>
-      Die Bilder werden für das kommende Album, Merchandise und alle 
-      Promo-Kanäle der Band verwendet. Aber mehr als das: Sie sind zu 
-      einem visuellen Statement geworden, das zeigt, wer MOONIAC wirklich ist.
-    </p>
-    <p>
-      Keine gestellten Posen, keine leeren Blicke. Stattdessen: vier 
-      Musiker, die ihre Kunst ernst nehmen und keine Angst haben, 
-      sich zu zeigen.
-    </p>
-  </div>
-</ProjectLayout>
+</ProjectLayoutV2>

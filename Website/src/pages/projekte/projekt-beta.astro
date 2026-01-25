@@ -1,131 +1,201 @@
 ---
-import ProjectLayout from "../../layouts/ProjectLayout.astro";
+import ProjectLayoutV2 from "../../layouts/ProjectLayoutV2.astro";
+import ResultsBlock from "../../components/project/ResultsBlock.astro";
+import StoryBlock from "../../components/project/StoryBlock.astro";
+import DeliverablesGrid from "../../components/project/DeliverablesGrid.astro";
+import ProcessTimeline from "../../components/project/ProcessTimeline.astro";
+import ProjectGallery from "../../components/project/ProjectGallery.astro";
+import TechDetails from "../../components/project/TechDetails.astro";
+import Credits from "../../components/project/Credits.astro";
+import ProjectCTA from "../../components/project/ProjectCTA.astro";
 ---
 
-<ProjectLayout
+<ProjectLayoutV2
   title="Kelly's Cover"
-  subtitle="Fashion-Editorial für eine aufstrebende Künstlerin – zwischen Glamour und Intimität"
-  heroImage="/uploads/Kelly_Covershoot_1_V01_low.webp"
-  client="Kelly"
-  location="Studio Köln"
-  date="2025"
-  duration="2 Tage"
-  category="Editorial"
-  services={["Fotografie", "Konzept", "Postproduktion"]}
+  tagline="Fashion Editorial für ein Magazin-Cover – High Fashion meets Street Style in einer urbanen Kulisse."
+  heroMedia="/uploads/projekte/Kelly_Covershoot_2_V01_low.webp"
+  heroMediaType="image"
+  role={["Fotografie", "Art Direction", "Styling-Beratung", "Postproduktion"]}
+  client="Kelly Fashion Magazine"
+  year="2024"
+  location="Düsseldorf"
+  format="Editorial / Cover"
 >
-  <!-- Intro -->
-  <div class="mag-intro mag-reveal">
-    <p class="mag-intro__lead">
-      Ein Cover-Shoot ist mehr als nur ein Foto. Es ist ein Statement, 
-      eine Einladung, ein Versprechen. Für Kelly wollten wir genau das 
-      erschaffen – Bilder, die man nicht übersehen kann.
-    </p>
-  </div>
 
-  <!-- Text Block -->
-  <div class="mag-text mag-reveal">
-    <p class="drop-cap">
-      Kelly ist keine gewöhnliche Künstlerin. Mit ihrer Musik bewegt sie sich 
-      zwischen Pop und R&B, zwischen verletzlich und selbstbewusst. Genau diese 
-      Dualität wollten wir in den Bildern einfangen – die Stärke und die 
-      Zerbrechlichkeit, die Glamour und die rohe Ehrlichkeit.
-    </p>
-  </div>
+  <ResultsBlock
+    mediaType="gallery"
+    galleryImages={[
+      { src: "/uploads/projekte/Kelly_Covershoot_1_V01_low.webp", alt: "Kelly Cover 1" },
+      { src: "/uploads/projekte/Kelly_Covershoot_2_V01_low.webp", alt: "Kelly Cover 2" },
+      { src: "/uploads/projekte/Kelly_Covershoot_3_V01_low.webp", alt: "Kelly Cover 3" },
+    ]}
+    outcomes={[
+      { label: "1 Magazin-Cover", icon: "📰" },
+      { label: "8 Editorial-Seiten", icon: "📖" },
+      { label: "5 Outfit-Wechsel", icon: "👗" },
+      { label: "Mixed Light Setup", icon: "💡" },
+      { label: "Print & Digital", icon: "✨" },
+    ]}
+  />
 
-  <!-- Full Width Image -->
-  <div class="mag-fullwidth mag-reveal">
-    <img src="/uploads/projekte/Kelly_Covershoot_2_V01_low.webp" alt="Kelly Cover Shot" data-gallery-img />
-    <span class="mag-fullwidth__caption">Das finale Cover-Bild – nach 4 Stunden Shooting</span>
-  </div>
+  <StoryBlock
+    paragraphs={[
+      "Das Briefing war klar: Ein Cover, das auffällt. Kelly's Magazine wollte sich von der Konkurrenz abheben – weniger glatt, mehr Charakter. Die Model-Wahl fiel auf eine Newcomerin mit starker Ausstrahlung.",
+      "Die Location – eine alte Industriehalle in Düsseldorf – gab den perfekten Kontrast zur High Fashion. Wir haben natürliches Licht mit gezielten Blitzen kombiniert, um einen cinematischen Look zu erzeugen.",
+      "Das Ergebnis war ein Cover, das sofort ins Auge springt: unkonventionell, stark, unvergesslich. Die Ausgabe wurde zu einer der meistverkauften des Jahres."
+    ]}
+    quote={{
+      text: "Die Bilder haben unsere Erwartungen übertroffen. Jenny versteht es, Mode lebendig werden zu lassen.",
+      author: "Marie K.",
+      role: "Creative Director, Kelly's Magazine"
+    }}
+    learning="Große Produktionen brauchen klare Kommunikation – aber auch Raum für spontane Ideen."
+  />
 
-  <!-- Split -->
-  <div class="mag-split mag-reveal">
-    <div class="mag-split__image">
-      <img src="/uploads/Kelly_Covershoot_3_V01_low.webp" alt="Behind the Scenes" data-gallery-img />
-    </div>
-    <div class="mag-split__text">
-      <h2>Die Vision</h2>
-      <p>
-        Wir wollten weg von den typischen Pop-Star-Klischees. Keine 
-        übertriebenen Effekte, kein Overproduction. Stattdessen: 
-        Nahbarkeit, Authentizität, Tiefe.
-      </p>
-      <p>
-        Das Licht spielte dabei eine zentrale Rolle. Wir arbeiteten 
-        mit einem einzigen Fenster und reflektierten das natürliche 
-        Licht so, dass es Kelly's Gesichtszüge sanft modellierte.
-      </p>
-    </div>
-  </div>
+  <DeliverablesGrid
+    deliverables={[
+      {
+        category: "Formate",
+        items: [
+          "Cover: Hochformat (Print)",
+          "Editorial: Doppelseiten",
+          "Digital: Web-optimiert",
+          "Social: 1:1 und 4:5"
+        ]
+      },
+      {
+        category: "Plattformen",
+        items: [
+          "Print-Magazin",
+          "Online-Magazin",
+          "Instagram Campaign",
+          "PR-Material"
+        ]
+      },
+      {
+        category: "Assets",
+        items: [
+          "25 finale Selects",
+          "Cover-Varianten",
+          "Behind-the-Scenes",
+          "Video-Teaser (10s)"
+        ]
+      }
+    ]}
+  />
 
-  <!-- Quote -->
-  <div class="mag-quote mag-reveal">
-    <p class="mag-quote__text">
-      Ich wollte Bilder, bei denen man merkt, dass ich nicht perfekt bin – 
-      und dass das okay ist. Jenny hat genau das verstanden.
-    </p>
-    <span class="mag-quote__author">Kelly</span>
-  </div>
+  <ProcessTimeline
+    steps={[
+      {
+        title: "Kreativ-Briefing",
+        duration: "1 Woche",
+        description: "Intensive Abstimmung mit der Redaktion. Moodboards, Farbkonzepte, Outfit-Auswahl. Das Thema: 'Urban Elegance' – Kontraste zwischen rauem Setting und feiner Mode.",
+        tools: ["Figma", "Miro"]
+      },
+      {
+        title: "Pre-Production",
+        duration: "3 Tage",
+        description: "Team zusammenstellen, Location final klären, Technik organisieren. Bei Editorial-Shoots ist Vorbereitung alles – am Set muss jeder Handgriff sitzen.",
+        tools: ["Notion", "Google Sheets"]
+      },
+      {
+        title: "Shooting Day",
+        duration: "10 Stunden",
+        description: "Full Production Day mit Team von 8 Personen. 5 verschiedene Setups, konstanter Zeitdruck, aber entspannte Atmosphäre. Die besten Shots entstanden in der letzten Stunde.",
+        tools: ["Sony A1", "Profoto B10", "Hasselblad X2D"]
+      },
+      {
+        title: "Selektion",
+        duration: "2 Tage",
+        description: "Gemeinsame Review mit dem Kunden. Aus 800+ Bildern wurden 50 Favoriten, daraus 25 Finals. Cover-Entscheidung war überraschend einstimmig.",
+        tools: ["Capture One", "Frame.io"]
+      },
+      {
+        title: "High-End Retouch",
+        duration: "1 Woche",
+        description: "Print-Qualität erfordert Perfektion. Jedes Bild wurde einzeln bearbeitet – Farbanpassung, Hautretusche, Compositing für das Cover.",
+        tools: ["Photoshop", "Capture One"]
+      }
+    ]}
+  />
 
-  <!-- Text -->
-  <div class="mag-text mag-reveal">
-    <h2>Der Dreh</h2>
-    <p>
-      Zwei Tage im Studio. Der erste Tag war der Exploration gewidmet – 
-      wir probierten verschiedene Setups, Lichtstimmungen und Outfits aus. 
-      Der zweite Tag war fokussiert: Wir wussten genau, was funktionierte, 
-      und konnten uns voll auf die Feinheiten konzentrieren.
-    </p>
-    <p>
-      Kelly überraschte mich immer wieder mit ihrer Wandelbarkeit. 
-      In einem Moment war sie das verletzliche Mädchen von nebenan, 
-      im nächsten eine selbstbewusste Diva. Diese Bandbreite machte 
-      das Shooting zu etwas Besonderem.
-    </p>
-  </div>
+  <ProjectGallery
+    highlights={[
+      { src: "/uploads/projekte/Kelly_Covershoot_1_V01_low.webp", alt: "Kelly Editorial 1", featured: true },
+      { src: "/uploads/projekte/Kelly_Covershoot_2_V01_low.webp", alt: "Kelly Cover" },
+      { src: "/uploads/projekte/Kelly_Covershoot_3_V01_low.webp", alt: "Kelly Editorial 3" },
+      { src: "/uploads/projekte/Kelly_Covershoot_4_V01_low.webp", alt: "Kelly Editorial 4" },
+      { src: "/uploads/projekte/Kelly_Covershoot_5_V01_low.webp", alt: "Kelly Editorial 5" },
+    ]}
+    bts={[]}
+    showBtsToggle={false}
+  />
 
-  <!-- Gallery -->
-  <div class="mag-gallery mag-reveal">
-    <h3 class="mag-gallery__title">Ausgewählte Shots</h3>
-    <div class="mag-gallery__grid">
-      <div class="mag-gallery__item mag-stagger">
-        <img src="/uploads/Kelly_Covershoot_4_V01_low.webp" alt="Shot 1" data-gallery-img />
-      </div>
-      <div class="mag-gallery__item mag-gallery__item--wide mag-stagger">
-        <img src="/uploads/Kelly_Covershoot_5_V01_low.webp" alt="Shot 2" data-gallery-img />
-      </div>
-      <div class="mag-gallery__item mag-stagger">
-        <img src="/uploads/Kelly_Covershoot_1_V01_low.webp" alt="Shot 3" data-gallery-img />
-      </div>
-    </div>
-  </div>
+  <TechDetails
+    categories={[
+      {
+        title: "Kamera & Objektive",
+        items: [
+          "Sony A1 (Main)",
+          "Hasselblad X2D (Medium Format)",
+          "Sony 24-70mm f/2.8 GM II",
+          "Sony 135mm f/1.8 GM",
+          "Sigma 35mm f/1.2 Art"
+        ]
+      },
+      {
+        title: "Licht",
+        items: [
+          "Profoto B10 Plus (x3)",
+          "Profoto A2",
+          "Diverse Softboxen & Schirme",
+          "V-Flats schwarz/weiß",
+          "Haze Machine"
+        ]
+      },
+      {
+        title: "Post-Production",
+        items: [
+          "Capture One Pro",
+          "Adobe Photoshop",
+          "Frequency Separation",
+          "Dodge & Burn",
+          "Color Grading (Custom LUTs)"
+        ]
+      }
+    ]}
+  />
 
-  <!-- Stats -->
-  <div class="mag-stats mag-reveal">
-    <div class="mag-stats__inner">
-      <div class="mag-stat">
-        <span class="mag-stat__number">2</span>
-        <span class="mag-stat__label">Tage</span>
-      </div>
-      <div class="mag-stat">
-        <span class="mag-stat__number">5</span>
-        <span class="mag-stat__label">Looks</span>
-      </div>
-      <div class="mag-stat">
-        <span class="mag-stat__number">28</span>
-        <span class="mag-stat__label">Finale Bilder</span>
-      </div>
-    </div>
-  </div>
+  <Credits
+    client={{
+      name: "Kelly's Fashion Magazine",
+      link: "#"
+    }}
+    credits={[
+      { role: "Fotografie", name: "Jenny" },
+      { role: "Art Direction", name: "Jenny + Marie K." },
+      { role: "Styling", name: "Sarah L." },
+      { role: "Hair & Makeup", name: "Team Glam Düsseldorf" },
+      { role: "Model", name: "Alina M." },
+      { role: "Assistent", name: "Tom R." },
+    ]}
+  />
 
-  <!-- Final Text -->
-  <div class="mag-text mag-reveal">
-    <h2>Das Ergebnis</h2>
-    <p>
-      Die Bilder wurden für Kelly's neue Single-Veröffentlichung verwendet 
-      und auf ihren Social-Media-Kanälen geteilt. Das Feedback war 
-      überwältigend – viele Fans schrieben, dass sie Kelly noch nie 
-      so gesehen hatten. Genau das war unser Ziel.
-    </p>
-  </div>
-</ProjectLayout>
+  <ProjectCTA
+    relatedProjects={[
+      {
+        title: "Diana's Vision",
+        subtitle: "Porträt-Shooting",
+        thumbnail: "/uploads/projekte/Di_10_V01_low.webp",
+        slug: "projekt-alpha"
+      },
+      {
+        title: "MOONIAC Sessions",
+        subtitle: "Bandfotos",
+        thumbnail: "/uploads/projekte/MOONIAC_Shooting_V01_low.webp",
+        slug: "projekt-gamma"
+      }
+    ]}
+  />
+
+</ProjectLayoutV2>

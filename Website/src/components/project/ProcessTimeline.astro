@@ -1,0 +1,61 @@
+---
+interface Step {
+  title: string;
+  duration?: string;
+  description: string;
+  tools?: string[];
+  image?: string;
+}
+
+interface Props {
+  steps: Step[];
+}
+
+const { steps } = Astro.props;
+---
+
+<section id="process" class="process-section" data-section>
+  <div class="process-section__inner">
+    <div class="process-section__header reveal">
+      <span class="process-section__label">Der Prozess</span>
+      <h2 class="process-section__title">Von der Idee zum Ergebnis</h2>
+    </div>
+    
+    <div class="process-timeline reveal">
+      {steps.map((step, idx) => (
+        <div class={`process-step ${idx === 0 ? 'is-open' : ''}`}>
+          <button class="process-step__header" aria-expanded={idx === 0 ? "true" : "false"}>
+            <span class="process-step__number">{String(idx + 1).padStart(2, '0')}</span>
+            <span class="process-step__title">{step.title}</span>
+            {step.duration && <span class="process-step__duration">{step.duration}</span>}
+            <span class="process-step__toggle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+            </span>
+          </button>
+          <div class="process-step__content">
+            <div class="process-step__inner">
+              <p class="process-step__description">{step.description}</p>
+              {step.tools && step.tools.length > 0 && (
+                <div class="process-step__tools">
+                  <span class="process-step__tools-label">Tools:</span>
+                  <div class="process-step__tools-list">
+                    {step.tools.map((tool) => (
+                      <span class="process-step__tool">{tool}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {step.image && (
+                <div class="process-step__image">
+                  <img src={step.image} alt={step.title} loading="lazy" />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

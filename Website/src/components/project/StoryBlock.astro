@@ -1,0 +1,45 @@
+---
+interface Props {
+  paragraphs: string[];
+  quote?: {
+    text: string;
+    author: string;
+    role?: string;
+  };
+  learning?: string;
+}
+
+const { paragraphs, quote, learning } = Astro.props;
+---
+
+<section id="story" class="story-block" data-section>
+  <div class="story-block__inner">
+    <div class="story-block__content reveal">
+      <span class="story-block__label">Die Story</span>
+      <div class="story-block__text">
+        {paragraphs.map((p, idx) => (
+          <p class={idx === 0 ? "drop-cap" : ""}>{p}</p>
+        ))}
+      </div>
+      
+      {learning && (
+        <div class="story-block__learning">
+          <span class="story-block__learning-label">Was ich gelernt habe:</span>
+          <p>{learning}</p>
+        </div>
+      )}
+    </div>
+    
+    {quote && (
+      <aside class="story-block__quote reveal">
+        <blockquote>
+          <p>"{quote.text}"</p>
+          <footer>
+            <cite>{quote.author}</cite>
+            {quote.role && <span>{quote.role}</span>}
+          </footer>
+        </blockquote>
+      </aside>
+    )}
+  </div>
+</section>

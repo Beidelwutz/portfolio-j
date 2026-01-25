@@ -1,0 +1,64 @@
+---
+interface Credit {
+  role: string;
+  name: string;
+  link?: string;
+}
+
+interface Props {
+  credits: Credit[];
+  client?: {
+    name: string;
+    link?: string;
+  };
+}
+
+const { credits, client } = Astro.props;
+---
+
+<section id="credits" class="credits-section" data-section>
+  <div class="credits-section__inner">
+    <div class="credits-section__header reveal">
+      <span class="credits-section__label">Credits</span>
+      <h2 class="credits-section__title">Team & Beteiligte</h2>
+    </div>
+    
+    <div class="credits-grid reveal">
+      {client && (
+        <div class="credit-item credit-item--client">
+          <span class="credit-item__role">Kunde</span>
+          {client.link ? (
+            <a href={client.link} target="_blank" rel="noopener noreferrer" class="credit-item__name">
+              {client.name}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
+          ) : (
+            <span class="credit-item__name">{client.name}</span>
+          )}
+        </div>
+      )}
+      
+      {credits.map((credit) => (
+        <div class="credit-item">
+          <span class="credit-item__role">{credit.role}</span>
+          {credit.link ? (
+            <a href={credit.link} target="_blank" rel="noopener noreferrer" class="credit-item__name">
+              {credit.name}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
+          ) : (
+            <span class="credit-item__name">{credit.name}</span>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
