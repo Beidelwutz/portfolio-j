@@ -10,6 +10,8 @@ function openNav() {
   navToggle.setAttribute("aria-expanded", "true");
   navToggle.setAttribute("aria-label", "Menü schließen");
   document.body.style.overflow = "hidden";
+  document.documentElement.style.overflow = "hidden";
+  if (navOverlay) navOverlay.setAttribute("aria-hidden", "false");
 }
 
 function closeNav() {
@@ -18,6 +20,8 @@ function closeNav() {
   navToggle.setAttribute("aria-expanded", "false");
   navToggle.setAttribute("aria-label", "Menü öffnen");
   document.body.style.overflow = "";
+  document.documentElement.style.overflow = "";
+  if (navOverlay) navOverlay.setAttribute("aria-hidden", "true");
 }
 
 if (navToggle && siteNav) {

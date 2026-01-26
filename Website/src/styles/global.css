@@ -4125,8 +4125,8 @@ a.service-icon {
   }
 }
 
-/* Ab 880px: Hamburger + Bottom Sheet */
-@media (max-width: 880px) {
+/* Ab 980px: Hamburger + Bottom Sheet (Tablet + Mobile) */
+@media (max-width: 980px) {
   .nav-toggle {
     display: flex;
   }
@@ -4143,6 +4143,7 @@ a.service-icon {
     align-items: stretch;
     gap: 8px;
     padding: 16px 24px 40px;
+    padding-bottom: max(40px, env(safe-area-inset-bottom, 0px));
     border-radius: 24px 24px 0 0;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
@@ -4152,6 +4153,7 @@ a.service-icon {
     transform: translateY(100%);
     transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .site-header.is-menu-open .site-nav {
