@@ -520,9 +520,11 @@ main {
   transition-delay: calc(var(--stagger, 0) * 0.08s);
 }
 
-.portfolio-grid.is-visible .portfolio-card {
+.portfolio-grid.is-visible .portfolio-card,
+.reveal.is-visible .portfolio-grid .portfolio-card {
   opacity: 1;
   transform: translateY(0);
+  transition-delay: 0s;
 }
 
 .portfolio-card {

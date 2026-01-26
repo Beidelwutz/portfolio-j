@@ -2,7 +2,7 @@
 import ServiceIcon, { type ServiceType } from "./ServiceIcon.astro";
 
 type Category = "Videografie" | "Short Content" | "Fotografie";
-const { category }: { category: Category } = Astro.props;
+const { category, noReveal = false }: { category: Category; noReveal?: boolean } = Astro.props;
 
 const items: {
   title: string;
@@ -43,7 +43,7 @@ const formatCount = (value: number) => {
   return `${value}`;
 };
 ---
-<div class="portfolio-grid reveal" data-reveal>
+<div class={`portfolio-grid${noReveal ? "" : " reveal"}`} data-reveal={noReveal ? undefined : ""}>
   {filtered.map((item, index) => (
     <article
       class={`portfolio-card${item.video ? ' portfolio-card--short' : ''}`}
@@ -58,7 +58,14 @@ const formatCount = (value: number) => {
     >
       <div class="media" aria-hidden="true">
         {item.image && (
-          <img src={item.image} alt={item.title} class={item.video ? 'short-thumb' : ''} data-full={item.imageFull || item.image} />
+          <img
+            src={item.image}
+            alt={item.title}
+            class={item.video ? 'short-thumb' : ''}
+            data-full={item.imageFull || item.image}
+            loading={category === "Videografie" ? "eager" : "lazy"}
+            fetchpriority={category === "Videografie" && index < 2 ? "high" : undefined}
+          />
         )}
         {item.video && (
           <>
