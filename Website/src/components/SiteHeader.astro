@@ -1,16 +1,22 @@
 ---
 ---
-<header class="site-header">
+<header class="site-header" id="site-header">
   <div class="site-header-inner">
     <a href="#start" class="site-logo" aria-label="Startseite">
-      Jenny<span>.</span>
+      jpgjenny<span>.me</span>
     </a>
-    <nav class="site-nav" aria-label="Hauptnavigation">
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menü öffnen" data-nav-toggle>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Hauptnavigation">
       <a href="#videos" class="nav-link">Videografie</a>
       <a href="#clips" class="nav-link">Short Content</a>
       <a href="#fotos" class="nav-link">Fotografie</a>
-      <a href="#leistungen" class="nav-link">Leistungen</a>
+      <a href="#leistungen" class="nav-link">Was ich mache</a>
       <a href="#kontakt" class="nav-link nav-link--cta">Kontakt</a>
     </nav>
   </div>
+  <div class="site-nav-overlay" data-nav-overlay aria-hidden="true"></div>
 </header>

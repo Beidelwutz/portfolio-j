@@ -19,8 +19,8 @@ const projects: Project[] = [
     artist: "@maximal_schradin @montanablack",
     subtitle: "Short Content",
     thumbnail: "/uploads/projekte/Di_10_V01_low.webp",
-    views: 89200,
-    likes: 4820,
+    views: 3890000,
+    likes: 102000,
     services: ["video", "post", "konzept"],
   },
   {
@@ -29,8 +29,8 @@ const projects: Project[] = [
     artist: "@kel",
     subtitle: "Fotografie",
     thumbnail: "/uploads/projekte/Kelly_Covershoot_2_V01_low.webp",
-    views: 124500,
-    likes: 7340,
+    views: 443000,
+    likes: 9700,
     services: ["foto", "post", "produktion"],
   },
   {
@@ -39,8 +39,8 @@ const projects: Project[] = [
     artist: "@leilalowfire",
     subtitle: "Videografie",
     thumbnail: "/uploads/projekte/MOONIAC_Shooting_V01_low.webp",
-    views: 67800,
-    likes: 3910,
+    views: 187700,
+    likes: 0,
     services: ["video", "foto", "post"],
   },
 ];
@@ -67,7 +67,7 @@ const formatCount = (value: number) => {
         href={`/projekte/${project.slug}`}
         class="portfolio-card portfolio-card--link reveal"
         data-reveal
-        aria-label={`${project.title}. ${formatCount(project.views)} Aufrufe, ${formatCount(project.likes)} Likes.`}
+        aria-label={`${project.title}. ${formatCount(project.views)} Aufrufe${project.likes > 0 ? `, ${formatCount(project.likes)} Likes` : ''}.`}
       >
         <div class="media" aria-hidden="true">
           <img src={project.thumbnail} alt={project.title} loading="lazy" />
@@ -78,14 +78,18 @@ const formatCount = (value: number) => {
               </span>
               <span class="stats-badge__count" data-value={project.views}>{formatCount(project.views)}</span>
             </span>
-            <span class="stats-bar__divider" aria-hidden="true"></span>
-            <span class="stats-badge stats-badge--likes">
-              <span class="stats-badge__icon stats-badge__icon--heart" aria-hidden="true">
-                <svg class="heart-outline" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                <svg class="heart-filled" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-              </span>
-              <span class="stats-badge__count" data-value={project.likes}>{formatCount(project.likes)}</span>
-            </span>
+            {project.likes > 0 && (
+              <>
+                <span class="stats-bar__divider" aria-hidden="true"></span>
+                <span class="stats-badge stats-badge--likes">
+                  <span class="stats-badge__icon stats-badge__icon--heart" aria-hidden="true">
+                    <svg class="heart-outline" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    <svg class="heart-filled" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  </span>
+                  <span class="stats-badge__count" data-value={project.likes}>{formatCount(project.likes)}</span>
+                </span>
+              </>
+            )}
           </div>
         </div>
         <div class="label">

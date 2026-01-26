@@ -18,10 +18,10 @@ const items: {
   link?: string;
 }[] = [
   // Videografie (4)
-  { title: "mooniac", subtitle: "Behind the scene brand content", artist: "@mooniac", type: "video", category: "Videografie", views: 95200, likes: 5180, services: ["video", "post", "produktion", "konzept"], image: "/uploads/videos/MOONIAC_Shooting_3_v01_low.webp" },
-  { title: "MissesVlog", subtitle: "YouTube Content", artist: "@MissesVlog", type: "video", category: "Videografie", views: 128400, likes: 6420, services: ["post"], image: "/uploads/videos/Kelly_Shooting_2_v01_low.webp" },
-  { title: "Kaffee mit Zitrone", subtitle: "Video Podcast", artist: "@dagibee @tinadzialas", type: "video", category: "Videografie", views: 87500, likes: 4230, services: ["post"], image: "/uploads/videos/Kaffee_mit_Zitrone_1_v01_low.webp" },
-  { title: "Henkes Corner", subtitle: "Video Podcast", artist: "@henkescorner", type: "video", category: "Videografie", views: 112300, likes: 6890, services: ["video", "post", "produktion", "konzept"], image: "/uploads/videos/Henkes_Corner_1_v01_low.webp" },
+  { title: "mooniac", subtitle: "Behind the scene brand content", artist: "@mooniac", type: "video", category: "Videografie", views: 136000, likes: 2500, services: ["video", "post", "produktion", "konzept"], image: "/uploads/videos/MOONIAC_Shooting_3_v01_low.webp" },
+  { title: "MissesVlog", subtitle: "YouTube Content", artist: "@MissesVlog", type: "video", category: "Videografie", views: 144000, likes: 12000, services: ["post"], image: "/uploads/videos/Kelly_Shooting_2_v01_low.webp" },
+  { title: "Kaffee mit Zitrone", subtitle: "Video Podcast", artist: "@dagibee @tinadzialas", type: "video", category: "Videografie", views: 54800, likes: 0, services: ["post"], image: "/uploads/videos/Kaffee_mit_Zitrone_1_v01_low.webp" },
+  { title: "Henkes Corner", subtitle: "Video Podcast", artist: "@henkescorner", type: "video", category: "Videografie", views: 24700, likes: 1100, services: ["video", "post", "produktion", "konzept"], image: "/uploads/videos/Henkes_Corner_1_v01_low.webp" },
   // Short Content (3)
   { title: "Branding & Motion Clip", type: "video", category: "Short Content", views: 84200, likes: 5210, services: ["video", "post"] },
   { title: "Showreel Teaser", type: "video", category: "Short Content", views: 156900, likes: 9020, services: ["video", "post", "produktion"] },
@@ -52,7 +52,7 @@ const formatCount = (value: number) => {
       data-title={item.title}
       data-type={item.type}
       tabindex="0"
-      aria-label={`${item.title}. ${formatCount(item.views)} Aufrufe, ${formatCount(item.likes)} Likes.`}
+      aria-label={`${item.title}. ${formatCount(item.views)} Aufrufe${item.likes > 0 ? `, ${formatCount(item.likes)} Likes` : ''}.`}
     >
       <div class="media" aria-hidden="true">
         {item.image && (
@@ -66,14 +66,18 @@ const formatCount = (value: number) => {
               </span>
               <span class="stats-badge__count" data-value={item.views}>{formatCount(item.views)}</span>
             </span>
-            <span class="stats-bar__divider" aria-hidden="true"></span>
-            <span class="stats-badge stats-badge--likes">
-              <span class="stats-badge__icon stats-badge__icon--heart" aria-hidden="true">
-                <svg class="heart-outline" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                <svg class="heart-filled" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-              </span>
-              <span class="stats-badge__count" data-value={item.likes}>{formatCount(item.likes)}</span>
-            </span>
+            {item.likes > 0 && (
+              <>
+                <span class="stats-bar__divider" aria-hidden="true"></span>
+                <span class="stats-badge stats-badge--likes">
+                  <span class="stats-badge__icon stats-badge__icon--heart" aria-hidden="true">
+                    <svg class="heart-outline" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    <svg class="heart-filled" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  </span>
+                  <span class="stats-badge__count" data-value={item.likes}>{formatCount(item.likes)}</span>
+                </span>
+              </>
+            )}
           </div>
         )}
       </div>

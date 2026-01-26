@@ -31,22 +31,7 @@ const tools: {
 
 <div class="services-legend">
   <div class="services-legend__header">
-    <span class="eyebrow">Leistungen</span>
     <h2 class="headline reveal" data-reveal>Was ich mache</h2>
-    <p class="subtitle reveal" data-reveal>
-      Diese Icons zeigen dir, wofür ich bei jedem Projekt verantwortlich war.
-    </p>
-  </div>
-  
-  <div class="services-badges reveal" data-reveal>
-    {services.map((service) => (
-      <div class="service-badge">
-        <span class="service-badge__icon">
-          <ServiceIcon service={service.id} size="sm" showTooltip={false} linkToLegend={false} />
-        </span>
-        <span class="service-badge__label">{service.label}</span>
-      </div>
-    ))}
   </div>
 
   <div class="tools-section reveal" data-reveal>
@@ -59,5 +44,20 @@ const tools: {
         </div>
       ))}
     </div>
+  </div>
+
+  <p class="services-legend__intro reveal" data-reveal>
+    Diese Icons zeigen dir, wofür ich bei jedem Projekt verantwortlich war.
+  </p>
+  
+  <div class="services-badges reveal" data-reveal>
+    {services.map((service) => (
+      <div class="service-badge">
+        <span class="service-badge__icon">
+          <ServiceIcon service={service.id} size="sm" showTooltip={false} linkToLegend={false} />
+        </span>
+        <span class="service-badge__label">{service.label}</span>
+      </div>
+    ))}
   </div>
 </div>
