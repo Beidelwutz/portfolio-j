@@ -42,12 +42,13 @@ content/private/
 data/private/
 **/offline/
 **/intern/
-uploads/
-**/uploads/
 form-submissions/
 **/form-submissions/
 contact-data/
 **/contact-data/
+
+# --- Uploads erlauben für public ---
+# (public/uploads wird NICHT ignoriert, damit Bilder deployed werden)
 
 # --- Persönliche / vertrauliche Dateien ---
 *geheim*
