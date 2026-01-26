@@ -1,125 +1,3 @@
-/* Mobil-Navigation: Hamburger öffnen/schließen */
-const siteHeader = document.getElementById("site-header");
-const navToggle = document.querySelector("[data-nav-toggle]");
-const siteNav = document.getElementById("site-nav");
-const navOverlay = document.querySelector("[data-nav-overlay]");
-const mobileMenuQuery = window.matchMedia("(max-width: 980px)");
-
-let scrollLockY = 0;
-let lastFocused = null;
-let scrollLockActive = false;
-
-function isMenuOpen() {
-  return siteHeader?.classList.contains("is-menu-open");
-}
-
-function setScrollLock(locked) {
-  if (locked) {
-    scrollLockY = window.scrollY || window.pageYOffset || 0;
-    scrollLockActive = true;
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${scrollLockY}px`;
-    document.body.style.left = "0";
-    document.body.style.right = "0";
-    document.body.style.width = "100%";
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.touchAction = "none";
-  } else {
-    if (scrollLockActive) {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.left = "";
-      document.body.style.right = "";
-      document.body.style.width = "";
-      document.documentElement.style.overflow = "";
-      document.body.style.touchAction = "";
-      window.scrollTo(0, scrollLockY);
-      scrollLockActive = false;
-    }
-  }
-}
-
-function setNavAriaHidden(hidden) {
-  if (!siteNav) return;
-  if (hidden) siteNav.setAttribute("aria-hidden", "true");
-  else siteNav.removeAttribute("aria-hidden");
-}
-
-function getFocusableElements() {
-  if (!siteNav) return [];
-  const selector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
-  return Array.from(siteNav.querySelectorAll(selector));
-}
-
-function setMenuState(open) {
-  if (!siteHeader || !navToggle || !siteNav) return;
-  if (open && !mobileMenuQuery.matches) return;
-  if (open) {
-    lastFocused = document.activeElement;
-    siteHeader.classList.add("is-menu-open");
-    navToggle.setAttribute("aria-expanded", "true");
-    navToggle.setAttribute("aria-label", "Menü schließen");
-    setScrollLock(true);
-    setNavAriaHidden(false);
-    if (navOverlay) navOverlay.setAttribute("aria-hidden", "false");
-    const focusables = getFocusableElements();
-    focusables[0]?.focus();
-  } else {
-    siteHeader.classList.remove("is-menu-open");
-    navToggle.setAttribute("aria-expanded", "false");
-    navToggle.setAttribute("aria-label", "Menü öffnen");
-    setScrollLock(false);
-    setNavAriaHidden(mobileMenuQuery.matches);
-    if (navOverlay) navOverlay.setAttribute("aria-hidden", "true");
-    if (lastFocused && typeof lastFocused.focus === "function") {
-      lastFocused.focus();
-    }
-  }
-}
-
-if (navToggle) {
-  navToggle.addEventListener("click", () => {
-    setMenuState(!isMenuOpen());
-  });
-}
-
-if (navOverlay) {
-  navOverlay.addEventListener("click", () => setMenuState(false));
-}
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && isMenuOpen()) {
-    setMenuState(false);
-  }
-  if (e.key === "Tab" && isMenuOpen()) {
-    const focusables = getFocusableElements();
-    if (focusables.length === 0) return;
-    const first = focusables[0];
-    const last = focusables[focusables.length - 1];
-    if (e.shiftKey && document.activeElement === first) {
-      e.preventDefault();
-      last.focus();
-    } else if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault();
-      first.focus();
-    }
-  }
-});
-
-siteNav?.querySelectorAll(".nav-link").forEach((link) => {
-  link.addEventListener("click", () => {
-    if (isMenuOpen()) setMenuState(false);
-  });
-});
-
-mobileMenuQuery.addEventListener("change", (event) => {
-  setMenuState(false);
-  setNavAriaHidden(event.matches);
-});
-
-// Initial sync (verhindert "ploppen" bei Resize/Load)
-setMenuState(false);
-
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const revealElements = document.querySelectorAll("[data-reveal]");
@@ -269,22 +147,55 @@ if (homeProgress) {
   const homeProgressItems = homeProgress.querySelectorAll(".home-progress__item");
 
   if (homeSections.length > 0 && homeProgressItems.length > 0) {
-    const homeProgressObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const sectionId = entry.target.id;
-            homeProgressItems.forEach((item) => {
-              const isMatch = item.dataset.section === sectionId;
-              item.classList.toggle("is-active", isMatch);
-            });
+    const updateActiveSection = () => {
+      const pointY = window.innerHeight * 0.25;
+      let currentId = null;
+      for (let i = 0; i < homeSections.length; i++) {
+        const r = homeSections[i].getBoundingClientRect();
+        if (r.top <= pointY && r.bottom >= pointY) {
+          currentId = homeSections[i].id;
+          break;
+        }
+      }
+      if (!currentId) {
+        let best = null;
+        let bestDist = Infinity;
+        for (let i = 0; i < homeSections.length; i++) {
+          const r = homeSections[i].getBoundingClientRect();
+          if (r.bottom <= pointY && pointY - r.bottom < bestDist) {
+            bestDist = pointY - r.bottom;
+            best = homeSections[i].id;
           }
-        });
-      },
-      { threshold: 0.15, rootMargin: "-10% 0px -70% 0px" }
-    );
+          if (r.top >= pointY && r.top - pointY < bestDist) {
+            bestDist = r.top - pointY;
+            best = homeSections[i].id;
+          }
+        }
+        currentId = best ?? homeSections[0]?.id ?? null;
+      }
+      homeProgressItems.forEach((item) => {
+        item.classList.toggle("is-active", item.dataset.section === currentId);
+      });
+    };
 
+    const homeProgressObserver = new IntersectionObserver(
+      () => updateActiveSection(),
+      { threshold: [0, 0.1, 0.5, 1], rootMargin: "0px 0px 0px 0px" }
+    );
     homeSections.forEach((section) => homeProgressObserver.observe(section));
+
+    let scrollTicking = false;
+    window.addEventListener("scroll", () => {
+      if (!scrollTicking) {
+        requestAnimationFrame(() => {
+          updateActiveSection();
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
+    }, { passive: true });
+
+    updateActiveSection();
   }
 }
 

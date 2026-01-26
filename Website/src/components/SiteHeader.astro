@@ -8,19 +8,12 @@ const baseUrl = isHomePage ? "" : "/";
     <a href="/" class="site-logo" aria-label="Startseite">
       jpgjenny<span>.me</span>
     </a>
-    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menü öffnen" data-nav-toggle>
-      <span class="nav-toggle__bar"></span>
-      <span class="nav-toggle__bar"></span>
-      <span class="nav-toggle__bar"></span>
-    </button>
     <nav id="site-nav" class="site-nav" aria-label="Hauptnavigation">
-      <div class="site-nav__handle"></div>
-      <a href={`${baseUrl}#fotos`} class="nav-link">Fotografie</a>
-      <a href={`${baseUrl}#videos`} class="nav-link">Videografie</a>
-      <a href={`${baseUrl}#clips`} class="nav-link">Short Content</a>
-      <a href={`${baseUrl}#leistungen`} class="nav-link">Was ich mache</a>
+      <a href={`${baseUrl}#fotos`} class="nav-link nav-link--desktop-only">Fotografie</a>
+      <a href={`${baseUrl}#videos`} class="nav-link nav-link--desktop-only">Videografie</a>
+      <a href={`${baseUrl}#clips`} class="nav-link nav-link--desktop-only">Short Content</a>
+      <a href={`${baseUrl}#leistungen`} class="nav-link nav-link--desktop-only">Was ich mache</a>
       <a href={`${baseUrl}#kontakt`} class="nav-link nav-link--cta">Kontakt</a>
     </nav>
   </div>
-  <div class="site-nav-overlay" data-nav-overlay aria-hidden="true"></div>
 </header>
