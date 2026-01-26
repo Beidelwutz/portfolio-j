@@ -18,7 +18,7 @@ const { paragraphs, quote, learning } = Astro.props;
       <span class="story-block__label">Die Story</span>
       <div class="story-block__text">
         {paragraphs.map((p, idx) => (
-          <p class={idx === 0 ? "drop-cap" : ""}>{p}</p>
+          <p class={idx === 0 ? "drop-cap" : ""} set:html={p} />
         ))}
       </div>
       

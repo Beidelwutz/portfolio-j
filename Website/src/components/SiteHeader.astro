@@ -1,8 +1,11 @@
 ---
+// Prüfen ob wir auf der Startseite sind
+const isHomePage = Astro.url.pathname === "/" || Astro.url.pathname === "/index.html";
+const baseUrl = isHomePage ? "" : "/";
 ---
 <header class="site-header" id="site-header">
   <div class="site-header-inner">
-    <a href="#start" class="site-logo" aria-label="Startseite">
+    <a href="/" class="site-logo" aria-label="Startseite">
       jpgjenny<span>.me</span>
     </a>
     <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menü öffnen" data-nav-toggle>
@@ -12,11 +15,11 @@
     </button>
     <nav id="site-nav" class="site-nav" aria-label="Hauptnavigation">
       <div class="site-nav__handle"></div>
-      <a href="#videos" class="nav-link">Videografie</a>
-      <a href="#clips" class="nav-link">Short Content</a>
-      <a href="#fotos" class="nav-link">Fotografie</a>
-      <a href="#leistungen" class="nav-link">Was ich mache</a>
-      <a href="#kontakt" class="nav-link nav-link--cta">Kontakt</a>
+      <a href={`${baseUrl}#fotos`} class="nav-link">Fotografie</a>
+      <a href={`${baseUrl}#videos`} class="nav-link">Videografie</a>
+      <a href={`${baseUrl}#clips`} class="nav-link">Short Content</a>
+      <a href={`${baseUrl}#leistungen`} class="nav-link">Was ich mache</a>
+      <a href={`${baseUrl}#kontakt`} class="nav-link nav-link--cta">Kontakt</a>
     </nav>
   </div>
   <div class="site-nav-overlay" data-nav-overlay aria-hidden="true"></div>
