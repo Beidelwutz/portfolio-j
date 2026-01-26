@@ -30,19 +30,12 @@ const { name = "Jenny", headline, subtitle } = Astro.props;
       {subtitle ?? "Ich begleite Projekte von der Planung über Foto und Video bis hin zur Postproduktion."}
     </p>
     <div class="hero__actions reveal" data-reveal>
-      <a class="hero__cta hero__cta--primary" href="#highlights">
-        Portfolio ansehen
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
+      <a class="hero__cta hero__cta--scroll" href="#highlights">
+        <span>Portfolio</span>
+        <svg class="hero__cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
         </svg>
       </a>
     </div>
   </div>
-
-  <a class="hero__scroll" href="#highlights" aria-label="Weiter scrollen">
-    <span>Entdecken</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M12 5v14M5 12l7 7 7-7"/>
-    </svg>
-  </a>
 </div>
