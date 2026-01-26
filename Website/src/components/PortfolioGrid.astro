@@ -13,6 +13,7 @@ const items: {
   services: ServiceType[];
   image?: string;
   imageFull?: string;
+  video?: string;
   subtitle?: string;
   artist?: string;
   link?: string;
@@ -23,9 +24,9 @@ const items: {
   { title: "Kaffee mit Zitrone", subtitle: "Video Podcast", artist: "@dagibee @tinadzialas", type: "video", category: "Videografie", views: 54800, likes: 0, services: ["post"], image: "/uploads/videos/Kaffee_mit_Zitrone_1_v01_low.webp" },
   { title: "Henkes Corner", subtitle: "Video Podcast", artist: "@henkescorner", type: "video", category: "Videografie", views: 24700, likes: 1100, services: ["video", "post", "produktion", "konzept"], image: "/uploads/videos/Henkes_Corner_1_v01_low.webp" },
   // Short Content (3)
-  { title: "Branding & Motion Clip", type: "video", category: "Short Content", views: 84200, likes: 5210, services: ["video", "post"] },
-  { title: "Showreel Teaser", type: "video", category: "Short Content", views: 156900, likes: 9020, services: ["video", "post", "produktion"] },
-  { title: "Social Teaser", type: "video", category: "Short Content", views: 67500, likes: 4320, services: ["video", "post", "konzept"] },
+  { title: "Kelly Short #1", subtitle: "TikTok / Reel", artist: "@kel", type: "video", category: "Short Content", views: 84200, likes: 5210, services: ["video", "post"], image: "/uploads/clips/Kelly_Short_01_v01.webp", video: "/uploads/clips/Clip_Kelly_Full_03_v01.mp4" },
+  { title: "Kelly Short #2", subtitle: "TikTok / Reel", artist: "@kel", type: "video", category: "Short Content", views: 156900, likes: 9020, services: ["video", "post", "produktion"], image: "/uploads/clips/Kelly_Short_02_v01.webp", video: "/uploads/clips/Clip_Kelly_Full_02_v01.mp4" },
+  { title: "Kelly Short #3", subtitle: "TikTok / Reel", artist: "@kel", type: "video", category: "Short Content", views: 67500, likes: 4320, services: ["video", "post", "konzept"], image: "/uploads/clips/Kelly_Short_03_v01.webp", video: "/uploads/clips/Clip_Kelly_Full_01_v01.mp4" },
   // Fotografie (5)
   { title: "Nessi", artist: "@nessiontour", type: "image", category: "Fotografie", views: 56400, likes: 3010, services: ["post", "konzept"], image: "/uploads/fotos/Nessi_1_V01_low.webp" },
   { title: "Sido", artist: "@shawnstein", type: "image", category: "Fotografie", views: 73300, likes: 4150, services: ["post", "konzept"], image: "/uploads/fotos/Sido_1_V01.jpg" },
@@ -42,21 +43,53 @@ const formatCount = (value: number) => {
   return `${value}`;
 };
 ---
-<div class="portfolio-grid">
-  {filtered.map((item) => (
+<div class="portfolio-grid reveal" data-reveal>
+  {filtered.map((item, index) => (
     <article
-      class="portfolio-card reveal"
-      data-reveal
-      data-lightbox={!item.link}
+      class={`portfolio-card${item.video ? ' portfolio-card--short' : ''}`}
+      style={`--stagger: ${index}`}
+      data-lightbox={!item.link && !item.video}
       data-link={item.link}
       data-title={item.title}
       data-type={item.type}
+      data-short-player={item.video ? "true" : undefined}
       tabindex="0"
       aria-label={`${item.title}. ${formatCount(item.views)} Aufrufe${item.likes > 0 ? `, ${formatCount(item.likes)} Likes` : ''}.`}
     >
       <div class="media" aria-hidden="true">
         {item.image && (
-          <img src={item.image} alt={item.title} data-full={item.imageFull || item.image} />
+          <img src={item.image} alt={item.title} class={item.video ? 'short-thumb' : ''} data-full={item.imageFull || item.image} />
+        )}
+        {item.video && (
+          <>
+            <video 
+              class="short-video" 
+              src={item.video} 
+              muted 
+              loop 
+              playsinline 
+              preload="none"
+            />
+            <button class="short-play-btn" aria-label="Video abspielen">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </button>
+            <button class="short-mute-btn" aria-label="Ton ein/aus">
+              <svg class="mute-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                <line x1="23" y1="9" x2="17" y2="15"/>
+                <line x1="17" y1="9" x2="23" y2="15"/>
+              </svg>
+              <svg class="unmute-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+              </svg>
+            </button>
+            <div class="short-progress">
+              <div class="short-progress__bar"></div>
+            </div>
+          </>
         )}
         {category !== "Fotografie" && (
           <div class="stats-bar" aria-hidden="true">
@@ -95,7 +128,7 @@ const formatCount = (value: number) => {
   ))}
   
   {category === "Videografie" && (
-    <a href="#highlights" class="portfolio-card portfolio-card--cta reveal" data-reveal>
+    <a href="#highlights" class="portfolio-card portfolio-card--cta" style={`--stagger: ${filtered.length}`}>
       <div class="cta-content">
         <div class="cta-icon">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -111,7 +144,7 @@ const formatCount = (value: number) => {
   )}
   
   {category === "Fotografie" && (
-    <a href="#kontakt" class="portfolio-card portfolio-card--cta reveal" data-reveal>
+    <a href="#kontakt" class="portfolio-card portfolio-card--cta" style={`--stagger: ${filtered.length}`}>
       <div class="cta-content">
         <div class="cta-icon">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">

@@ -62,11 +62,11 @@ const formatCount = (value: number) => {
   </div>
 
   <div class="portfolio-grid reveal" data-reveal>
-    {projects.map((project) => (
+    {projects.map((project, index) => (
       <a
         href={`/projekte/${project.slug}`}
-        class="portfolio-card portfolio-card--link reveal"
-        data-reveal
+        class="portfolio-card portfolio-card--link"
+        style={`--stagger: ${index}`}
         aria-label={`${project.title}. ${formatCount(project.views)} Aufrufe${project.likes > 0 ? `, ${formatCount(project.likes)} Likes` : ''}.`}
       >
         <div class="media" aria-hidden="true">

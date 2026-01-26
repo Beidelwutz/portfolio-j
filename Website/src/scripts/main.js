@@ -245,6 +245,9 @@ const closeLightbox = () => {
 
 document.querySelectorAll("[data-lightbox], [data-link]").forEach((card) => {
   card.addEventListener("click", () => {
+    // Skip if this is a short content player
+    if (card.hasAttribute("data-short-player")) return;
+    
     const link = card.getAttribute("data-link");
     if (link) {
       window.location.href = link;
@@ -277,3 +280,96 @@ if (contactForm) {
     window.location.href = `mailto:${target}?subject=${subject}&body=${body}`;
   });
 }
+
+/* Short Content Video Player */
+const shortPlayers = document.querySelectorAll("[data-short-player]");
+
+shortPlayers.forEach((card) => {
+  const video = card.querySelector(".short-video");
+  const playBtn = card.querySelector(".short-play-btn");
+  const muteBtn = card.querySelector(".short-mute-btn");
+  const progressBar = card.querySelector(".short-progress__bar");
+  
+  if (!video) return;
+  
+  let isHovering = false;
+  let isTouchDevice = "ontouchstart" in window;
+  
+  // Update progress bar
+  const updateProgress = () => {
+    if (video.duration) {
+      const percent = (video.currentTime / video.duration) * 100;
+      progressBar.style.width = `${percent}%`;
+    }
+  };
+  
+  video.addEventListener("timeupdate", updateProgress);
+  
+  // Desktop: Hover to play
+  if (!isTouchDevice) {
+    card.addEventListener("mouseenter", () => {
+      isHovering = true;
+      video.play().catch(() => {});
+      card.classList.add("is-playing");
+    });
+    
+    card.addEventListener("mouseleave", () => {
+      isHovering = false;
+      video.pause();
+      video.currentTime = 0;
+      card.classList.remove("is-playing");
+      progressBar.style.width = "0%";
+    });
+  }
+  
+  // Play button click (mobile)
+  playBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (video.paused) {
+      video.play().catch(() => {});
+      card.classList.add("is-playing");
+    } else {
+      video.pause();
+      card.classList.remove("is-playing");
+    }
+  });
+  
+  // Mute button click
+  muteBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    video.muted = !video.muted;
+    card.classList.toggle("is-unmuted", !video.muted);
+  });
+  
+  // Handle card clicks
+  card.addEventListener("click", (e) => {
+    // Always prevent default behavior (no lightbox)
+    e.stopPropagation();
+    e.preventDefault();
+    
+    // Only handle if not clicking on buttons
+    if (e.target.closest(".short-play-btn") || e.target.closest(".short-mute-btn")) {
+      return;
+    }
+    
+    // On mobile only: toggle play/pause on tap
+    if (isTouchDevice) {
+      if (video.paused) {
+        video.play().catch(() => {});
+        card.classList.add("is-playing");
+      } else {
+        video.pause();
+        card.classList.remove("is-playing");
+      }
+    }
+    // Desktop: do nothing on click (hover handles playback)
+  });
+  
+  // Reset when video ends
+  video.addEventListener("ended", () => {
+    if (!isHovering) {
+      card.classList.remove("is-playing");
+      progressBar.style.width = "0%";
+    }
+  });
+});
