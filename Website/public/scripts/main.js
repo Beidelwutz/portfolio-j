@@ -1,3 +1,49 @@
+/* Mobil-Navigation: Hamburger öffnen/schließen */
+const siteHeader = document.getElementById("site-header");
+const navToggle = document.querySelector("[data-nav-toggle]");
+const siteNav = document.getElementById("site-nav");
+const navOverlay = document.querySelector("[data-nav-overlay]");
+
+function openNav() {
+  if (!siteHeader || !navToggle || !siteNav) return;
+  siteHeader.classList.add("is-menu-open");
+  navToggle.setAttribute("aria-expanded", "true");
+  navToggle.setAttribute("aria-label", "Menü schließen");
+  document.body.style.overflow = "hidden";
+}
+
+function closeNav() {
+  if (!siteHeader || !navToggle || !siteNav) return;
+  siteHeader.classList.remove("is-menu-open");
+  navToggle.setAttribute("aria-expanded", "false");
+  navToggle.setAttribute("aria-label", "Menü öffnen");
+  document.body.style.overflow = "";
+}
+
+if (navToggle && siteNav) {
+  navToggle.addEventListener("click", () => {
+    const open = siteHeader?.classList.contains("is-menu-open");
+    if (open) closeNav();
+    else openNav();
+  });
+}
+
+if (navOverlay) {
+  navOverlay.addEventListener("click", closeNav);
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && siteHeader?.classList.contains("is-menu-open")) {
+    closeNav();
+  }
+});
+
+siteNav?.querySelectorAll(".nav-link").forEach((link) => {
+  link.addEventListener("click", () => {
+    closeNav();
+  });
+});
+
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const revealElements = document.querySelectorAll("[data-reveal]");
