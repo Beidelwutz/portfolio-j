@@ -11,40 +11,40 @@ import ProjectCTA from "../../components/project/ProjectCTA.astro";
 ---
 
 <ProjectLayoutV2
-  title="MOONIAC Sessions"
-  tagline="Bandfotos mit Energie – vom Proberaum auf die Bühne, eingefangen in einem intensiven Shooting-Tag."
+  title="MOONIAC Shooting"
+  tagline="Ein Tag am Set – meine Perspektive auf den Ablauf und die Stimmung."
   heroMedia="/uploads/projekte/MOONIAC_Shooting_V01_high.webp"
   heroMediaType="image"
-  role={["Fotografie", "Videografie", "Postproduktion", "Konzept"]}
+  role={["Videografie", "Konzept", "Postproduktion"]}
   client="MOONIAC"
   year="2024"
-  location="Köln"
-  format="Band-Promo"
+  location="Berlin"
+  format="Brand Content"
 >
 
   <ResultsBlock
     mediaType="gallery"
     galleryImages={[
-      { src: "/uploads/projekte/MOONIAC_Shooting_V01_high.webp", alt: "MOONIAC Band" },
+      { src: "/uploads/projekte/MOONIAC_Shooting_V01_high.webp", alt: "MOONIAC Shooting" },
     ]}
     outcomes={[
-      { label: "30+ Promo-Bilder", icon: "🎸" },
-      { label: "3 Location-Setups", icon: "📍" },
-      { label: "Einzel- & Gruppenshots", icon: "👥" },
-      { label: "1 Teaser-Video", icon: "🎬" },
-      { label: "Social Media Kit", icon: "📱" },
+      { label: "Behind-the-Scenes Film", icon: "🎬" },
+      { label: "3 Shorts (16:9 & 9:16)", icon: "📱" },
+      { label: "Brand Statements", icon: "🎤" },
+      { label: "Untertitel inkl.", icon: "💬" },
+      { label: "Instagram & Website", icon: "📲" },
     ]}
   />
 
   <StoryBlock
     paragraphs={[
-      "Als ich mir neue Kameras, Objektive und Mikrofone zugelegt habe, wollte ich sie nicht nur im Studio testen. Ich hatte Lust auf eine echte Produktion – also habe ich Leila angeschrieben. Kurz darauf stand fest: Berlin.",
-      "Es ging um das Shooting der neuen Kollektion ihres Bademodebrands mooniac – Bademode für alle Körpertypen. Geshootet wurde im Studio Batterie, einem hellen Studio mit ruhiger, klarer Stimmung.",
-      "Vor dem ersten Shot haben wir reduziert aufgebaut: Set vorbereitet, Licht gesetzt, alles bewusst simpel gehalten. Schritt für Schritt kamen die Models dazu – viele kannten sich untereinander und auch Leila, die Stimmung war entspannt und vertraut.",
-      "Mir war wichtig, nicht nur das Shooting zu begleiten, sondern Leilas Vision sichtbar zu machen. Deshalb haben wir Momente geschaffen, in denen sie direkt in die Kamera spricht und erzählt, wofür mooniac steht. Diese Aussagen waren fester Teil des Konzepts.",
-      "Ich liebe Produktionen, in denen Inhalt und Stimmung zusammenkommen. Nicht nur schöne Bilder, sondern ein echtes Gefühl dafür, warum etwas entsteht – nah, ehrlich und ohne großes Drumherum."
+      "Als ich mir neue Kameras, Objektive und Mikrofone zugelegt habe, wollte ich sie nicht einfach nur zu Hause testen. Ich hatte Lust, rauszugehen und zu sehen, wie sich das Ganze in einer echten Produktion anfühlt. Also habe ich mich umgesehen und Leila ganz unkompliziert angeschrieben. Kurz darauf war klar: Ich fahre nach Berlin.",
+      "Dort ging es um das Shooting der neuen Kollektion ihrer Bademodebrand mooniac, die Bademode für alle Körpertypen macht. Geshootet wurde im Studio Batterie in Berlin – ein helles Studio, das sofort eine ruhige Stimmung geschaffen hat. Bevor es losging, haben Bastian Bochinski (der Fotograf) und ich erst einmal aufgebaut: Set vorbereitet, Licht eingerichtet.",
+      "Nach und nach kamen die Models dazu. Viele kannten sich bereits untereinander und auch Leila, was man sofort gemerkt hat. Die Atmosphäre war entspannt und vertraut, nichts wirkte inszeniert. Genau das hat gut zu mooniac gepasst: Menschen authentisch zeigen.",
+      "Mir war wichtig, nicht nur das Shooting zu begleiten, sondern auch Leilas Vision sichtbar zu machen. Deshalb haben wir bewusst Situationen geschaffen, in denen sie direkt in die Kamera spricht und erzählt, wofür mooniac steht, was ihr wichtig ist und warum mooniac genau so entstanden ist. Diese Momente waren ein fester Teil meines Konzepts.",
+      "Ich liebe Produktionen, bei denen Inhalt und Stimmung zusammenkommen. Neben Aufnahmen, auch ein Gefühl dafür, warum etwas entsteht. Genau das wollte ich hier festhalten – ehrlich und nah."
     ]}
-    learning="Weniger Setup, mehr Nähe: Wenn die Atmosphäre stimmt, wirkt alles natürlicher."
+    learning="Eine klare Vision hilft am Set – besonders dann, wenn sie offen ausgesprochen wird."
   />
 
   <DeliverablesGrid
@@ -52,28 +52,23 @@ import ProjectCTA from "../../components/project/ProjectCTA.astro";
       {
         category: "Formate",
         items: [
-          "Querformat (Press Kit)",
-          "Hochformat (Poster/Flyer)",
-          "Quadrat (Social Media)",
-          "16:9 (Website Header)"
+          "Querformat (16:9)",
+          "Hochformat (9:16)"
         ]
       },
       {
         category: "Plattformen",
         items: [
-          "Spotify Artist Page",
-          "Instagram & TikTok",
-          "Booking-Anfragen",
-          "Merch & Poster"
+          "Instagram",
+          "Inhalte für Website"
         ]
       },
       {
         category: "Assets",
         items: [
-          "30 bearbeitete Finals",
-          "5 B/W Alternativ-Edits",
-          "15s Teaser-Video",
-          "Press Kit (PDF)"
+          "3× Shorts in 16:9 und 9:16",
+          "1× Behind-the-Scenes Film",
+          "Alles mit Untertiteln"
         ]
       }
     ]}
@@ -82,41 +77,42 @@ import ProjectCTA from "../../components/project/ProjectCTA.astro";
   <ProcessTimeline
     steps={[
       {
-        title: "Kontakt & Vision",
-        duration: "Kurz & direkt",
-        description: "Leila unkompliziert angeschrieben, Vision abgeklärt, Ziel definiert: authentische Momente, die mooniac als Brand und Haltung zeigen.",
-        tools: ["Kurz-Call", "Moodboard"]
+        title: "Vision",
+        duration: "Vorbereitung",
+        description: "Als klar war, dass ich das Shooting behind the scenes begleiten werde, habe ich mir Gedanken darüber gemacht, wie ich das umsetzen möchte und welchen Fokus der Content haben soll. Zur Vorbereitung habe ich mir ein Moodboard erstellt, um das Konzept vor Augen zu haben.",
+        tools: ["Moodboard"]
       },
       {
         title: "Studio & Setup",
         duration: "Vor Ort",
-        description: "Studio Batterie in Berlin: hell, ruhig, minimal. Set reduziert vorbereitet, Licht bewusst schlicht gehalten, damit die Menschen im Mittelpunkt stehen.",
+        description: "Das Shooting fand im Studio Batterie in Berlin statt – ein helles, ruhiges Studio mit viel Tageslicht. Gemeinsam mit Bastian Bochinski habe ich das Setup aufgebaut und Licht eingerichtet.",
         tools: ["Studio Batterie", "Lichtsetup"]
       },
       {
         title: "Shooting",
         duration: "1 Tag",
-        description: "Models kamen nach und nach dazu, viele kannten sich. Dadurch entstand eine entspannte Atmosphäre ohne Inszenierung – passend zu mooniac.",
-        tools: ["Kamera-Setup", "Objektive"]
+        description: "Die Models kamen nach und nach dazu. Viele kannten sich bereits untereinander und auch Leila, was sich direkt auf die Stimmung ausgewirkt hat. Das Shooting war sehr entspannt, vertraut und gemütlich. Während fotografiert wurde, habe ich den Fokus auf sämtliche Abläufe gelegt, um möglichst viele Eindrücke einzufangen.",
+        tools: ["Kamera", "Objektive"]
       },
       {
-        title: "Brand-Statements",
-        duration: "integriert",
-        description: "Bewusst Situationen geschaffen, in denen Leila direkt in die Kamera spricht – kein Beiwerk, sondern zentraler Bestandteil des Konzepts.",
-        tools: ["Funkmikrofone", "On-Cam Audio"]
+        title: "Brand Statement",
+        duration: "Integriert",
+        description: "Ein zentraler Bestandteil des Konzepts war, Leilas Vision klar sichtbar zu machen. Dafür haben wir bewusst Situationen geschaffen, in denen sie direkt in die Kamera spricht. Diese Statements waren kein ergänzendes Element, sondern fester Teil des Contents und sollten zeigen, wofür mooniac steht.",
+        tools: ["Funkmikrofone"]
       },
       {
         title: "Auswahl & Edit",
         duration: "Post",
-        description: "Bilder ausgewählt und so bearbeitet, dass die natürliche Stimmung erhalten bleibt – klar, ruhig, nah.",
-        tools: ["Selection", "Color"]
+        description: "Nach dem Shooting habe ich das gesamte Material gesichtet, das Video geschnitten und die Short-Formate umgesetzt. Ziel war es, die Inhalte so aufzubereiten, dass sie sowohl als zusammenhängender Behind-the-Scenes-Film als auch in kurzen Clips funktionieren.",
+        tools: ["Schnitt", "Color"]
       }
     ]}
   />
 
   <ProjectGallery
+    title="Impressionen"
     highlights={[
-      { src: "/uploads/projekte/MOONIAC_Shooting_V01_high.webp", alt: "MOONIAC Gruppe", featured: true },
+      { src: "/uploads/projekte/MOONIAC_Shooting_V01_high.webp", alt: "MOONIAC Shooting", featured: true },
     ]}
     bts={[]}
     showBtsToggle={false}
@@ -127,33 +123,31 @@ import ProjectCTA from "../../components/project/ProjectCTA.astro";
       {
         title: "Setup & Kamera",
         items: [
-          "Foto- & Video-Kamera (Fullframe)",
-          "Festbrennweiten (Portrait/Detail)",
-          "Weitwinkel für Raum & Sets"
+          "2× Sony A7 IV",
+          "24-70mm G Master Objektiv",
+          "70-200mm G Master Objektiv"
         ]
       },
       {
         title: "Licht & Set",
         items: [
-          "Reduziertes Lichtsetup",
-          "Praktisches Licht im Studio",
-          "Reflektoren/Flags"
+          "Studiointerne Lichtquellen",
+          "Schlichtes Lichtsetup zur Unterstützung des natürlichen Looks"
         ]
       },
       {
         title: "Audio",
         items: [
-          "Funkmikrofone",
-          "Richtmikro für klare Statements",
-          "On-Cam Backup"
+          "Funkmikrofone für die direkten Kamera-Statements",
+          "On-Camera-Audio als Backup"
         ]
       },
       {
-        title: "Post-Production",
+        title: "Postproduktion",
         items: [
-          "Bildauswahl & Retusche",
-          "Farblook: natürlich & ruhig",
-          "Audio-Cleanup für Statements"
+          "Auswahl und Retusche der Bilder",
+          "Natürlicher, ruhiger Farblook",
+          "Audio-Cleanup für die gesprochenen Statements"
         ]
       }
     ]}
@@ -162,12 +156,37 @@ import ProjectCTA from "../../components/project/ProjectCTA.astro";
   <Credits
     client={{
       name: "MOONIAC",
-      link: "#"
+      link: "https://instagram.com/mooniac"
     }}
     credits={[
-      { role: "Konzept, Foto & Video", name: "Jenny" },
-      { role: "Brand & Creative Direction", name: "Leila (mooniac)" },
-      { role: "Models", name: "Diverse Cast" },
+      { 
+        role: "Kunde", 
+        people: [
+          { name: "@mooniac", instagram: "mooniac" },
+          { name: "@leilalowfire", instagram: "leilalowfire" }
+        ]
+      },
+      { 
+        role: "Konzept & Video", 
+        people: [{ name: "@jpgjenny", instagram: "jpgjenny" }]
+      },
+      { 
+        role: "Fotograf", 
+        people: [{ name: "@bastianbochinski", instagram: "bastianbochinski" }]
+      },
+      { 
+        role: "P.A. der Brand", 
+        people: [{ name: "@lastlaugh.music", instagram: "lastlaugh.music" }]
+      },
+      { 
+        role: "Models", 
+        people: [
+          { name: "@julianesinsta", instagram: "julianesinsta" },
+          { name: "@izzys.place", instagram: "izzys.place" },
+          { name: "@hannelore030", instagram: "hannelore030" },
+          { name: "@marlenhhe", instagram: "marlenhhe" }
+        ]
+      },
       { role: "Location", name: "Studio Batterie, Berlin" }
     ]}
   />

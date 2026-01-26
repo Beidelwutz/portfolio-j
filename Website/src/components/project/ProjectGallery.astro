@@ -9,9 +9,10 @@ interface Props {
   highlights: GalleryImage[];
   bts?: GalleryImage[];
   showBtsToggle?: boolean;
+  title?: string;
 }
 
-const { highlights, bts = [], showBtsToggle = true } = Astro.props;
+const { highlights, bts = [], showBtsToggle = true, title = "Ausgewählte Aufnahmen" } = Astro.props;
 ---
 
 <section id="gallery" class="gallery-section" data-section>
@@ -19,7 +20,7 @@ const { highlights, bts = [], showBtsToggle = true } = Astro.props;
     <div class="gallery-section__header reveal">
       <div class="gallery-section__title-wrap">
         <span class="gallery-section__label">Galerie</span>
-        <h2 class="gallery-section__title">Ausgewählte Aufnahmen</h2>
+        <h2 class="gallery-section__title">{title}</h2>
       </div>
       
       {showBtsToggle && bts.length > 0 && (

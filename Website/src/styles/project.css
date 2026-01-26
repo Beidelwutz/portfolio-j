@@ -1121,6 +1121,13 @@
   margin-bottom: 8px;
 }
 
+.credit-item__names {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+}
+
 .credit-item__name {
   font-family: "Raleway", sans-serif;
   font-size: 16px;
@@ -1130,15 +1137,31 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  transition: color 0.2s ease;
 }
 
-a.credit-item__name:hover {
+.credit-item__name--link {
+  cursor: pointer;
+}
+
+.credit-item__name--link:hover {
   color: var(--project-accent);
 }
 
-.credit-item__name svg {
+.credit-item__separator {
+  color: var(--project-text-muted);
+  margin-right: 4px;
+}
+
+.credit-item__icon {
   width: 14px;
   height: 14px;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.credit-item__name--link:hover .credit-item__icon {
+  opacity: 1;
 }
 
 /* ═══════════════════════════════════════════════════════════

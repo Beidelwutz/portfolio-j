@@ -1,8 +1,14 @@
 ---
+interface Person {
+  name: string;
+  instagram?: string;
+}
+
 interface Credit {
   role: string;
-  name: string;
+  name?: string;
   link?: string;
+  people?: Person[];
 }
 
 interface Props {
@@ -14,6 +20,9 @@ interface Props {
 }
 
 const { credits, client } = Astro.props;
+
+// Helper to generate Instagram URL
+const instaUrl = (handle: string) => `https://instagram.com/${handle.replace('@', '')}`;
 ---
 
 <section id="credits" class="credits-section" data-section>
@@ -30,7 +39,7 @@ const { credits, client } = Astro.props;
           {client.link ? (
             <a href={client.link} target="_blank" rel="noopener noreferrer" class="credit-item__name">
               {client.name}
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg class="credit-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
                 <polyline points="15 3 21 3 21 9"/>
                 <line x1="10" y1="14" x2="21" y2="3"/>
@@ -45,18 +54,39 @@ const { credits, client } = Astro.props;
       {credits.map((credit) => (
         <div class="credit-item">
           <span class="credit-item__role">{credit.role}</span>
-          {credit.link ? (
-            <a href={credit.link} target="_blank" rel="noopener noreferrer" class="credit-item__name">
-              {credit.name}
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                <polyline points="15 3 21 3 21 9"/>
-                <line x1="10" y1="14" x2="21" y2="3"/>
-              </svg>
-            </a>
-          ) : (
-            <span class="credit-item__name">{credit.name}</span>
-          )}
+          <div class="credit-item__names">
+            {credit.people ? (
+              credit.people.map((person, idx) => (
+                <>
+                  {person.instagram ? (
+                    <a 
+                      href={instaUrl(person.instagram)} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      class="credit-item__name credit-item__name--link"
+                      title={`${person.name} auf Instagram`}
+                    >
+                      {person.name}
+                    </a>
+                  ) : (
+                    <span class="credit-item__name">{person.name}</span>
+                  )}
+                  {idx < credit.people!.length - 1 && <span class="credit-item__separator">, </span>}
+                </>
+              ))
+            ) : credit.link ? (
+              <a href={credit.link} target="_blank" rel="noopener noreferrer" class="credit-item__name credit-item__name--link">
+                {credit.name}
+                <svg class="credit-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
+            ) : (
+              <span class="credit-item__name">{credit.name}</span>
+            )}
+          </div>
         </div>
       ))}
     </div>
