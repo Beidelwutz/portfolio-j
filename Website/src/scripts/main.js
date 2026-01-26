@@ -171,13 +171,23 @@ const lightboxMedia = document.querySelector("[data-lightbox-media]");
 const lightboxTitle = document.querySelector("[data-lightbox-title]");
 const lightboxClose = document.querySelector("[data-lightbox-close]");
 
-const openLightbox = (title, type) => {
+const openLightbox = (title, type, imageSrc) => {
   if (!lightboxOverlay || !lightboxMedia || !lightboxTitle) return;
   lightboxMedia.innerHTML = "";
-  const placeholder = document.createElement("div");
-  placeholder.className = "lightbox-placeholder";
-  placeholder.textContent = type === "video" ? "Video-Clip Vorschau" : "Foto Vorschau";
-  lightboxMedia.appendChild(placeholder);
+  
+  if (type === "image" && imageSrc) {
+    const img = document.createElement("img");
+    img.src = imageSrc;
+    img.alt = title;
+    img.className = "lightbox-image";
+    lightboxMedia.appendChild(img);
+  } else {
+    const placeholder = document.createElement("div");
+    placeholder.className = "lightbox-placeholder";
+    placeholder.textContent = type === "video" ? "Video-Clip Vorschau" : "Foto Vorschau";
+    lightboxMedia.appendChild(placeholder);
+  }
+  
   lightboxTitle.textContent = title;
   lightboxOverlay.removeAttribute("hidden");
 };
@@ -187,11 +197,18 @@ const closeLightbox = () => {
   lightboxOverlay.setAttribute("hidden", "true");
 };
 
-document.querySelectorAll("[data-lightbox]").forEach((card) => {
+document.querySelectorAll("[data-lightbox], [data-link]").forEach((card) => {
   card.addEventListener("click", () => {
+    const link = card.getAttribute("data-link");
+    if (link) {
+      window.location.href = link;
+      return;
+    }
     const title = card.getAttribute("data-title") ?? "Projekt";
     const type = card.getAttribute("data-type") ?? "image";
-    openLightbox(title, type);
+    const img = card.querySelector("img[data-full]");
+    const imageSrc = img?.getAttribute("data-full") || img?.src;
+    openLightbox(title, type, imageSrc);
   });
 });
 

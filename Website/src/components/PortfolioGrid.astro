@@ -12,22 +12,26 @@ const items: {
   likes: number;
   services: ServiceType[];
   image?: string;
+  imageFull?: string;
   subtitle?: string;
   artist?: string;
+  link?: string;
 }[] = [
   // Videografie (4)
-  { title: "mooniac", subtitle: "Behind the scene brand content", artist: "@mooniac", type: "video", category: "Videografie", views: 95200, likes: 5180, services: ["video", "post"], image: "/uploads/videos/MOONIAC_Shooting_3_v01_low.webp" },
-  { title: "MissesVlog", subtitle: "YouTube Content", artist: "@MissesVlog", type: "video", category: "Videografie", views: 128400, likes: 6420, services: ["video", "post", "konzept"], image: "/uploads/videos/Kelly_Shooting_2_v01_low.webp" },
-  { title: "Henkes Corner", subtitle: "Video Podcast", artist: "@henkescorner", type: "video", category: "Videografie", views: 112300, likes: 6890, services: ["video", "post", "produktion"] },
-  { title: "Kaffee mit Zitrone", subtitle: "Video Podcast", artist: "@kaffeemitzitrone_podcast", type: "video", category: "Videografie", views: 87500, likes: 4230, services: ["video", "post"] },
+  { title: "mooniac", subtitle: "Behind the scene brand content", artist: "@mooniac", type: "video", category: "Videografie", views: 95200, likes: 5180, services: ["video", "post", "produktion", "konzept"], image: "/uploads/videos/MOONIAC_Shooting_3_v01_low.webp" },
+  { title: "MissesVlog", subtitle: "YouTube Content", artist: "@MissesVlog", type: "video", category: "Videografie", views: 128400, likes: 6420, services: ["post"], image: "/uploads/videos/Kelly_Shooting_2_v01_low.webp" },
+  { title: "Kaffee mit Zitrone", subtitle: "Video Podcast", artist: "@dagibee @tinadzialas", type: "video", category: "Videografie", views: 87500, likes: 4230, services: ["post"], image: "/uploads/videos/Kaffee_mit_Zitrone_1_v01_low.webp" },
+  { title: "Henkes Corner", subtitle: "Video Podcast", artist: "@henkescorner", type: "video", category: "Videografie", views: 112300, likes: 6890, services: ["video", "post", "produktion", "konzept"], image: "/uploads/videos/Henkes_Corner_1_v01_low.webp" },
   // Short Content (3)
   { title: "Branding & Motion Clip", type: "video", category: "Short Content", views: 84200, likes: 5210, services: ["video", "post"] },
   { title: "Showreel Teaser", type: "video", category: "Short Content", views: 156900, likes: 9020, services: ["video", "post", "produktion"] },
   { title: "Social Teaser", type: "video", category: "Short Content", views: 67500, likes: 4320, services: ["video", "post", "konzept"] },
-  // Fotografie (3)
-  { title: "Nessi Portrait", type: "image", category: "Fotografie", views: 56400, likes: 3010, services: ["foto", "post"], image: "/uploads/fotos/Nessi_1_V01_low.webp" },
-  { title: "Sido Live", type: "image", category: "Fotografie", views: 73300, likes: 4150, services: ["foto", "post", "konzept"], image: "/uploads/fotos/Sido_1_V01.jpg" },
-  { title: "Studio Session", type: "image", category: "Fotografie", views: 48900, likes: 2870, services: ["foto", "post"] },
+  // Fotografie (5)
+  { title: "Nessi", artist: "@nessiontour", type: "image", category: "Fotografie", views: 56400, likes: 3010, services: ["post", "konzept"], image: "/uploads/fotos/Nessi_1_V01_low.webp" },
+  { title: "Sido", artist: "@shawnstein", type: "image", category: "Fotografie", views: 73300, likes: 4150, services: ["post", "konzept"], image: "/uploads/fotos/Sido_1_V01.jpg" },
+  { title: "Trymacs", artist: "@trymacs", type: "image", category: "Fotografie", views: 48900, likes: 2870, services: ["foto", "post", "konzept"], image: "/uploads/fotos/Trymacs_1_V01_low.webp", imageFull: "/uploads/fotos/Trymacs_1_V01_high.webp" },
+  { title: "Rose", artist: "@realrosemondy @maximal_schradin", type: "image", category: "Fotografie", views: 62100, likes: 3540, services: ["post", "konzept"], image: "/uploads/fotos/Rose_1_V01_low.webp", imageFull: "/uploads/fotos/Rose_1_V01_high.webp" },
+  { title: "Kelly", artist: "@kel", type: "image", category: "Fotografie", views: 98700, likes: 5820, services: ["foto", "post", "konzept", "produktion"], image: "/uploads/fotos/Kelly_Covershoot_1_V01_low.webp", imageFull: "/uploads/fotos/Kelly_Covershoot_1_V01_High.webp", link: "/projekte/kel" },
 ];
 
 const filtered = items.filter((item) => item.category === category);
@@ -43,7 +47,8 @@ const formatCount = (value: number) => {
     <article
       class="portfolio-card reveal"
       data-reveal
-      data-lightbox
+      data-lightbox={!item.link}
+      data-link={item.link}
       data-title={item.title}
       data-type={item.type}
       tabindex="0"
@@ -51,24 +56,26 @@ const formatCount = (value: number) => {
     >
       <div class="media" aria-hidden="true">
         {item.image && (
-          <img src={item.image} alt={item.title} loading="lazy" />
+          <img src={item.image} alt={item.title} data-full={item.imageFull || item.image} />
         )}
-        <div class="stats-bar" aria-hidden="true">
-          <span class="stats-badge stats-badge--views">
-            <span class="stats-badge__icon stats-badge__icon--eye" aria-hidden="true">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        {category !== "Fotografie" && (
+          <div class="stats-bar" aria-hidden="true">
+            <span class="stats-badge stats-badge--views">
+              <span class="stats-badge__icon stats-badge__icon--eye" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </span>
+              <span class="stats-badge__count" data-value={item.views}>{formatCount(item.views)}</span>
             </span>
-            <span class="stats-badge__count" data-value={item.views}>{formatCount(item.views)}</span>
-          </span>
-          <span class="stats-bar__divider" aria-hidden="true"></span>
-          <span class="stats-badge stats-badge--likes">
-            <span class="stats-badge__icon stats-badge__icon--heart" aria-hidden="true">
-              <svg class="heart-outline" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-              <svg class="heart-filled" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <span class="stats-bar__divider" aria-hidden="true"></span>
+            <span class="stats-badge stats-badge--likes">
+              <span class="stats-badge__icon stats-badge__icon--heart" aria-hidden="true">
+                <svg class="heart-outline" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <svg class="heart-filled" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </span>
+              <span class="stats-badge__count" data-value={item.likes}>{formatCount(item.likes)}</span>
             </span>
-            <span class="stats-badge__count" data-value={item.likes}>{formatCount(item.likes)}</span>
-          </span>
-        </div>
+          </div>
+        )}
       </div>
       <div class="label">
         <div class="eyebrow">{item.subtitle || item.category}</div>
