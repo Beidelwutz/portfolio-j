@@ -2040,7 +2040,7 @@ a.service-icon {
 }
 
 .mag-quote::before {
-  content: """;
+  content: "\201C";
   position: absolute;
   top: 0;
   left: 50%;

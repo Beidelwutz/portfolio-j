@@ -1,6 +1,8 @@
 ---
 const { title = "Portfolio", description = "Von der Idee zum fertigen Ergebnis." } = Astro.props;
 import SiteHeader from "../components/SiteHeader.astro";
+import "../styles/global.css";
+import "../styles/project.css";
 ---
 <!doctype html>
 <html lang="de">
@@ -16,14 +18,11 @@ import SiteHeader from "../components/SiteHeader.astro";
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Raleway:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-
-    <link rel="stylesheet" href="/src/styles/global.css" />
-    <link rel="stylesheet" href="/src/styles/project.css" />
   </head>
   <body>
     <a class="skip-link" href="#main">Zum Inhalt springen</a>
     <SiteHeader />
     <slot />
-    <script type="module" src="/src/scripts/main.js"></script>
+    <script type="module" src="/scripts/main.js"></script>
   </body>
 </html>
