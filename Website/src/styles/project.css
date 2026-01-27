@@ -1864,3 +1864,70 @@
     font-size: 16px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   KELLY IMPRESSIONEN SECTION
+   ═══════════════════════════════════════════════════════════ */
+.kelly-impressionen-section {
+  padding: var(--project-spacing) 0;
+  background: var(--project-bg-alt);
+}
+
+.kelly-impressionen-section__inner {
+  max-width: var(--project-max-width);
+  margin: 0 auto;
+  padding: 0 var(--project-spacing);
+}
+
+.kelly-impressionen-section__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.kelly-impressionen-section__label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--project-accent);
+}
+
+.kelly-impressionen-images {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.kelly-impressionen-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  cursor: pointer;
+  background: var(--project-bg);
+  width: 100%;
+}
+
+.kelly-impressionen-image--portrait {
+  max-width: 600px;
+  aspect-ratio: 2 / 3;
+}
+
+.kelly-impressionen-image--landscape {
+  max-width: 900px;
+  aspect-ratio: 3 / 2;
+}
+
+.kelly-impressionen-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.kelly-impressionen-image:hover img {
+  transform: scale(1.05);
+}
