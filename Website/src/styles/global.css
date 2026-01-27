@@ -633,20 +633,19 @@ main {
   box-shadow: 0 16px 36px rgba(15, 17, 21, 0.2);
 }
 
-/* Videografie: Klick deaktiviert */
+/* Videografie: Hover-Effekte deaktiviert */
 #videos .portfolio-card {
   cursor: default;
   pointer-events: none;
 }
 
-#videos .portfolio-card .media,
-#videos .portfolio-card .label {
-  pointer-events: auto;
-}
-
 #videos .portfolio-card:hover {
   transform: none;
-  box-shadow: 0 12px 30px rgba(15, 17, 21, 0.12);
+  box-shadow: 0 8px 24px rgba(15, 17, 21, 0.12);
+}
+
+#videos .portfolio-card:hover .media img {
+  transform: none;
 }
 
 .portfolio-card .media {
