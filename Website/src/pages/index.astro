@@ -8,9 +8,6 @@ import ServicesLegend from "../components/ServicesLegend.astro";
 import ContactForm from "../components/ContactForm.astro";
 ---
 <BaseLayout title="Portfolio · Beidelwutz" description="Von der Idee zum fertigen Ergebnis.">
-  <Fragment slot="head">
-    <link rel="preload" as="image" href="/uploads/videos/Kelly_Shooting_2_v01_low.webp" />
-  </Fragment>
   <main id="main">
     <!-- Progress / Kapitel-Navigation (wie bei Projektseiten) -->
     <nav class="home-progress" aria-label="Seitenfortschritt">
@@ -66,13 +63,13 @@ import ContactForm from "../components/ContactForm.astro";
     </Section>
 
     <Section id="videos" theme="light">
-      <div class="stack reveal" data-reveal>
+      <div class="stack">
         <span class="eyebrow">Portfolio</span>
-        <h2 class="headline">Videografie</h2>
-        <p class="subtitle">
+        <h2 class="headline reveal" data-reveal>Videografie</h2>
+        <p class="subtitle reveal" data-reveal>
           Content-Produktionen inklusive Postproduktion.
         </p>
-        <PortfolioGrid category="Videografie" noReveal />
+        <PortfolioGrid category="Videografie" />
       </div>
     </Section>
 

@@ -64,7 +64,7 @@ const formatCount = (value: number) => {
             class={item.video ? 'short-thumb' : ''}
             data-full={item.imageFull || item.image}
             loading={category === "Videografie" ? "eager" : "lazy"}
-            fetchpriority={category === "Videografie" && index < 2 ? "high" : undefined}
+            fetchpriority={category === "Videografie" && index === 0 ? "high" : undefined}
           />
         )}
         {item.video && (
