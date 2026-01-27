@@ -296,7 +296,7 @@ if (contactForm) {
         showStatus(result.error || "Fehler beim Senden", true);
       }
     } catch (err) {
-      showStatus("Verbindungsfehler. Bitte versuche es erneut.", true);
+      showStatus("Verbindungsfehler. Melde dich direkt bei sester.jennifer@gmail.com", true);
     } finally {
       button.disabled = false;
       button.textContent = "Nachricht senden";
