@@ -346,16 +346,16 @@
   gap: 16px;
 }
 
-/* When gallery has only 2 images, stack vertically and make larger */
+/* When gallery has only 2 images, display side by side with portrait aspect ratio */
 .results-block__gallery:has(.results-block__gallery-item:nth-child(2):last-child) {
-  grid-template-columns: 1fr;
-  max-width: 900px;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1000px;
   margin: 0 auto;
   gap: 24px;
 }
 
 .results-block__gallery:has(.results-block__gallery-item:nth-child(2):last-child) .results-block__gallery-item {
-  aspect-ratio: 16/10;
+  aspect-ratio: 2/3;
 }
 
 .results-block__gallery-item {
