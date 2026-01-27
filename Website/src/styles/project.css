@@ -346,6 +346,18 @@
   gap: 16px;
 }
 
+/* When gallery has only 2 images, stack vertically and make larger */
+.results-block__gallery:has(.results-block__gallery-item:nth-child(2):last-child) {
+  grid-template-columns: 1fr;
+  max-width: 900px;
+  margin: 0 auto;
+  gap: 24px;
+}
+
+.results-block__gallery:has(.results-block__gallery-item:nth-child(2):last-child) .results-block__gallery-item {
+  aspect-ratio: 16/10;
+}
+
 .results-block__gallery-item {
   aspect-ratio: 4/3;
   border-radius: 12px;
