@@ -649,25 +649,14 @@ main {
 }
 
 #clips .portfolio-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
-}
-
-/* Erste Kachel zentriert */
-#clips .portfolio-grid .portfolio-card:first-child {
-  grid-column: 1 / -1;
-  justify-self: center;
-  max-width: calc(50% - 10px);
 }
 
 @media (max-width: 900px) {
   #clips .portfolio-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 16px;
-  }
-  
-  #clips .portfolio-grid .portfolio-card:first-child {
-    max-width: calc(50% - 8px);
   }
 }
 
@@ -675,10 +664,6 @@ main {
   #clips .portfolio-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
-  }
-  
-  #clips .portfolio-grid .portfolio-card:first-child {
-    max-width: calc(50% - 6px);
   }
   
   #clips .portfolio-card .label {
@@ -3511,6 +3496,84 @@ a.service-icon {
   height: 20px;
   background: linear-gradient(180deg, #6366f1, #8b5cf6);
   border-radius: 2px;
+}
+
+.lightbox-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lightbox-footer .lightbox-title {
+  padding: 0;
+  background: none;
+  border: none;
+  flex: 1;
+}
+
+.lightbox-counter {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  z-index: 10;
+}
+
+.lightbox-nav:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-nav svg {
+  width: 24px;
+  height: 24px;
+}
+
+.lightbox-nav--prev {
+  left: 20px;
+}
+
+.lightbox-nav--next {
+  right: 20px;
+}
+
+@media (max-width: 768px) {
+  .lightbox-nav {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .lightbox-nav--prev {
+    left: 10px;
+  }
+  
+  .lightbox-nav--next {
+    right: 10px;
+  }
+  
+  .lightbox-nav svg {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 /* Magazine Responsive */

@@ -203,22 +203,59 @@ const lightboxOverlay = document.querySelector("[data-lightbox-overlay]");
 const lightboxMedia = document.querySelector("[data-lightbox-media]");
 const lightboxTitle = document.querySelector("[data-lightbox-title]");
 const lightboxClose = document.querySelector("[data-lightbox-close]");
+const lightboxPrev = document.querySelector("[data-lightbox-prev]");
+const lightboxNext = document.querySelector("[data-lightbox-next]");
+const lightboxCounter = document.querySelector("[data-lightbox-counter]");
 
-const openLightbox = (title, type, imageSrc) => {
-  if (!lightboxOverlay || !lightboxMedia || !lightboxTitle) return;
+let currentGallery = [];
+let currentIndex = 0;
+let currentTitle = "";
+
+const updateLightboxImage = () => {
+  if (!lightboxMedia) return;
   lightboxMedia.innerHTML = "";
   
-  if (type === "image" && imageSrc) {
+  if (currentGallery.length > 0) {
     const img = document.createElement("img");
-    img.src = imageSrc;
-    img.alt = title;
+    img.src = currentGallery[currentIndex].full;
+    img.alt = currentTitle;
     img.className = "lightbox-image";
     lightboxMedia.appendChild(img);
+    
+    if (lightboxCounter) {
+      lightboxCounter.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+      lightboxCounter.style.display = currentGallery.length > 1 ? "" : "none";
+    }
+    
+    if (lightboxPrev) lightboxPrev.style.display = currentGallery.length > 1 ? "" : "none";
+    if (lightboxNext) lightboxNext.style.display = currentGallery.length > 1 ? "" : "none";
+  }
+};
+
+const openLightbox = (title, type, imageSrc, gallery = null) => {
+  if (!lightboxOverlay || !lightboxMedia || !lightboxTitle) return;
+  
+  currentTitle = title;
+  currentIndex = 0;
+  
+  if (gallery && gallery.length > 0) {
+    currentGallery = gallery;
+  } else if (type === "image" && imageSrc) {
+    currentGallery = [{ low: imageSrc, full: imageSrc }];
   } else {
+    currentGallery = [];
+    lightboxMedia.innerHTML = "";
     const placeholder = document.createElement("div");
     placeholder.className = "lightbox-placeholder";
     placeholder.textContent = type === "video" ? "Video-Clip Vorschau" : "Foto Vorschau";
     lightboxMedia.appendChild(placeholder);
+    if (lightboxPrev) lightboxPrev.style.display = "none";
+    if (lightboxNext) lightboxNext.style.display = "none";
+    if (lightboxCounter) lightboxCounter.style.display = "none";
+  }
+  
+  if (currentGallery.length > 0) {
+    updateLightboxImage();
   }
   
   lightboxTitle.textContent = title;
@@ -228,6 +265,20 @@ const openLightbox = (title, type, imageSrc) => {
 const closeLightbox = () => {
   if (!lightboxOverlay) return;
   lightboxOverlay.setAttribute("hidden", "true");
+  currentGallery = [];
+  currentIndex = 0;
+};
+
+const prevImage = () => {
+  if (currentGallery.length <= 1) return;
+  currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+  updateLightboxImage();
+};
+
+const nextImage = () => {
+  if (currentGallery.length <= 1) return;
+  currentIndex = (currentIndex + 1) % currentGallery.length;
+  updateLightboxImage();
 };
 
 document.querySelectorAll("[data-lightbox], [data-link]").forEach((card) => {
@@ -244,13 +295,34 @@ document.querySelectorAll("[data-lightbox], [data-link]").forEach((card) => {
     const type = card.getAttribute("data-type") ?? "image";
     const img = card.querySelector("img[data-full]");
     const imageSrc = img?.getAttribute("data-full") || img?.src;
-    openLightbox(title, type, imageSrc);
+    
+    let gallery = null;
+    const galleryData = card.getAttribute("data-gallery");
+    if (galleryData) {
+      try {
+        gallery = JSON.parse(galleryData);
+      } catch (e) {
+        console.error("Failed to parse gallery data:", e);
+      }
+    }
+    
+    openLightbox(title, type, imageSrc, gallery);
   });
 });
 
 lightboxClose?.addEventListener("click", closeLightbox);
+lightboxPrev?.addEventListener("click", (e) => { e.stopPropagation(); prevImage(); });
+lightboxNext?.addEventListener("click", (e) => { e.stopPropagation(); nextImage(); });
 lightboxOverlay?.addEventListener("click", (event) => {
   if (event.target === lightboxOverlay) closeLightbox();
+});
+
+// Keyboard navigation for lightbox
+document.addEventListener("keydown", (e) => {
+  if (!lightboxOverlay || lightboxOverlay.hasAttribute("hidden")) return;
+  if (e.key === "Escape") closeLightbox();
+  if (e.key === "ArrowLeft") prevImage();
+  if (e.key === "ArrowRight") nextImage();
 });
 
 const contactForm = document.querySelector("[data-contact]");
