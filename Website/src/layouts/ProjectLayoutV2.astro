@@ -14,7 +14,7 @@ interface Props {
   client?: string;
   year: string;
   location?: string;
-  format: string;
+  format: string | string[];
   
   // Optional CTAs
   watchUrl?: string;
@@ -99,7 +99,11 @@ const {
       <div class="project-hero__content">
         <div class="project-hero__meta">
           {client && <span class="project-hero__client">{client}</span>}
-          <span class="project-hero__format">{format}</span>
+          {Array.isArray(format) ? (
+            format.map((f) => <span class="project-hero__format">{f}</span>)
+          ) : (
+            <span class="project-hero__format">{format}</span>
+          )}
           <span class="project-hero__year">{year}</span>
           {location && <span class="project-hero__location">{location}</span>}
         </div>
