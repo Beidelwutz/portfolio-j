@@ -8,7 +8,6 @@ import ProjectGallery from "../../components/project/ProjectGallery.astro";
 import TechDetails from "../../components/project/TechDetails.astro";
 import Credits from "../../components/project/Credits.astro";
 import ProjectCTA from "../../components/project/ProjectCTA.astro";
-import ServiceIcon from "../../components/ServiceIcon.astro";
 ---
 
 <ProjectLayoutV2
@@ -24,7 +23,11 @@ import ServiceIcon from "../../components/ServiceIcon.astro";
 >
 
   <ResultsBlock
-    mediaType="video"
+    mediaType="gallery"
+    galleryImages={[
+      { src: "/uploads/projekte/Kelly_Covershoot_4_V01_high.webp", alt: "Kelly Mantel" },
+      { src: "/uploads/projekte/Kelly_Covershoot_1_V01_low.webp", alt: "Kelly Stuhl" },
+    ]}
     outcomes={[
       { label: "Short-Content Produktion", icon: "📱" },
       { label: "Podcast Covershooting", icon: "🎙️" },
