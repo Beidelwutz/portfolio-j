@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/Beidelwutz/portfolio-j#readme",
   "dependencies": {
-    "astro": "latest"
+    "@astrojs/vercel": "^9.0.4",
+    "astro": "latest",
+    "resend": "^6.9.1"
   }
 }

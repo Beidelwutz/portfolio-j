@@ -256,15 +256,51 @@ lightboxOverlay?.addEventListener("click", (event) => {
 const contactForm = document.querySelector("[data-contact]");
 if (contactForm) {
   const button = contactForm.querySelector("button");
-  button?.addEventListener("click", () => {
+  const statusEl = contactForm.querySelector("[data-contact-status]");
+  
+  const showStatus = (message, isError = false) => {
+    if (!statusEl) return;
+    statusEl.textContent = message;
+    statusEl.className = `contact-status ${isError ? 'contact-status--error' : 'contact-status--success'}`;
+    statusEl.removeAttribute("hidden");
+  };
+  
+  button?.addEventListener("click", async () => {
     const name = contactForm.querySelector('input[name="name"]')?.value ?? "";
     const email = contactForm.querySelector('input[name="email"]')?.value ?? "";
     const message = contactForm.querySelector('textarea[name="message"]')?.value ?? "";
-    const target = contactForm.getAttribute("data-email") ?? "";
-    const subject = encodeURIComponent("Portfolio Anfrage");
-    const body = encodeURIComponent(`Name: ${name}\nE-Mail: ${email}\n\n${message}`);
-    if (!target) return;
-    window.location.href = `mailto:${target}?subject=${subject}&body=${body}`;
+    
+    if (!name || !email || !message) {
+      showStatus("Bitte alle Felder ausfüllen", true);
+      return;
+    }
+    
+    button.disabled = true;
+    button.textContent = "Wird gesendet...";
+    
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+      
+      const result = await response.json();
+      
+      if (response.ok) {
+        showStatus("Nachricht gesendet! Ich melde mich bald.");
+        contactForm.querySelector('input[name="name"]').value = "";
+        contactForm.querySelector('input[name="email"]').value = "";
+        contactForm.querySelector('textarea[name="message"]').value = "";
+      } else {
+        showStatus(result.error || "Fehler beim Senden", true);
+      }
+    } catch (err) {
+      showStatus("Verbindungsfehler. Bitte versuche es erneut.", true);
+    } finally {
+      button.disabled = false;
+      button.textContent = "Nachricht senden";
+    }
   });
 }
 
