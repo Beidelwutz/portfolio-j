@@ -33,7 +33,7 @@ export const POST: APIRoute = async ({ request }) => {
     if (error) {
       console.error("Resend error:", error);
       return new Response(
-        JSON.stringify({ error: "E-Mail konnte nicht gesendet werden" }),
+        JSON.stringify({ error: `E-Mail Fehler: ${error.message}` }),
         { status: 500, headers: { "Content-Type": "application/json" } }
       );
     }
