@@ -23,10 +23,6 @@ import ProjectCTA from "../../components/project/ProjectCTA.astro";
 >
 
   <ResultsBlock
-    mediaType="gallery"
-    galleryImages={[
-      { src: "/uploads/projekte/MOONIAC_Shooting_V01_high.webp", alt: "MOONIAC Shooting" },
-    ]}
     outcomes={[
       { label: "Behind-the-Scenes Film", icon: "🎬" },
       { label: "Shorts (16:9 & 9:16)", icon: "📱" },
@@ -117,24 +113,6 @@ import ProjectCTA from "../../components/project/ProjectCTA.astro";
         <h2 class="shorts-section__title">Entstandene Shorts</h2>
       </div>
       <div class="shorts-grid reveal">
-        <div class="short-card" data-short-player="true">
-          <div class="short-card__media">
-            <img src="/uploads/clips/Mooniac_1.1_v01.webp" alt="MOONIAC Short 1" class="short-thumb" />
-            <video class="short-video" src="/uploads/clips/MOONIAC_Short_1_v02.webm" muted loop playsinline preload="none"></video>
-            <button class="short-play-btn" aria-label="Video abspielen">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            </button>
-            <button class="short-mute-btn" aria-label="Ton ein/aus">
-              <svg class="mute-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
-              </svg>
-              <svg class="unmute-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
-              </svg>
-            </button>
-            <div class="short-progress"><div class="short-progress__bar"></div></div>
-          </div>
-        </div>
         <div class="short-card" data-short-player="true">
           <div class="short-card__media">
             <img src="/uploads/clips/Mooniac_1.2_v01.webp" alt="MOONIAC Short 2" class="short-thumb" />
