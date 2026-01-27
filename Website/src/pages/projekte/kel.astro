@@ -38,6 +38,20 @@ import ProjectCTA from "../../components/project/ProjectCTA.astro";
     ]}
   />
 
+  <!-- Two Featured Images -->
+  <section class="featured-images-section" data-section>
+    <div class="featured-images-section__inner">
+      <div class="featured-images-grid reveal">
+        <div class="featured-image-card" data-lightbox="true" data-title="Rosa Top">
+          <img src="/uploads/projekte/Kelly_Covershoot_3_V01_high.webp" alt="Rosa Top" data-full="/uploads/projekte/Kelly_Covershoot_3_V01_high.webp" />
+        </div>
+        <div class="featured-image-card" data-lightbox="true" data-title="Mantel">
+          <img src="/uploads/projekte/Kelly_Covershoot_4_V01_high.webp" alt="Mantel" data-full="/uploads/projekte/Kelly_Covershoot_4_V01_high.webp" />
+        </div>
+      </div>
+    </div>
+  </section>
+
   <StoryBlock
     paragraphs={[
       "Das Briefing war klar: Ein Cover, das auffällt. Kelly's Magazine wollte sich von der Konkurrenz abheben – weniger glatt, mehr Charakter. Die Model-Wahl fiel auf eine Newcomerin mit starker Ausstrahlung.",
@@ -119,18 +133,6 @@ import ProjectCTA from "../../components/project/ProjectCTA.astro";
     ]}
   />
 
-  <ProjectGallery
-    highlights={[
-      { src: "/uploads/projekte/Kelly_Covershoot_2_V01_high.webp", alt: "Kelly Editorial 1", featured: true },
-      { src: "/uploads/projekte/Kelly_Covershoot_3_V01_high.webp", alt: "Kelly Cover" },
-      { src: "/uploads/projekte/Kelly_Covershoot_4_V01_high.webp", alt: "Kelly Editorial 3" },
-      { src: "/uploads/projekte/Kelly_Covershoot_5_V01_high.webp", alt: "Kelly Editorial 4" },
-      { src: "/uploads/projekte/Kelly_Covershoot_1_V01_low.webp", alt: "Kelly Editorial 5" },
-    ]}
-    bts={[]}
-    showBtsToggle={false}
-  />
-
   <!-- Kelly Harry Potter Shorts Section -->
   <section class="shorts-section" data-section>
     <div class="shorts-section__inner">
@@ -191,6 +193,34 @@ import ProjectCTA from "../../components/project/ProjectCTA.astro";
               </svg>
             </button>
             <div class="short-progress"><div class="short-progress__bar"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kelly's Vlog Section -->
+  <section class="kelly-vlog-section" data-section>
+    <div class="kelly-vlog-section__inner">
+      <div class="kelly-vlog-section__header reveal">
+        <span class="kelly-vlog-section__label">Impressionen</span>
+        <p class="kelly-vlog-section__intro">Hier ein Einblick vom covershooting aus Kellys Sicht:</p>
+      </div>
+      <div class="kelly-vlog-section__content reveal">
+        <div class="tiktok-embed-wrapper">
+          <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@missesvlog/video/7557362885828119830" data-video-id="7557362885828119830" style="max-width: 605px; min-width: 325px;">
+            <section>
+              <a target="_blank" title="@missesvlog" href="https://www.tiktok.com/@missesvlog?refer=embed">@missesvlog</a>
+            </section>
+          </blockquote>
+          <script async src="https://www.tiktok.com/embed.js"></script>
+        </div>
+        <div class="kelly-vlog-images">
+          <div class="kelly-vlog-image kelly-vlog-image--portrait">
+            <img src="/uploads/projekte/Kelly_Covershoot_5_V01_high.webp" alt="Schwarzes Top" data-lightbox="true" data-full="/uploads/projekte/Kelly_Covershoot_5_V01_high.webp" />
+          </div>
+          <div class="kelly-vlog-image kelly-vlog-image--landscape">
+            <img src="/uploads/projekte/Kelly_Covershoot_1_V01_low.webp" alt="Stuhl liegend" data-lightbox="true" data-full="/uploads/projekte/Kelly_Covershoot_1_V01_low.webp" />
           </div>
         </div>
       </div>
