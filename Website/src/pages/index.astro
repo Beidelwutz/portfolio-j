@@ -126,17 +126,15 @@ import ContactForm from "../components/ContactForm.astro";
   <div class="lightbox" data-lightbox-overlay hidden>
     <div class="lightbox-content">
       <button class="lightbox-close" data-lightbox-close aria-label="Schließen">×</button>
-      <button class="lightbox-nav lightbox-nav--prev" data-lightbox-prev aria-label="Vorheriges Bild">
+      <button class="lightbox-nav lightbox-prev" data-lightbox-prev aria-label="Vorheriges Bild" hidden>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
       <div class="lightbox-media" data-lightbox-media></div>
-      <button class="lightbox-nav lightbox-nav--next" data-lightbox-next aria-label="Nächstes Bild">
+      <button class="lightbox-nav lightbox-next" data-lightbox-next aria-label="Nächstes Bild" hidden>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
       </button>
-      <div class="lightbox-footer">
-        <div class="lightbox-title" data-lightbox-title></div>
-        <div class="lightbox-counter" data-lightbox-counter></div>
-      </div>
+      <div class="lightbox-title" data-lightbox-title></div>
+      <div class="lightbox-counter" data-lightbox-counter hidden></div>
     </div>
   </div>
 </BaseLayout>
