@@ -52,7 +52,7 @@ const formatCount = (value: number) => {
     <article
       class={`portfolio-card${item.video ? ' portfolio-card--short' : ''}`}
       style={`--stagger: ${index}`}
-      data-lightbox={!item.link && !item.video}
+      data-lightbox={!item.link && !item.video && category !== "Videografie"}
       data-link={item.link}
       data-title={item.title}
       data-type={item.type}
