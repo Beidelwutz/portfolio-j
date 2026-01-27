@@ -346,16 +346,16 @@
   gap: 16px;
 }
 
-/* When gallery has only 2 images, display side by side with portrait aspect ratio */
+/* When gallery has only 2 images, stack vertically and make larger */
 .results-block__gallery:has(.results-block__gallery-item:nth-child(2):last-child) {
-  grid-template-columns: 1fr 1fr;
-  max-width: 1000px;
+  grid-template-columns: 1fr;
+  max-width: 900px;
   margin: 0 auto;
   gap: 24px;
 }
 
 .results-block__gallery:has(.results-block__gallery-item:nth-child(2):last-child) .results-block__gallery-item {
-  aspect-ratio: 2/3;
+  aspect-ratio: 16/10;
 }
 
 .results-block__gallery-item {
@@ -1572,16 +1572,24 @@
 
 .shorts-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  max-width: 700px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-.shorts-grid .short-card:last-child:nth-child(odd) {
-  grid-column: 1 / -1;
-  justify-self: center;
-  max-width: calc(50% - 12px);
+@media (max-width: 900px) {
+  .shorts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 500px) {
+  .shorts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
 }
 
 .short-card {
@@ -1722,16 +1730,6 @@
   transition: width 0.1s linear;
 }
 
-@media (max-width: 600px) {
-  .shorts-grid {
-    grid-template-columns: 1fr;
-    max-width: 280px;
-  }
-  
-  .shorts-grid .short-card:last-child:nth-child(odd) {
-    max-width: 100%;
-  }
-}
 
 /* ═══════════════════════════════════════════════════════════
    FEATURED IMAGES SECTION (Kelly)
