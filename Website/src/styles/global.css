@@ -633,21 +633,6 @@ main {
   box-shadow: 0 16px 36px rgba(15, 17, 21, 0.2);
 }
 
-/* Videografie: Hover-Effekte deaktiviert */
-#videos .portfolio-card {
-  cursor: default;
-  pointer-events: none;
-}
-
-#videos .portfolio-card:hover {
-  transform: none;
-  box-shadow: 0 8px 24px rgba(15, 17, 21, 0.12);
-}
-
-#videos .portfolio-card:hover .media img {
-  transform: none;
-}
-
 .portfolio-card .media {
   position: relative;
   height: 200px;
@@ -686,6 +671,29 @@ main {
   
   #clips .portfolio-card .label__title {
     font-size: 14px;
+  }
+  
+  /* Short Content: Stats übereinander und kleiner auf Mobile */
+  #clips .stats-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 6px 8px;
+  }
+  
+  #clips .stats-bar__divider {
+    display: none;
+  }
+  
+  #clips .stats-bar .stats-badge {
+    font-size: 9px;
+    padding: 3px 6px;
+    min-height: 20px;
+  }
+  
+  #clips .stats-bar .stats-badge__icon svg {
+    width: 9px;
+    height: 9px;
   }
 }
 
