@@ -649,14 +649,25 @@ main {
 }
 
 #clips .portfolio-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
+}
+
+/* Erste Kachel zentriert */
+#clips .portfolio-grid .portfolio-card:first-child {
+  grid-column: 1 / -1;
+  justify-self: center;
+  max-width: calc(50% - 10px);
 }
 
 @media (max-width: 900px) {
   #clips .portfolio-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
+  }
+  
+  #clips .portfolio-grid .portfolio-card:first-child {
+    max-width: calc(50% - 8px);
   }
 }
 
@@ -664,6 +675,10 @@ main {
   #clips .portfolio-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
+  }
+  
+  #clips .portfolio-grid .portfolio-card:first-child {
+    max-width: calc(50% - 6px);
   }
   
   #clips .portfolio-card .label {
