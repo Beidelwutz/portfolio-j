@@ -1560,8 +1560,16 @@
 
 .shorts-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.shorts-grid .short-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  justify-self: center;
+  max-width: calc(50% - 12px);
 }
 
 .short-card {
@@ -1702,16 +1710,13 @@
   transition: width 0.1s linear;
 }
 
-@media (max-width: 900px) {
-  .shorts-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 600px) {
   .shorts-grid {
     grid-template-columns: 1fr;
-    max-width: 320px;
-    margin: 0 auto;
+    max-width: 280px;
+  }
+  
+  .shorts-grid .short-card:last-child:nth-child(odd) {
+    max-width: 100%;
   }
 }
