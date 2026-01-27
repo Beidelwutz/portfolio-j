@@ -203,63 +203,22 @@ const lightboxOverlay = document.querySelector("[data-lightbox-overlay]");
 const lightboxMedia = document.querySelector("[data-lightbox-media]");
 const lightboxTitle = document.querySelector("[data-lightbox-title]");
 const lightboxClose = document.querySelector("[data-lightbox-close]");
-const lightboxPrev = document.querySelector("[data-lightbox-prev]");
-const lightboxNext = document.querySelector("[data-lightbox-next]");
-const lightboxCounter = document.querySelector("[data-lightbox-counter]");
 
-// Gallery state
-let currentGallery = [];
-let currentIndex = 0;
-let currentTitle = "";
-
-const showImage = (index) => {
-  if (!lightboxMedia || !currentGallery.length) return;
-  if (index < 0 || index >= currentGallery.length) return;
-  
-  currentIndex = index;
+const openLightbox = (title, type, imageSrc) => {
+  if (!lightboxOverlay || !lightboxMedia || !lightboxTitle) return;
   lightboxMedia.innerHTML = "";
   
-  const img = document.createElement("img");
-  img.src = currentGallery[index].full;
-  img.alt = `${currentTitle} - Bild ${index + 1}`;
-  img.className = "lightbox-image";
-  lightboxMedia.appendChild(img);
-  
-  // Update counter
-  if (lightboxCounter && currentGallery.length > 1) {
-    lightboxCounter.textContent = `${index + 1} / ${currentGallery.length}`;
-  }
-};
-
-const openLightbox = (title, type, imageSrc, gallery = null) => {
-  if (!lightboxOverlay || !lightboxMedia || !lightboxTitle) return;
-  
-  currentTitle = title;
-  currentGallery = gallery || [];
-  currentIndex = 0;
-  
-  // Show/hide navigation based on gallery
-  const hasGallery = currentGallery.length > 1;
-  if (lightboxPrev) lightboxPrev.hidden = !hasGallery;
-  if (lightboxNext) lightboxNext.hidden = !hasGallery;
-  if (lightboxCounter) lightboxCounter.hidden = !hasGallery;
-  
-  if (hasGallery) {
-    showImage(0);
+  if (type === "image" && imageSrc) {
+    const img = document.createElement("img");
+    img.src = imageSrc;
+    img.alt = title;
+    img.className = "lightbox-image";
+    lightboxMedia.appendChild(img);
   } else {
-    lightboxMedia.innerHTML = "";
-    if (type === "image" && imageSrc) {
-      const img = document.createElement("img");
-      img.src = imageSrc;
-      img.alt = title;
-      img.className = "lightbox-image";
-      lightboxMedia.appendChild(img);
-    } else {
-      const placeholder = document.createElement("div");
-      placeholder.className = "lightbox-placeholder";
-      placeholder.textContent = type === "video" ? "Video-Clip Vorschau" : "Foto Vorschau";
-      lightboxMedia.appendChild(placeholder);
-    }
+    const placeholder = document.createElement("div");
+    placeholder.className = "lightbox-placeholder";
+    placeholder.textContent = type === "video" ? "Video-Clip Vorschau" : "Foto Vorschau";
+    lightboxMedia.appendChild(placeholder);
   }
   
   lightboxTitle.textContent = title;
@@ -269,16 +228,6 @@ const openLightbox = (title, type, imageSrc, gallery = null) => {
 const closeLightbox = () => {
   if (!lightboxOverlay) return;
   lightboxOverlay.setAttribute("hidden", "true");
-  currentGallery = [];
-  currentIndex = 0;
-};
-
-const navigateGallery = (direction) => {
-  if (currentGallery.length <= 1) return;
-  let newIndex = currentIndex + direction;
-  if (newIndex < 0) newIndex = currentGallery.length - 1;
-  if (newIndex >= currentGallery.length) newIndex = 0;
-  showImage(newIndex);
 };
 
 document.querySelectorAll("[data-lightbox], [data-link]").forEach((card) => {
@@ -295,49 +244,13 @@ document.querySelectorAll("[data-lightbox], [data-link]").forEach((card) => {
     const type = card.getAttribute("data-type") ?? "image";
     const img = card.querySelector("img[data-full]");
     const imageSrc = img?.getAttribute("data-full") || img?.src;
-    
-    // Check for gallery
-    const galleryData = card.getAttribute("data-gallery");
-    let gallery = null;
-    if (galleryData) {
-      try {
-        gallery = JSON.parse(galleryData);
-      } catch (e) {
-        console.warn("Failed to parse gallery data", e);
-      }
-    }
-    
-    openLightbox(title, type, imageSrc, gallery);
+    openLightbox(title, type, imageSrc);
   });
 });
 
 lightboxClose?.addEventListener("click", closeLightbox);
 lightboxOverlay?.addEventListener("click", (event) => {
   if (event.target === lightboxOverlay) closeLightbox();
-});
-
-// Gallery navigation
-lightboxPrev?.addEventListener("click", (e) => {
-  e.stopPropagation();
-  navigateGallery(-1);
-});
-
-lightboxNext?.addEventListener("click", (e) => {
-  e.stopPropagation();
-  navigateGallery(1);
-});
-
-// Keyboard navigation
-document.addEventListener("keydown", (e) => {
-  if (!lightboxOverlay || lightboxOverlay.hidden) return;
-  
-  if (e.key === "Escape") {
-    closeLightbox();
-  } else if (e.key === "ArrowLeft") {
-    navigateGallery(-1);
-  } else if (e.key === "ArrowRight") {
-    navigateGallery(1);
-  }
 });
 
 const contactForm = document.querySelector("[data-contact]");
