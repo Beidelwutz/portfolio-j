@@ -17,7 +17,6 @@ const items: {
   subtitle?: string;
   artist?: string;
   link?: string;
-  gallery?: { name: string; low: string; full?: string }[];
 }[] = [
   // Videografie (5)
   { title: "mooniac", subtitle: "Behind the scene brand content", artist: "@mooniac", type: "video", category: "Videografie", views: 136000, likes: 2500, services: ["video", "post", "produktion", "konzept"], image: "/uploads/videos/MOONIAC_Shooting_3_v01_low.webp" },
@@ -32,15 +31,7 @@ const items: {
   // Fotografie (5)
   { title: "Nessi", artist: "@nessiontour", type: "image", category: "Fotografie", views: 56400, likes: 3010, services: ["post", "konzept"], image: "/uploads/fotos/Nessi_1_V01_low.webp" },
   { title: "Sido", artist: "@shawnstein", type: "image", category: "Fotografie", views: 73300, likes: 4150, services: ["post", "konzept"], image: "/uploads/fotos/Sido_1_V01.jpg" },
-  { title: "Trymacs", artist: "@trymacs", type: "image", category: "Fotografie", views: 48900, likes: 2870, services: ["foto", "post", "konzept"], image: "/uploads/fotos/Trymacs_1_V01_low.webp", imageFull: "/uploads/fotos/Trymacs_1_V01_high.webp", gallery: [
-    { name: "Trymacs", low: "/uploads/fotos/Trymacs_1_V01_low.webp", full: "/uploads/fotos/Trymacs_1_V01_high.webp" },
-    { name: "Adi", low: "/uploads/fotos/Adi_Low.webp", full: "/uploads/fotos/Adi_Full.webp" },
-    { name: "Chef", low: "/uploads/fotos/Chef_low.webp", full: "/uploads/fotos/Chef_Full.webp" },
-    { name: "Anna", low: "/uploads/fotos/Anna_Low.webp", full: "/uploads/fotos/Anna_Full.webp" },
-    { name: "Jan", low: "/uploads/fotos/Jan_low.webp" },
-    { name: "Dilara", low: "/uploads/fotos/Dilara_Low.webp", full: "/uploads/fotos/Dilara_Full.webp" },
-    { name: "Jonas", low: "/uploads/fotos/Jonas_Low.webp", full: "/uploads/fotos/Jonas_Full.webp" },
-  ] },
+  { title: "Trymacs", artist: "@trymacs", type: "image", category: "Fotografie", views: 48900, likes: 2870, services: ["foto", "post", "konzept"], image: "/uploads/fotos/Trymacs_1_V01_low.webp", imageFull: "/uploads/fotos/Trymacs_1_V01_high.webp" },
   { title: "Rose", artist: "@realrosemondy @maximal_schradin", type: "image", category: "Fotografie", views: 62100, likes: 3540, services: ["post", "konzept"], image: "/uploads/fotos/Rose_1_V01_low.webp", imageFull: "/uploads/fotos/Rose_1_V01_high.webp" },
   { title: "Kelly", artist: "@kel", type: "image", category: "Fotografie", views: 98700, likes: 5820, services: ["foto", "post", "konzept", "produktion"], image: "/uploads/fotos/Kelly_Covershoot_1_V01_low.webp", imageFull: "/uploads/fotos/Kelly_Covershoot_1_V01_High.webp", link: "/projekte/kel" },
 ];
@@ -66,28 +57,8 @@ const formatCount = (value: number) => {
       tabindex="0"
       aria-label={`${item.title}. ${formatCount(item.views)} Aufrufe${item.likes > 0 ? `, ${formatCount(item.likes)} Likes` : ''}.`}
     >
-      <div class={`media${item.gallery ? ' media--gallery' : ''}`} aria-hidden="true" data-gallery-count={item.gallery?.length}>
-        {item.gallery ? (
-          <div class="gallery-slideshow">
-            {item.gallery.map((img, i) => (
-              <img
-                src={img.low}
-                alt={img.name}
-                class={`gallery-slide${i === 0 ? ' is-active' : ''}`}
-                data-full={img.full || img.low}
-                data-name={img.name}
-                style={`--slide-index: ${i}`}
-                loading="lazy"
-              />
-            ))}
-            <div class="gallery-indicator">
-              {item.gallery.map((img, i) => (
-                <span class="gallery-dot" data-index={i}></span>
-              ))}
-            </div>
-            <div class="gallery-name"></div>
-          </div>
-        ) : item.image && (
+      <div class="media" aria-hidden="true">
+        {item.image && (
           <img
             src={item.image}
             alt={item.title}
