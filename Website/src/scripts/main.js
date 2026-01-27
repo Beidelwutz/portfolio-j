@@ -242,8 +242,20 @@ document.querySelectorAll("[data-lightbox], [data-link]").forEach((card) => {
     }
     const title = card.getAttribute("data-title") ?? "Projekt";
     const type = card.getAttribute("data-type") ?? "image";
-    const img = card.querySelector("img[data-full]");
-    const imageSrc = img?.getAttribute("data-full") || img?.src;
+    
+    // Check if this is a gallery - find the active slide
+    const gallery = card.querySelector(".gallery-slideshow");
+    let img, imageSrc;
+    
+    if (gallery) {
+      const activeSlide = gallery.querySelector(".gallery-slide.is-active");
+      img = activeSlide || gallery.querySelector(".gallery-slide");
+      imageSrc = img?.getAttribute("data-full") || img?.src;
+    } else {
+      img = card.querySelector("img[data-full]");
+      imageSrc = img?.getAttribute("data-full") || img?.src;
+    }
+    
     openLightbox(title, type, imageSrc);
   });
 });
@@ -362,68 +374,77 @@ shortPlayers.forEach((card) => {
 });
 
 /* Gallery Slideshow */
-const gallerySlideshows = document.querySelectorAll(".gallery-slideshow");
+function initGallerySlideshows() {
+  const gallerySlideshows = document.querySelectorAll(".gallery-slideshow");
 
-gallerySlideshows.forEach((slideshow) => {
-  const slides = slideshow.querySelectorAll(".gallery-slide");
-  const dots = slideshow.querySelectorAll(".gallery-dot");
-  const nameEl = slideshow.querySelector(".gallery-name");
-  
-  if (slides.length === 0) return;
-  
-  let currentIndex = 0;
-  let intervalId = null;
-  const intervalMs = 2500;
-  
-  const showSlide = (index) => {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle("is-active", i === index);
-    });
-    dots.forEach((dot, i) => {
-      dot.classList.toggle("is-active", i === index);
-    });
-    if (nameEl && slides[index]) {
-      nameEl.textContent = slides[index].dataset.name || "";
-    }
-  };
-  
-  const nextSlide = () => {
-    currentIndex = (currentIndex + 1) % slides.length;
-    showSlide(currentIndex);
-  };
-  
-  // Initialize first slide
-  showSlide(0);
-  
-  // Start auto-rotation on hover
-  const card = slideshow.closest(".portfolio-card");
-  if (card) {
-    card.addEventListener("mouseenter", () => {
-      intervalId = setInterval(nextSlide, intervalMs);
-    });
+  gallerySlideshows.forEach((slideshow) => {
+    const slides = slideshow.querySelectorAll(".gallery-slide");
+    const dots = slideshow.querySelectorAll(".gallery-dot");
+    const nameEl = slideshow.querySelector(".gallery-name");
     
-    card.addEventListener("mouseleave", () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-        intervalId = null;
+    if (slides.length === 0) return;
+    
+    let currentIndex = 0;
+    let intervalId = null;
+    const intervalMs = 2500;
+    
+    const showSlide = (index) => {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("is-active", i === index);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("is-active", i === index);
+      });
+      if (nameEl && slides[index]) {
+        nameEl.textContent = slides[index].dataset.name || "";
       }
-      // Reset to first slide
-      currentIndex = 0;
-      showSlide(0);
-    });
-  }
-  
-  // Click on dots to jump to slide
-  dots.forEach((dot, i) => {
-    dot.addEventListener("click", (e) => {
-      e.stopPropagation();
-      currentIndex = i;
-      showSlide(i);
-      // Reset interval
-      if (intervalId) {
-        clearInterval(intervalId);
+    };
+    
+    const nextSlide = () => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
+    };
+    
+    // Initialize first slide (ensure it's visible)
+    showSlide(0);
+    
+    // Start auto-rotation on hover
+    const card = slideshow.closest(".portfolio-card");
+    if (card) {
+      card.addEventListener("mouseenter", () => {
         intervalId = setInterval(nextSlide, intervalMs);
-      }
+      });
+      
+      card.addEventListener("mouseleave", () => {
+        if (intervalId) {
+          clearInterval(intervalId);
+          intervalId = null;
+        }
+        // Reset to first slide
+        currentIndex = 0;
+        showSlide(0);
+      });
+    }
+    
+    // Click on dots to jump to slide
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentIndex = i;
+        showSlide(i);
+        // Reset interval
+        if (intervalId) {
+          clearInterval(intervalId);
+          intervalId = setInterval(nextSlide, intervalMs);
+        }
+      });
     });
   });
-});
+}
+
+// Initialize on DOM ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initGallerySlideshows);
+} else {
+  initGallerySlideshows();
+}

@@ -76,7 +76,7 @@ const formatCount = (value: number) => {
               <img
                 src={img.low}
                 alt={img.name}
-                class="gallery-slide"
+                class={`gallery-slide${i === 0 ? ' is-active' : ''}`}
                 data-full={img.full || img.low}
                 data-name={img.name}
                 style={`--slide-index: ${i}`}
