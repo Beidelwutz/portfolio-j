@@ -17,28 +17,30 @@ const { mediaType = "video", mediaSrc, mediaPoster, galleryImages = [], outcomes
 
 <section id="results" class="results-block" data-section>
   <div class="results-block__inner">
-    <div class="results-block__media reveal">
-      {mediaType === "video" && mediaSrc && (
-        <div class="results-block__video">
-          <video
-            src={mediaSrc}
-            poster={mediaPoster}
-            controls
-            preload="metadata"
-            playsinline
-          />
-        </div>
-      )}
-      {mediaType === "gallery" && galleryImages.length > 0 && (
-        <div class="results-block__gallery" data-gallery="results">
-          {galleryImages.slice(0, 3).map((img, idx) => (
-            <div class="results-block__gallery-item" data-gallery-item>
-              <img src={img.src} alt={img.alt} loading="lazy" data-full={img.src} />
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+    {(mediaType === "video" && mediaSrc) || (mediaType === "gallery" && galleryImages.length > 0) ? (
+      <div class="results-block__media reveal">
+        {mediaType === "video" && mediaSrc && (
+          <div class="results-block__video">
+            <video
+              src={mediaSrc}
+              poster={mediaPoster}
+              controls
+              preload="metadata"
+              playsinline
+            />
+          </div>
+        )}
+        {mediaType === "gallery" && galleryImages.length > 0 && (
+          <div class="results-block__gallery" data-gallery="results">
+            {galleryImages.slice(0, 3).map((img, idx) => (
+              <div class="results-block__gallery-item" data-gallery-item>
+                <img src={img.src} alt={img.alt} loading="lazy" data-full={img.src} />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    ) : null}
     
     <div class="results-block__outcomes reveal">
       <span class="results-block__label">Key Outcomes</span>
