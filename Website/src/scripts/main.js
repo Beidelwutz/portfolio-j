@@ -299,6 +299,10 @@ if (contactForm) {
         contactForm.querySelector('input[name="email"]').value = "";
         contactForm.querySelector('textarea[name="message"]').value = "";
       } else {
+        // #region agent log
+        console.log("API Error Response:", result);
+        if (result.debug) console.log("DEBUG INFO:", JSON.stringify(result.debug, null, 2));
+        // #endregion
         showStatus(result.error || "Fehler beim Senden", true);
       }
     } catch (err) {
