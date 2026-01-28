@@ -276,10 +276,10 @@ function getGeoData(request: Request): { city?: string; region?: string; country
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    // API Key Check
-    const apiKey = import.meta.env.RESEND_API_KEY;
+    // API Key Check - process.env für Vercel Runtime
+    const apiKey = process.env.RESEND_API_KEY || import.meta.env.RESEND_API_KEY;
     if (!apiKey) {
-      console.error("RESEND_API_KEY is not configured");
+      console.error("RESEND_API_KEY is not configured. process.env:", Object.keys(process.env).filter(k => k.includes('RESEND')));
       return new Response(
         JSON.stringify({ error: "E-Mail-Service nicht konfiguriert. Bitte kontaktiere mich direkt unter sester.jennifer@gmail.com" }),
         { status: 500, headers: { "Content-Type": "application/json" } }
