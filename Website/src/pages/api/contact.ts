@@ -275,16 +275,50 @@ function getGeoData(request: Request): { city?: string; region?: string; country
 }
 
 export const POST: APIRoute = async ({ request }) => {
+  // #region agent log
+  const debugLog = (msg: string, data: object, hyp: string) => fetch('http://127.0.0.1:7243/ingest/9b23f08a-f094-4013-9082-d48a34e00eb2',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'contact.ts',message:msg,data,timestamp:Date.now(),sessionId:'debug-session',hypothesisId:hyp})}).catch(()=>{});
+  // #endregion
+
   try {
+    // #region agent log
+    await debugLog('ENV_CHECK_START', {
+      processEnvKeys: Object.keys(process.env).filter(k => k.toUpperCase().includes('RESEND') || k.toUpperCase().includes('API')),
+      processEnvResend: process.env.RESEND_API_KEY ? `exists(${process.env.RESEND_API_KEY.substring(0,6)}...)` : 'undefined',
+      importMetaResend: typeof import.meta.env.RESEND_API_KEY !== 'undefined' ? `exists(${String(import.meta.env.RESEND_API_KEY).substring(0,6)}...)` : 'undefined',
+      nodeEnv: process.env.NODE_ENV,
+      vercelEnv: process.env.VERCEL_ENV
+    }, 'A-B-C-D');
+    // #endregion
+
     // API Key Check - process.env für Vercel Runtime
     const apiKey = process.env.RESEND_API_KEY || import.meta.env.RESEND_API_KEY;
+    
+    // #region agent log
+    await debugLog('API_KEY_RESOLVED', {
+      apiKeyExists: !!apiKey,
+      apiKeyPrefix: apiKey ? apiKey.substring(0,6) : 'none',
+      source: process.env.RESEND_API_KEY ? 'process.env' : (import.meta.env.RESEND_API_KEY ? 'import.meta.env' : 'none')
+    }, 'A-B');
+    // #endregion
+
     if (!apiKey) {
+      // #region agent log
+      await debugLog('API_KEY_MISSING', {
+        allEnvKeys: Object.keys(process.env).slice(0, 30),
+        errorReturned: true
+      }, 'A-B-C');
+      // #endregion
+      
       console.error("RESEND_API_KEY is not configured. process.env:", Object.keys(process.env).filter(k => k.includes('RESEND')));
       return new Response(
         JSON.stringify({ error: "E-Mail-Service nicht konfiguriert. Bitte kontaktiere mich direkt unter sester.jennifer@gmail.com" }),
         { status: 500, headers: { "Content-Type": "application/json" } }
       );
     }
+
+    // #region agent log
+    await debugLog('RESEND_CLIENT_CREATING', { apiKeyLength: apiKey.length }, 'E');
+    // #endregion
 
     // Resend Client innerhalb der Funktion erstellen
     const resend = new Resend(apiKey);
