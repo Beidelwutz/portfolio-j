@@ -278,6 +278,15 @@ function getGeoData(request: Request): { city?: string; region?: string; country
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // API Key Check
+    if (!import.meta.env.RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not configured");
+      return new Response(
+        JSON.stringify({ error: "E-Mail-Service nicht konfiguriert" }),
+        { status: 500, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
     const data = await request.json();
     const { name, email, message } = data;
 
