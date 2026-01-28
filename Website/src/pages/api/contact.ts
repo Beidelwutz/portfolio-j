@@ -373,10 +373,10 @@ export const POST: APIRoute = async ({ request }) => {
       console.error("Confirmation email error:", confirmationResult.error);
     }
 
-    // 2. Admin-Benachrichtigung an pepebauer5@gmail.com
+    // 2. Admin-Benachrichtigung an sester.jennifer@gmail.com
     const adminResult = await resend.emails.send({
       from: "Portfolio Kontakt <kontakt@jpgjenny.me>",
-      to: "pepebauer5@gmail.com",
+      to: "sester.jennifer@gmail.com",
       replyTo: email,
       subject: `Neue Anfrage von ${name}`,
       html: getAdminNotificationHtml(name, email, message, clientIP, geoData, userAgent, timestamp),
@@ -389,21 +389,6 @@ export const POST: APIRoute = async ({ request }) => {
         JSON.stringify({ error: `E-Mail Fehler: ${adminResult.error.message}` }),
         { status: 500, headers: { "Content-Type": "application/json" } }
       );
-    }
-
-    // 3. Kopie an sester.jennifer@gmail.com mit allen Daten
-    const copyResult = await resend.emails.send({
-      from: "Portfolio Kontakt <kontakt@jpgjenny.me>",
-      to: "sester.jennifer@gmail.com",
-      replyTo: email,
-      subject: `[Kopie] Neue Anfrage von ${name}`,
-      html: getAdminNotificationHtml(name, email, message, clientIP, geoData, userAgent, timestamp),
-      text: `Neue Anfrage über das Portfolio\n\nName: ${name}\nE-Mail: ${email}\n\nNachricht:\n${message}\n\n---\nIP: ${clientIP}\nStandort: ${geoData ? [geoData.city, geoData.region, geoData.country].filter(Boolean).join(", ") : "Unbekannt"}\nZeit: ${timestamp}`,
-    });
-
-    if (copyResult.error) {
-      console.error("Copy email error:", copyResult.error);
-      // Nicht als Fehler behandeln, da die Hauptmails gesendet wurden
     }
 
     return new Response(
