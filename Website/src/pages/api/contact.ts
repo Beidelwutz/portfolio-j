@@ -1,8 +1,6 @@
 import type { APIRoute } from "astro";
 import { Resend } from "resend";
 
-const resend = new Resend(import.meta.env.RESEND_API_KEY);
-
 // Professionelles HTML-Template für die Bestätigungs-E-Mail an den Absender
 const getConfirmationEmailHtml = (name: string) => `
 <!DOCTYPE html>
@@ -279,13 +277,17 @@ function getGeoData(request: Request): { city?: string; region?: string; country
 export const POST: APIRoute = async ({ request }) => {
   try {
     // API Key Check
-    if (!import.meta.env.RESEND_API_KEY) {
+    const apiKey = import.meta.env.RESEND_API_KEY;
+    if (!apiKey) {
       console.error("RESEND_API_KEY is not configured");
       return new Response(
-        JSON.stringify({ error: "E-Mail-Service nicht konfiguriert" }),
+        JSON.stringify({ error: "E-Mail-Service nicht konfiguriert. Bitte kontaktiere mich direkt unter sester.jennifer@gmail.com" }),
         { status: 500, headers: { "Content-Type": "application/json" } }
       );
     }
+
+    // Resend Client innerhalb der Funktion erstellen
+    const resend = new Resend(apiKey);
 
     const data = await request.json();
     const { name, email, message } = data;
