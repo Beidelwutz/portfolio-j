@@ -311,7 +311,11 @@ export const POST: APIRoute = async ({ request }) => {
         importMetaValue: import.meta.env.RESEND_API_KEY ? `${String(import.meta.env.RESEND_API_KEY).substring(0,8)}...` : 'UNDEFINED',
         nodeEnv: process.env.NODE_ENV,
         vercelEnv: process.env.VERCEL_ENV,
-        allEnvKeysCount: Object.keys(process.env).length
+        vercelGitRepo: process.env.VERCEL_GIT_REPO_SLUG,
+        vercelGitCommit: process.env.VERCEL_GIT_COMMIT_SHA?.substring(0,7),
+        vercelUrl: process.env.VERCEL_URL,
+        allEnvKeysCount: Object.keys(process.env).length,
+        allEnvKeysSample: Object.keys(process.env).slice(0, 15)
       };
       // #endregion
       
