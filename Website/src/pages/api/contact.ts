@@ -302,16 +302,25 @@ export const POST: APIRoute = async ({ request }) => {
     // #endregion
 
     if (!apiKey) {
-      // #region agent log
-      await debugLog('API_KEY_MISSING', {
-        allEnvKeys: Object.keys(process.env).slice(0, 30),
-        errorReturned: true
-      }, 'A-B-C');
+      // #region agent log - Debug info in Response zurückgeben
+      const debugInfo = {
+        processEnvKeys: Object.keys(process.env).filter(k => k.toUpperCase().includes('RESEND') || k.toUpperCase().includes('API') || k.toUpperCase().includes('KEY')),
+        processEnvResendExists: typeof process.env.RESEND_API_KEY !== 'undefined',
+        processEnvResendValue: process.env.RESEND_API_KEY ? `${process.env.RESEND_API_KEY.substring(0,8)}...` : 'UNDEFINED',
+        importMetaExists: typeof import.meta.env.RESEND_API_KEY !== 'undefined',
+        importMetaValue: import.meta.env.RESEND_API_KEY ? `${String(import.meta.env.RESEND_API_KEY).substring(0,8)}...` : 'UNDEFINED',
+        nodeEnv: process.env.NODE_ENV,
+        vercelEnv: process.env.VERCEL_ENV,
+        allEnvKeysCount: Object.keys(process.env).length
+      };
       // #endregion
       
-      console.error("RESEND_API_KEY is not configured. process.env:", Object.keys(process.env).filter(k => k.includes('RESEND')));
+      console.error("RESEND_API_KEY is not configured.", debugInfo);
       return new Response(
-        JSON.stringify({ error: "E-Mail-Service nicht konfiguriert. Bitte kontaktiere mich direkt unter sester.jennifer@gmail.com" }),
+        JSON.stringify({ 
+          error: "E-Mail-Service nicht konfiguriert. Bitte kontaktiere mich direkt unter sester.jennifer@gmail.com",
+          debug: debugInfo
+        }),
         { status: 500, headers: { "Content-Type": "application/json" } }
       );
     }
