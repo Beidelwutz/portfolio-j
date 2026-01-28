@@ -10,9 +10,12 @@ interface Props {
   bts?: GalleryImage[];
   showBtsToggle?: boolean;
   title?: string;
+  variant?: 'default' | 'magazine';
 }
 
-const { highlights, bts = [], showBtsToggle = true, title = "Ausgewählte Aufnahmen" } = Astro.props;
+const { highlights, bts = [], showBtsToggle = true, title = "Ausgewählte Aufnahmen", variant = 'default' } = Astro.props;
+
+const gridClass = variant === 'magazine' ? 'gallery-grid--magazine' : 'gallery-grid';
 ---
 
 <section id="gallery" class="gallery-section" data-section>
@@ -35,7 +38,7 @@ const { highlights, bts = [], showBtsToggle = true, title = "Ausgewählte Aufnah
       )}
     </div>
     
-    <div class="gallery-grid is-visible reveal" data-gallery="highlights">
+    <div class={`${gridClass} is-visible reveal`} data-gallery="highlights">
       {highlights.map((img, idx) => (
         <div 
           class={`gallery-item ${img.featured ? 'gallery-item--featured' : ''}`}

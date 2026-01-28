@@ -235,6 +235,12 @@ document.querySelectorAll("[data-lightbox], [data-link]").forEach((card) => {
     // Skip if this is a short content player
     if (card.hasAttribute("data-short-player")) return;
     
+    // Skip if this is a gallery item (handled by project page lightbox)
+    if (card.hasAttribute("data-gallery-item")) return;
+    
+    // Skip the lightbox container itself
+    if (card.classList.contains("project-lightbox")) return;
+    
     const link = card.getAttribute("data-link");
     if (link) {
       window.location.href = link;

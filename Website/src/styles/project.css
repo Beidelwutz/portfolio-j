@@ -908,6 +908,134 @@
   grid-row: span 2;
 }
 
+/* ═══════════════════════════════════════════════════════════
+   GALLERY VARIANT: Magazine Layout (Schradin)
+   ═══════════════════════════════════════════════════════════ */
+.gallery-grid--magazine {
+  display: none;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  gap: 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.gallery-grid--magazine.is-visible {
+  display: grid;
+}
+
+.gallery-grid--magazine .gallery-item {
+  aspect-ratio: auto;
+}
+
+/* Magazine Layout: 7 Bilder mit variierender Größe */
+/* Reihe 1: Großes Bild links (8 cols), kleines rechts (4 cols) */
+.gallery-grid--magazine .gallery-item:nth-child(1) {
+  grid-column: span 8;
+  aspect-ratio: 16/10;
+}
+
+.gallery-grid--magazine .gallery-item:nth-child(2) {
+  grid-column: span 4;
+  aspect-ratio: 3/4;
+}
+
+/* Reihe 2: Drei gleich große Bilder */
+.gallery-grid--magazine .gallery-item:nth-child(3) {
+  grid-column: span 4;
+  aspect-ratio: 4/5;
+}
+
+.gallery-grid--magazine .gallery-item:nth-child(4) {
+  grid-column: span 4;
+  aspect-ratio: 4/5;
+}
+
+.gallery-grid--magazine .gallery-item:nth-child(5) {
+  grid-column: span 4;
+  aspect-ratio: 4/5;
+}
+
+/* Reihe 3: Kleines links, großes rechts */
+.gallery-grid--magazine .gallery-item:nth-child(6) {
+  grid-column: span 5;
+  aspect-ratio: 4/5;
+}
+
+.gallery-grid--magazine .gallery-item:nth-child(7) {
+  grid-column: span 7;
+  aspect-ratio: 16/10;
+}
+
+/* Responsive Magazine Layout */
+@media (max-width: 1024px) {
+  .gallery-grid--magazine {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+  
+  .gallery-grid--magazine .gallery-item:nth-child(1) {
+    grid-column: span 6;
+    aspect-ratio: 16/9;
+  }
+  
+  .gallery-grid--magazine .gallery-item:nth-child(2) {
+    grid-column: span 3;
+    aspect-ratio: 3/4;
+  }
+  
+  .gallery-grid--magazine .gallery-item:nth-child(3) {
+    grid-column: span 3;
+    aspect-ratio: 3/4;
+  }
+  
+  .gallery-grid--magazine .gallery-item:nth-child(4) {
+    grid-column: span 3;
+    aspect-ratio: 4/5;
+  }
+  
+  .gallery-grid--magazine .gallery-item:nth-child(5) {
+    grid-column: span 3;
+    aspect-ratio: 4/5;
+  }
+  
+  .gallery-grid--magazine .gallery-item:nth-child(6) {
+    grid-column: span 6;
+    aspect-ratio: 16/9;
+  }
+  
+  .gallery-grid--magazine .gallery-item:nth-child(7) {
+    grid-column: span 6;
+    aspect-ratio: 16/9;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-grid--magazine {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .gallery-grid--magazine .gallery-item:nth-child(1) {
+    grid-column: span 2;
+    aspect-ratio: 16/10;
+  }
+  
+  .gallery-grid--magazine .gallery-item:nth-child(2),
+  .gallery-grid--magazine .gallery-item:nth-child(3),
+  .gallery-grid--magazine .gallery-item:nth-child(4),
+  .gallery-grid--magazine .gallery-item:nth-child(5) {
+    grid-column: span 1;
+    aspect-ratio: 3/4;
+  }
+  
+  .gallery-grid--magazine .gallery-item:nth-child(6),
+  .gallery-grid--magazine .gallery-item:nth-child(7) {
+    grid-column: span 2;
+    aspect-ratio: 16/10;
+  }
+}
+
 .gallery-item img {
   width: 100%;
   height: 100%;
@@ -1537,7 +1665,7 @@
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SHORTS SECTION (Project Page)
+   SHORTS SECTION (Project Page) - 1:1 wie Index-Seite
    ═══════════════════════════════════════════════════════════ */
 .shorts-section {
   padding: var(--project-spacing) 24px;
@@ -1572,127 +1700,140 @@
 
 .shorts-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
+/* Bei 4 Items: 4-spaltig */
+.shorts-grid:has(.short-card:nth-child(4)) {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 1200px;
+}
+
 @media (max-width: 900px) {
-  .shorts-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .shorts-grid,
+  .shorts-grid:has(.short-card:nth-child(4)) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 16px;
   }
 }
 
-@media (max-width: 500px) {
-  .shorts-grid {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 600px) {
+  .shorts-grid,
+  .shorts-grid:has(.short-card:nth-child(4)) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
   }
 }
 
+/* Short Card - 1:1 wie portfolio-card--short */
 .short-card {
   position: relative;
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
-  background: #000;
-  aspect-ratio: 9 / 16;
-  cursor: pointer;
+  background: #0f0f12;
+  cursor: default;
+  box-shadow: 0 12px 30px rgba(15, 17, 21, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.short-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(15, 17, 21, 0.2);
 }
 
 .short-card__media {
   position: relative;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 9 / 16;
+  background: #0f0f12;
 }
 
+/* Thumbnail - 1:1 wie Index */
 .short-card .short-thumb {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: opacity 0.3s ease;
+  opacity: 1;
+  transition: opacity 0.35s ease;
 }
 
+/* Video (versteckt bis Hover/Play) */
 .short-card .short-video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: 1;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.35s ease;
 }
 
-.short-card.is-playing .short-thumb {
-  opacity: 0;
-}
-
-.short-card.is-playing .short-video {
-  opacity: 1;
-}
-
+/* Play Button - Glassmorphism wie Index */
 .short-card .short-play-btn {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 10;
   width: 64px;
   height: 64px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.95);
   border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  z-index: 2;
 }
 
 .short-card .short-play-btn svg {
   width: 28px;
   height: 28px;
+  color: #ffffff;
   margin-left: 4px;
-  color: #0f1115;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .short-card .short-play-btn:hover {
-  transform: translate(-50%, -50%) scale(1.1);
-  background: #fff;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%) scale(1.08);
 }
 
-.short-card.is-playing .short-play-btn {
-  opacity: 0;
-  pointer-events: none;
-}
-
+/* Mute Button */
 .short-card .short-mute-btn {
   position: absolute;
-  bottom: 16px;
-  right: 16px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.6);
+  bottom: 52px;
+  right: 10px;
+  z-index: 12;
+  width: 36px;
+  height: 36px;
   border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 2;
+  transition: all 0.3s ease;
 }
 
 .short-card .short-mute-btn svg {
-  width: 20px;
-  height: 20px;
-  color: #fff;
-}
-
-.short-card.is-playing .short-mute-btn {
-  opacity: 1;
+  width: 18px;
+  height: 18px;
+  color: #ffffff;
 }
 
 .short-card .short-mute-btn .unmute-icon {
@@ -1707,6 +1848,7 @@
   display: block;
 }
 
+/* Progress Bar */
 .short-card .short-progress {
   position: absolute;
   bottom: 0;
@@ -1714,20 +1856,55 @@
   right: 0;
   height: 3px;
   background: rgba(255, 255, 255, 0.2);
+  z-index: 11;
   opacity: 0;
   transition: opacity 0.3s ease;
-  z-index: 2;
-}
-
-.short-card.is-playing .short-progress {
-  opacity: 1;
 }
 
 .short-card .short-progress__bar {
   height: 100%;
-  background: var(--project-accent);
   width: 0%;
+  background: linear-gradient(90deg, var(--project-accent), #a78bfa);
+  border-radius: 0 2px 2px 0;
   transition: width 0.1s linear;
+}
+
+/* Hover States - 1:1 wie Index */
+.short-card:hover .short-thumb,
+.short-card.is-playing .short-thumb {
+  opacity: 0;
+}
+
+.short-card:hover .short-video,
+.short-card.is-playing .short-video {
+  opacity: 1;
+}
+
+.short-card:hover .short-play-btn,
+.short-card.is-playing .short-play-btn {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.short-card:hover .short-mute-btn,
+.short-card.is-playing .short-mute-btn {
+  opacity: 1;
+}
+
+.short-card:hover .short-progress,
+.short-card.is-playing .short-progress {
+  opacity: 1;
+}
+
+/* Mobile Touch Support */
+@media (hover: none) {
+  .short-card .short-play-btn {
+    opacity: 1;
+  }
+  
+  .short-card.is-playing .short-play-btn {
+    opacity: 0;
+  }
 }
 
 

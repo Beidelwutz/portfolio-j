@@ -147,7 +147,7 @@ const {
     <slot />
 
     <!-- Lightbox -->
-    <div class="project-lightbox" data-lightbox hidden>
+    <div class="project-lightbox" data-project-lightbox hidden>
       <button class="project-lightbox__close" data-lightbox-close aria-label="Schließen">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M18 6L6 18M6 6l12 12"/>
@@ -211,7 +211,7 @@ const {
     }
 
     // Lightbox
-    const lightbox = document.querySelector('[data-lightbox]');
+    const lightbox = document.querySelector('[data-project-lightbox]');
     const lightboxContent = document.querySelector('[data-lightbox-content]');
     const lightboxCounter = document.querySelector('[data-lightbox-counter]');
     const lightboxClose = document.querySelector('[data-lightbox-close]');
@@ -254,12 +254,16 @@ const {
     }
 
     // Gallery click handlers
-    document.querySelectorAll('[data-gallery-item]').forEach((item, idx) => {
+    document.querySelectorAll('[data-gallery-item]').forEach((item) => {
       item.addEventListener('click', () => {
         const gallery = item.closest('[data-gallery]');
-        const images = Array.from(gallery?.querySelectorAll('[data-gallery-item] img') || []);
-        const imgData = images.map((img) => ({ src: img.dataset.full || img.src, alt: img.alt }));
-        openLightbox(imgData, idx);
+        const galleryItems = Array.from(gallery?.querySelectorAll('[data-gallery-item]') || []);
+        const clickedIndex = galleryItems.indexOf(item);
+        const images = galleryItems.map((el) => {
+          const img = el.querySelector('img');
+          return { src: img?.dataset.full || img?.src || '', alt: img?.alt || '' };
+        });
+        openLightbox(images, clickedIndex >= 0 ? clickedIndex : 0);
       });
     });
 
